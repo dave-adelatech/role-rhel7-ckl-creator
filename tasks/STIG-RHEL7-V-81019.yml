@@ -1,0 +1,34 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-81019 Check
+  shell: grep "overflow_action" /etc/audisp/audispd.conf 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_81019
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-81019 Check 2
+  shell: grep "overflow_action" /etc/audisp/audispd.conf | grep -i "overflow_action = syslog" 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check2_81019
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-81019 Report
+  set_fact: 
+    status_81019: "{{ 'fail' if (check2_81019.stdout == '') else 'pass'}}"
+
+# 

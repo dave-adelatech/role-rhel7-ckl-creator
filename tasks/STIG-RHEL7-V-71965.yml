@@ -1,0 +1,51 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-09: Updated playbook. removed cntl-M's
+#
+#----------
+
+- name: STIG RHEL7 V-71965 Check
+  shell: authconfig --test | grep -i pkcs11 2>&1; authconfig --test | grep -i smartcard 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_71965
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71965 Check 2
+  shell: authconfig --test | grep "pam_pkcs11 is enabled"
+  args:
+    executable: /bin/bash
+  register: check2_71965
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71965 Check 3
+  shell: authconfig --test | grep "smartcard removal action = \"Ignore\""
+  args:
+    executable: /bin/bash
+  register: check3_71965
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71965 Check 4
+  shell: authconfig --test | grep "smartcard module = \"coolkey\""
+  args:
+    executable: /bin/bash
+  register: check4_71965
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71965 Report
+  set_fact: 
+    status_71965: "{{ 'pass' if ((check2_71965.stdout != '') and (check3_71965.stdout != '') and (check4_71965.stdout != '')) else 'fail'}}"
+
+#

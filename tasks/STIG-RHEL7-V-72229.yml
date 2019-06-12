@@ -1,0 +1,43 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-28: Added ldap usage check for NA
+#
+#----------
+
+- name: STIG RHEL7 V-72229 Check
+  shell: |
+      systemctl status sssd.service 2>&1
+      grep -i tls_reqcert /etc/sssd/sssd.conf 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_72229
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72229 Check 2
+  shell: systemctl status sssd.service|grep "   Active. inactive"
+  args:
+    executable: /bin/bash
+  register: check2_72229
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72229 Check 3
+  shell: grep -i tls_reqcert /etc/sssd/sssd.conf |grep -x "ldap_tls_reqcert = demand"
+  args:
+    executable: /bin/bash
+  register: check3_72229
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72229 Report
+  set_fact: 
+    status_72229: "{{ 'NA' if check2_72229.stdout != '' else 'fail' if (check2_72229.stdout == '') else 'pass'}}"

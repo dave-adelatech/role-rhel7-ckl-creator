@@ -1,0 +1,33 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-71969 Check
+  shell: rpm -qa | grep ypserv
+  args:
+    executable: /bin/bash
+  register: check1_71969
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71969 Check 2
+  shell: rpm -qa | grep ypserv
+  args:
+    executable: /bin/bash
+  register: check2_71969
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71969 Report
+  set_fact: 
+    status_71969: "{{ 'fail' if (check2_71969.stdout != '' ) else 'pass'}}"
+

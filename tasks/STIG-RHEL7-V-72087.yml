@@ -1,0 +1,33 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-06: corrected checked file and changed grep and awk to correct values 
+#----------
+
+- name: STIG RHEL7 V-72087 Check
+  shell: grep -i disk_full_action /etc/audisp/audisp-remote.conf 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_72087
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72087 Check 2
+  shell: grep -i disk_full_action /etc/audisp/audisp-remote.conf | awk '/^disk_full_action/'
+  args:
+    executable: /bin/bash
+  register: check2_72087
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72087 Report
+  set_fact: 
+    status_72087: "{{ 'fail' if (check2_72087.stdout == '') else 'pass'}}"
+

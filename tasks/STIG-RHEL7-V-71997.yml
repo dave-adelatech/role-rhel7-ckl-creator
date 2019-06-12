@@ -1,0 +1,51 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-14: V2R3 updateds. JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-71997 Check
+  shell: cat /etc/redhat-release 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_71997
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71997 Check 2
+  #shell: cat /etc/redhat-release | awk '/7.2||7.3||7.4||7.5/'
+  shell: grep " 7.[1-3] " /etc/redhat-release
+  args:
+    executable: /bin/bash
+  register: check2_71997
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71997 Report
+  set_fact: 
+    status_71997: "{{ 'fail' if (check2_71997.stdout != '') else 'pass'}}"
+
+
+
+#Current End of Life for RHEL 7.1 is 31 March 2017.
+#
+#Current End of Life for RHEL 7.2 is 30 November 2017.
+#
+#Current End of Life for RHEL 7.3 is 30 November 2018.
+#
+#Current End of Life for RHEL 7.4 is 31 August 2019.
+#
+#Current End of Life for RHEL 7.5 is 30 April 2020.
+#
+#Current End of Life for RHEL 7.6 is 31 October 2020.
+#
+#If the release is not supported by the vendor, this is a finding.
+

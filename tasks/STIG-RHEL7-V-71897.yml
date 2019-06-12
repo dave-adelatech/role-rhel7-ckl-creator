@@ -1,0 +1,45 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-05-06
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+# Ver 2, 2019-05-06: Changed shell command to account for STIG preference
+# Ver 3, 2019-05-14: Added V2R3 changes. JHMF
+# Ver 3.1, 2019-05-20: Wording in check is incorrect.  Should be "If neither the screen package or the tmux package is installed, this is a finding."
+#----------
+
+- name: STIG RHEL7 V-71897 Check
+  shell: yum list installed screen tmux 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_71897
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71897 Check 2
+  shell: yum list -q installed screen 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check2_71897
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71897 Check 3
+  shell: yum list -q installed tmux 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check3_71897
+  ignore_errors: True
+  changed_when: False
+
+
+- name: STIG RHEL7 V-71897 Report
+  set_fact: 
+    status_71897: "{{ 'fail' if ((check2_71897.stdout == '' ) and (check3_71897.stdout == '' )) else 'pass'}}"
+

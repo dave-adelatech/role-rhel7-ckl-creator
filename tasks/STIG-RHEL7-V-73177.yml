@@ -1,0 +1,34 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-05-13: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-73177 Check
+  shell: nmcli device 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_73177
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-73177 Check 2
+  shell: nmcli device|grep "wifi connected"
+  args:
+    executable: /bin/bash
+  register: check2_73177
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-73177 Report
+  set_fact: 
+    status_73177: "{{ 'fail' if (check2_73177.stdout != '') else 'NA'}}"
+
+#

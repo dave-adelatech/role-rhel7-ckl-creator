@@ -1,0 +1,36 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-21: Changed print statement from awk. removed "chage"
+#
+#----------
+
+- name: STIG RHEL7 V-71931 Check
+  shell: awk "-F:" '$5 > 60 {print $1}' /etc/shadow
+  args:
+    executable: /bin/bash
+  register: check1_71931
+
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71931 Check 2
+  shell:  awk "-F:" '$5 > 60 && $1 !~ /root|bin|daemon|adm|lp|sync|shutdown|halt|mail|operator|games|ftp|nobody|scanuser|rpc|nagios/ {print $1, $5}' /etc/shadow
+  args:
+    executable: /bin/bash
+  register: check2_71931
+
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71931 Report
+  set_fact: 
+    status_71931: "{{ 'fail' if (check2_71931.stdout != '') else 'pass'}}"
+

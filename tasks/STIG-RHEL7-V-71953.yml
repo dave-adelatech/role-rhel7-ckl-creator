@@ -1,0 +1,35 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-17: changed dev.null to /dev/null
+#
+#----------
+
+- name: STIG RHEL7 V-71953 Check
+  shell: if [ "$(cat /etc/gdm/custom.conf 2>/dev/null)" ]; then grep -i automaticloginenable /etc/gdm/custom.conf; else echo "GNOME is not installed"; fi
+  args:
+    executable: /bin/bash
+  register: check1_71953
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71953 Check 2
+  shell: if [ "$(cat /etc/gdm/custom.conf 2>/dev/null)" ]; then grep -i automaticloginenable /etc/gdm/custom.conf; fi
+  args:
+    executable: /bin/bash
+  register: check2_71953
+  ignore_errors: True
+  changed_when: False
+
+
+- name: STIG RHEL7 V-71953 Report
+  set_fact: 
+    status_71953: "{{ 'fail' if (check2_71953.stdout != '' ) else 'pass'}}"
+

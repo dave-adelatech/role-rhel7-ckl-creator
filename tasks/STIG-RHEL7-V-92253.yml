@@ -1,0 +1,45 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-05-13: New DISA STIG in V2R3 JHMF
+# Ver 2, 2019-05-29: adjusted check
+#
+#----------
+
+- name: STIG RHEL7 V-92253 Check
+  shell: |
+     grep net.ipv4.conf.default.rp_filter /etc/sysctl.conf /etc/sysctl.d/* 2>&1
+     /sbin/sysctl -a 2>&1| grep net.ipv4.conf.default.rp_filter
+  args:
+    executable: /bin/bash
+  register: check1_92253
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-92253 Check 2
+  shell: cat /etc/sysctl.conf /etc/sysctl.d/* 2>/dev/null |grep -ix "net.ipv4.conf.default.rp_filter = 1"
+  args:
+    executable: /bin/bash
+  register: check2_92253
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-92253 Check 3
+  shell:  /sbin/sysctl -a 2>/dev/null | grep -ix "net.ipv4.conf.default.rp_filter = 1"
+  args:
+    executable: /bin/bash
+  register: check3_92253
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-92253 Report
+  set_fact: 
+    status_92253: "{{ 'fail' if (check2_92253.stdout == '' or check3_92253.stdout == '' ) else 'pass'}}"
+
+#

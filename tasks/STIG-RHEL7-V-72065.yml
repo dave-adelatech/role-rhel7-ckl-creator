@@ -1,0 +1,43 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-09: Re-wrote checks
+# Ver 3, 2019-05-14; V2R3 updated. JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-72065 Check
+  shell: systemctl status tmp.mount 2>&1; grep -i /tmp /etc/fstab 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_72065
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72065 Check 2
+  shell: systemctl is-enabled tmp.mount |grep -x "enabled" 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check2_72065
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72065 Check 3
+  shell: grep -i /tmp /etc/fstab 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check3_72065
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72065 Report
+  set_fact: 
+    status_72065: "{{ 'fail' if ((check2_72065.stdout == '') and (check3_72065.stdout == '')) else 'pass'}}"
+

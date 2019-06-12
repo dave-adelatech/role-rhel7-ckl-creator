@@ -1,0 +1,51 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-72273 Check
+  shell: |
+      echo -e "\n    yum list installed firewalld"; yum list installed firewalld; \
+      echo -e "\n    systemctl status firewalld"; systemctl status firewalld; \
+      echo -e "\n    firewall-cmd --state "; firewall-cmd --state 2>&1 ;
+  args:
+    executable: /bin/bash
+  register: check1_72273
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72273 Check 2
+  shell: yum list installed firewalld 2>/dev/null|grep firewalld
+  args:
+    executable: /bin/bash
+  register: check2_72273
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72273 Check 3
+  shell: systemctl status firewalld|egrep "Loaded. loaded| Active. active"|wc -l
+  args:
+    executable: /bin/bash
+  register: check3_72273
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72273 Check 4
+  shell: firewall-cmd --state | awk '/not running/'
+  args:
+    executable: /bin/bash
+  register: check4_72273
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72273 Report
+  set_fact: 
+    status_72273: "{{ 'fail' if ((check2_72273.stdout == '' or check3_72273.stdout != '2' or  check4_72273.stdout != '')) else 'pass'}}"

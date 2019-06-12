@@ -1,0 +1,35 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-20: Correct grep so commented lines are not counted
+#
+#----------
+
+- name: STIG RHEL7 V-71947 Check
+  shell: grep -i nopasswd /etc/sudoers /etc/sudoers.d/* 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_71947
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71947 Check 2
+  shell: cat /etc/sudoers /etc/sudoers.d/* 2>/dev/null |grep -i nopasswd |grep -v "^#"
+  args:
+    executable: /bin/bash
+  register: check2_71947
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71947 Report
+  set_fact: 
+    status_71947: "{{ 'fail' if (check2_71947.stdout != '') else 'pass'}}"
+
+#

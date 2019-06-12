@@ -1,0 +1,34 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-05-06
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+# Ver 2, 2019-05-06: Changed awk to account for values equal to or less than 60  
+#----------
+
+- name: STIG RHEL7 V-71929 Check
+  shell:  grep -i pass_max_days /etc/login.defs 
+  args:
+    executable: /bin/bash
+  register: check1_71929
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71929 Check 2
+  shell:  grep -i pass_max_days /etc/login.defs |  awk '!/^#/ && $ 2 <= 60'
+  args:
+    executable: /bin/bash
+  register: check2_71929
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71929 Report
+  set_fact: 
+    status_71929: "{{ 'fail' if (check2_71929.stdout == '' ) else 'pass'}}"
+    

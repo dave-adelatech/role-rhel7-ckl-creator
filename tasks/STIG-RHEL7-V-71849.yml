@@ -1,0 +1,39 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 1, 2019-06-05; Mods to make more readable/manageable.  Get rid of script.
+#
+#----------
+
+- name: STIG RHEL7 V-71849 Check
+  shell: |
+      for i in `rpm -Va | grep '^.M' | cut -d " " -f4,5`;do for j in `rpm -qf $i`;do rpm -ql $j --dump | cut -d " " -f1,5,6,7 | grep $i;done;done >/root/V-71849
+      echo ------------
+      cat /root/V-71849
+      echo ------------
+      cat /root/V-71849 | awk '{print $1 }' | while read FILE; do ls -la $FILE; done
+  args:
+    executable: /bin/bash
+  register: check1_71849
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71849 Check 2
+  shell:  /installs/Ansible/redhat-7/roles/STIG-RHEL7-master/files/V-71849.sh
+  args:
+    executable: /bin/bash
+  register: check2_71849
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71849 Report
+  set_fact: 
+    status_71849: "{{ 'fail' if (check2_71849.stdout != '' ) else 'pass'}}" 
+

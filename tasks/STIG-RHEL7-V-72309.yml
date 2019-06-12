@@ -1,0 +1,44 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-05-13: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-72309 Check
+  shell: |
+    grep net.ipv4.ip_forward /etc/sysctl.conf /etc/sysctl.d/* 2>&1
+    /sbin/sysctl -a 2>&1 | grep net.ipv4.ip_forward
+  args:
+    executable: /bin/bash
+  register: check1_72309
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72309 Check 2
+  shell: cat /etc/sysctl.conf /etc/sysctl.d/*  2>/dev/null |grep -ix "net.ipv4.ip_forward = 0"
+  args:
+    executable: /bin/bash
+  register: check2_72309
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72309 Check 3
+  shell: /sbin/sysctl -a 2>/dev/null |grep -ix "net.ipv4.ip_forward = 0"
+  args:
+    executable: /bin/bash
+  register: check3_72309
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72309 Report
+  set_fact: 
+    status_72309: "{{ 'fail' if (( check2_72309.stdout == '' or check3_72309.stdout == '' )) else 'pass'}}"
+
+#

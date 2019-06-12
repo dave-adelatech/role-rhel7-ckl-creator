@@ -1,0 +1,44 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-20: check was incomplete. 2 parts. JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-72319 Check
+  shell:  grep net.ipv6.conf.all.accept_source_route /etc/sysctl.conf /etc/sysctl.d/*;/sbin/sysctl -a | grep net.ipv6.conf.all.accept_source_route 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_72319
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72319 Check 2
+  shell: cat /etc/sysctl.conf /etc/sysctl.d/* |grep -ix "net.ipv6.conf.all.accept_source_route = 0" 2>&1
+  args:
+    executable: /bin/bash
+  register: check2_72319
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72319 Check 3
+  shell: /sbin/sysctl -a 2>/dev/null | grep -ix "net.ipv6.conf.all.accept_source_route = 0"
+  args:
+    executable: /bin/bash
+  register: check3_72319
+  ignore_errors: True
+  changed_when: False
+
+
+- name: STIG RHEL7 V-72319 Report
+  set_fact: 
+    status_72319: "{{ 'fail' if (check2_72319.stdout == '' or check3_72319.stdout == '') else 'pass'}}"
+
+#

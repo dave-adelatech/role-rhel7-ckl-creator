@@ -1,0 +1,39 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-31: changed "-print" to "-ls" in find.  Excluded proc filesystems. And limit output to 100 line. JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-72007 Check
+  shell:  find / \( \( -fstype nfs -o -fstype proc \) -prune \) -o -nouser -ls 2>/dev/null |head -100
+  args:
+    executable: /bin/bash
+  register: check1_72007
+  ignore_errors: True
+  changed_when: False
+  async: 5000
+  poll: 10
+
+
+- name: STIG RHEL7 V-72007 Check 2
+  shell:  find / \( \( -fstype nfs -o -fstype proc \) -prune \) -o -nouser -ls 2>/dev/null |head -100
+  args:
+    executable: /bin/bash
+  register: check2_72007
+  ignore_errors: True
+  changed_when: False
+  async: 5000
+  poll: 10
+
+
+- name: STIG RHEL7 V-72007 Report
+  set_fact: 
+    status_72007: "{{ 'fail' if (check2_72007.stdout != '' ) else 'pass'}}"

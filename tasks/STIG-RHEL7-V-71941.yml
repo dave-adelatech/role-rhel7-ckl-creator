@@ -1,0 +1,34 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-21: added check to look for "0" after "="
+#
+#----------
+
+- name: STIG RHEL7 V-71941 Check
+  shell: grep -i inactive /etc/default/useradd
+  args:
+    executable: /bin/bash
+  register: check1_71941
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71941 Check 2
+  shell: grep -i inactive /etc/default/useradd | awk -F= '!/^#/ && $2 == 0'
+  args:
+    executable: /bin/bash
+  register: check2_71941
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71941 Report
+  set_fact: 
+    status_71941: "{{ 'fail' if (check2_71941.stdout == '' ) else 'pass'}}"
+

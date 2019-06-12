@@ -1,0 +1,33 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-71911 Check
+  shell: grep difok /etc/security/pwquality.conf 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_71911
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71911 Check 2
+  shell: grep difok /etc/security/pwquality.conf 2>/dev/null | awk '!/^#/ && $3 >= /8/'
+  args:
+    executable: /bin/bash
+  register: check2_71911
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71911 Report
+  set_fact: 
+    status_71911: "{{ 'fail' if (check2_71911.stdout == '' ) else 'pass'}}"
+

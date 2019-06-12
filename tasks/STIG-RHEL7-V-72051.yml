@@ -1,0 +1,46 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-09: Added carot and corrected check
+#
+#----------
+
+- name: STIG RHEL7 V-72051 Check
+  shell: grep cron /etc/rsyslog.conf 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_72051
+  ignore_errors: True
+  changed_when: False
+ 
+
+- name: STIG RHEL7 V-72051 Check 2
+  shell: grep "^cron.\*" /etc/rsyslog.conf
+  args:
+    executable: /bin/bash
+  register: check2_72051
+  ignore_errors: True
+  changed_when: False
+ 
+- name: STIG RHEL7 V-72051 Check 3
+  shell: more /etc/rsyslog.conf | grep "^'*.*' /var/log/messages" 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check3_72051
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72051 Report
+  set_fact: 
+    status_72051: "{{ 'fail' if ((check2_72051.stdout == '') and (check3_72051.stdout == '')) else 'pass' }}"
+
+ 
+
+#

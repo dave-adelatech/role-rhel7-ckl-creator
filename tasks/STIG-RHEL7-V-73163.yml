@@ -1,0 +1,34 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-29: changed check file from /etc/audisp/au-remote.conf to /etc/audisp/audisp-remote.conf
+#
+#----------
+
+- name: STIG RHEL7 V-73163 Check
+  shell: grep -i network_failure_action /etc/audisp/audisp-remote.conf  2>&1
+  args:
+    executable: /bin/bash
+  register: check1_73163
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-73163 Check 2
+  shell: grep -ix "network_failure_action = syslog" /etc/audisp/audisp-remote.conf 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check2_73163
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-73163 Report
+  set_fact: 
+    status_73163: "{{ 'fail' if ((check2_73163.stdout == '' )) else 'pass'}}"
+

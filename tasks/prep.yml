@@ -1,0 +1,22 @@
+####################################################################
+# Developed For 7.2.4 by:
+# Darley, Andrew E CTR NAVAIR, 724000D <andrew.darley.ctr@navy.mil>  
+# Loscar, Joshua D CTR NAVAIR, 541400D  <joshua.loscar.ctr@navy.mil>
+#      
+# Originally created for:
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide 
+# Release: 4 Benchmark Date: 26 Jan 2018
+# 
+# This is expected to run with a play book that defines these variables
+# REPORT
+# FIX
+####################################################################
+
+- name: Prep
+  file: path={{out_file}} owner=scanuser group=wheel state=touch
+
+- name: Prep cvs file
+  file: path={{cvs_file}} owner=scanuser group=wheel state=touch
+
+- file: path=/installs/andrew/ansible-out mode=0755 owner=root group=10 state=directory
+

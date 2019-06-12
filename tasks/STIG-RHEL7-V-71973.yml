@@ -1,0 +1,41 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-71973 Check
+  shell: yum -q list installed aide 2>&1; grep -ri "aide --check" /etc/cron* /var/spool/cron/root
+  args:
+    executable: /bin/bash
+  register: check1_71973
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71973 Check 2
+  shell:  yum -q list installed aide 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check2_71973
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71973 Check 3
+  shell:  grep -ri "aide --check" /etc/cron* /var/spool/cron/root
+  args:
+    executable: /bin/bash
+  register: check3_71973
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71973 Report
+  set_fact: 
+    status_71973: "{{ 'fail' if (check2_71973.stdout == '' ) or (check3_71973.stdout == '' ) else 'pass'}}"
+

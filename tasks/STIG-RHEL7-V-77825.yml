@@ -1,0 +1,45 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-29: Cleaned up checks
+#
+#----------
+
+- name: STIG RHEL7 V-77825 Check
+  shell: |
+     grep kernel.randomize_va_space /etc/sysctl.conf /etc/sysctl.d/* 2>&1
+     /sbin/sysctl -a 2>&1 | grep kernel.randomize_va_space 
+  args:
+    executable: /bin/bash
+  register: check1_77825
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-77825 Check 2
+  shell: cat /etc/sysctl.conf /etc/sysctl.d/* |grep -ix "kernel.randomize_va_space = 2"
+  args:
+    executable: /bin/bash
+  register: check2_77825
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-77825 Check 3
+  shell: /sbin/sysctl -a 2>/dev/null |grep -ix "kernel.randomize_va_space = 2"
+  args:
+    executable: /bin/bash
+  register: check3_77825
+  ignore_errors: True
+  changed_when: False
+
+
+- name: STIG RHEL7 V-77825 Report
+  set_fact: 
+    status_77825: "{{ 'fail' if (check2_77825.stdout == '' or check3_77825.stdout == '' ) else 'pass'}}"
+

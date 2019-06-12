@@ -1,0 +1,42 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-14: V2R3 changes. JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-71993 Check
+  shell: systemctl status ctrl-alt-del.target 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_71993
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71993 Check 2
+  shell: systemctl status ctrl-alt-del.target |grep "Active. active"
+  args:
+    executable: /bin/bash
+  register: check2_71993
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71993 Check 3
+  shell: systemctl status ctrl-alt-del.target |grep "Loaded. masked"
+  args:
+    executable: /bin/bash
+  register: check3_71993
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71993 Report
+  set_fact: 
+    status_71993: "{{ 'fail' if ((check2_71993.stdout != '') or (check3_71993.stdout == '')) else 'pass'}}"
+

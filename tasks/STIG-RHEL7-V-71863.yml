@@ -1,0 +1,35 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-14: Exact /etc/issue. Make such no space at end of line! JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-71863 Check
+  shell: cat /etc/issue 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_71863
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71863 Check 2
+#  shell: more /etc/issue 2>/dev/null | awk '!/You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only. /'
+  shell: cat /etc/issue 2>/dev/null |egrep "You are accessing a U.S. Government \(USG\) Information System \(IS\) that is|provided for USG\-authorized use only. By using this IS \(which includes any|device attached to this IS\), you consent to the following conditions.|device attached to this IS\), you consent to the following conditions.|\-The USG routinely intercepts and monitors communications on this IS for|purposes including, but not limited to, penetration testing, COMSEC monitoring,|network operations and defense, personnel misconduct \(PM\), law enforcement|\(LE\), and counterintelligence \(CI\) investigations.|\-At any time, the USG may inspect and seize data stored on this IS.|\-Communications using, or data stored on, this IS are not private, are subject|to routine monitoring, interception, and search, and may be disclosed or used|for any USG\-authorized purpose.|\-This IS includes security measures \(e.g., authentication and access controls\)|to protect USG interests\-\-not for your personal benefit or privacy.|\-Notwithstanding the above, using this IS does not constitute consent to PM, LE|or CI investigative searching or monitoring of the content of privileged|communications, or work product, related to personal representation or services|by attorneys, psychotherapists, or clergy, and their assistants. Such|communications and work product are private and confidential. See User|Agreement for details."|wc -l
+  args:
+    executable: /bin/bash
+  register: check2_71863
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71863 Report
+  set_fact: 
+    status_71863: "{{ 'fail' if (check2_71863.stdout != '19') else 'pass'}}"
+

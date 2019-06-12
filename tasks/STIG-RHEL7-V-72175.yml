@@ -1,0 +1,32 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-17: Changed logic to check for entire audit rule string
+#----------
+
+- name: STIG RHEL7 V-72175 Check
+  shell: grep -iw /usr/sbin/postdrop /etc/audit/audit.rules 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_72175
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72175 Check 2
+  shell: grep -iw /usr/sbin/postdrop /etc/audit/audit.rules | awk '/postdrop -F auid>=1000 -F auid!=4294967295 -k privileged-postfix/' 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check2_72175
+  ignore_errors: True
+  changed_when: False
+- name: STIG RHEL7 V-72175 Report
+  set_fact:
+    status_72175: "{{ 'fail' if (check2_72175.stdout == '') else 'pass'}}"
+

@@ -1,0 +1,36 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-20: Changed finds to use "-prune". DISA checks not correct.
+# Ver 2.2, 2019-05-30 fix redirect to 2>/dev/null, not >/dev/null. JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-72047 Check
+  shell: find / \( -fstype nfs -o -fstype proc \) -prune -o -perm +o+w -ls 2>/dev/null |head -20
+  args:
+    executable: /bin/bash
+  register: check1_72047
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72047 Check 2
+  shell: find / \( -fstype nfs -o -fstype proc \) -prune -o -perm +o+w -ls 2>/dev/null |awk '$5 !~ /root|sys|bin/'
+  args:
+    executable: /bin/bash
+  register: check2_72047
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72047 Report
+  set_fact: 
+    status_72047: "{{ 'fail' if (check2_72047.stdout != '') else 'pass'}}"
+
+

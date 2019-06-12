@@ -1,0 +1,34 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-20: corrected commented out grep
+#
+#----------
+
+- name: V-72085 Check
+  shell: grep -i enable_krb5 /etc/audisp/audisp-remote.conf 2>&1;echo "If the value of the "enable_krb5" option is not set to "yes" or the line is commented out, ask the System Administrator to indicate how the audit logs are off-loaded to a different system or media."
+  args:
+    executable: /bin/bash
+  register: check1_72085
+  ignore_errors: True
+  changed_when: False
+
+- name: V-72085 Check 2
+  shell: grep -ix "enable_krb5 = yes" /etc/audisp/audisp-remote.conf 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check2_72085
+  ignore_errors: True
+  changed_when: False
+
+- name: V-72085 Reporting
+  set_fact: 
+    status_72085: "{{ 'NR' if (check2_72085.stdout == '' ) else 'pass'}}"
+

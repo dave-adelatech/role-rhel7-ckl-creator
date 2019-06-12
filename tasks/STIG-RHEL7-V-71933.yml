@@ -1,0 +1,34 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-21: changed awk to look for "remember=5"
+#
+#----------
+
+- name: STIG RHEL7 V-71933 Check
+  shell: grep -i remember /etc/pam.d/system-auth-ac 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_71933
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71933 Check 2
+  shell: grep -i remember /etc/pam.d/system-auth-ac 2>/dev/null | awk '/remember=5/'
+  args:
+    executable: /bin/bash
+  register: check2_71933
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71933 Report
+  set_fact: 
+    status_71933: "{{ 'fail' if (check2_71933.stdout == '') else 'pass'}}"
+

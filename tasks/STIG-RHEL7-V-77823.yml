@@ -1,0 +1,33 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-77823 Check
+  shell: grep -i execstart /usr/lib/systemd/system/rescue.service 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_77823
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-77823 Check 2
+  shell: grep -i execstart /usr/lib/systemd/system/rescue.service 2>/dev/null | awk '/\/usr\/sbin\/sulogin; \/usr\/bin\/systemctl --fail --no-block default/'
+  args:
+    executable: /bin/bash
+  register: check2_77823
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-77823 Report
+  set_fact: 
+    status_77823: "{{ 'fail' if (check2_77823.stdout == '') else 'pass'}}"
+

@@ -1,0 +1,117 @@
+
+~V-71849 Contents of script /installs/andrew/Ansible/redhat-7/roles/STIG-RHEL7-V-71849/V-71849.sh available upon request
+Scripts checks for elevated permission as well as user/group changes from original file/direcotry found in package
+
+~V-71855 This check will typically be OPEN as files are commonly modified from their original state (ie: McAfee).
+Files pushed from a DOD entity (McAfee, et al) are expected.
+
+~V-71859 If GNOME not installed, this check will be N/A.
+DISA check will be False Positive, as DISA does not check for N/A
+
+~V-71861 If GNOME not installed, this check will be N/A.
+DISA check will be False Positive, as DISA does not check for N/A
+
+~V-71863 False Positive. DISA's check of /etc/issue file is incorrect.
+
+~V-71891 If GNOME not installed, this check will be N/A.
+DISA check will be False Positive, as DISA does not check for N/A
+
+~V-71893 If GNOME not installed, this check will be N/A.
+DISA check will be False Positive, as DISA does not check for N/A
+
+~V-71897 Wording in check is incorrect.
+Under "Check Text", and check itself, it should be "If NEITHER the screen package or the tmux package is installed, this is a finding."
+
+~V-71899 If GNOME not installed, this check will be N/A.
+DISA check will be False Positive, as DISA does not check for N/A
+
+~V-71901 If GNOME not installed, this check will be N/A.
+DISA check will be False Positive, as DISA does not check for N/A
+
+~V-71963 For systems that are running RHEL 7.2 or newer, this is Not Applicable.
+
+~V-71971 This is a manual check due to complexity.
+Output for check is provided.
+
+~V-71989 If an HBSS or HIPS is active on the system, this is Not Applicable.
+
+~V-71999 Complex check.  Possible that this is a false positive from Ansible script.  May need to verify
+
+~V-72035 This is a manual check due to complexity.
+Output for check is provided.
+
+~V-72047 DISA check using "-xdev" does not work.  Changed check to use "-prune" instead.
+Playbook is not checking for application groups, which may lead to a false positive.
+DISA check WILL produce a false positive, as they do not check for group ownership, as the check states.
+
+~V-72081 DISA False Positive in V2R3
+
+~V-72085 Manual check
+If the value of the "enable_krb5" option is not set to "yes" or the line is commented out, ask the System Administrator to indicate how the audit logs are off-loaded to a different system or media.
+
+~V-72095 May show up as a FALSE POSITIVE. Only 64bit architect is checked
+
+~V-72149 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". Stated check vs. actual check in benchmark do not match
+
+~V-72153 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". Stated check vs. actual check in benchmark do not match
+
+~V-72155 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". Stated check vs. actual check in benchmark do not match
+
+~V-72157 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". Stated check vs. actual check in benchmark do not match
+
+~V-72171 DISA False Positive in V2R3
+~V-72187 DISA False Positive in V2R3
+~V-72189 DISA False Positive in V2R3
+
+~V-72213 If OPEN, this check should be followed up with a manual check to verify/confirm finding.
+
+~V-72219 This is a manual check due to complexity.
+Firewall rules are customized per server/application as requested.
+
+~V-72225 DISA False Positive in V2R3
+
+~V-72227 If LDAP is not being utilized, this requirement is Not Applicable.
+
+~V-72229 If LDAP is not being utilized, this requirement is Not Applicable.
+
+~V-72231 If LDAP is not being utilized, this requirement is Not Applicable.
+
+~V-72239 If the release is 7.4 or newer this requirement is Not Applicable.
+~V-72251 If the release is 7.4 or newer this requirement is Not Applicable.
+
+~V-72283 DISA False Positive in V2R3
+
+~V-72285 DISA False Positive in V2R3
+
+~V-72427 This STIG will always be OPEN, as the sssd service is not in use.
+
+~V-73155 If GNOME not installed, this check will be N/A.
+DISA check will be False Positive, as DISA does not check for N/A
+
+~V-73157 If GNOME not installed, this check will be N/A.
+DISA check will be False Positive, as DISA does not check for N/A
+
+~V-73161 This finding will always be OPEN as site requirements dictate that noexec for /installs\* NOT to be in place.
+
+~V-73165 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". Stated check vs. actual check in benchmark do not match
+
+~V-73167 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". Stated check vs. actual check in benchmark do not match
+
+~V-73177 This is N/A for systems that do not have wireless network adapters.
+
+~V-77819 If GNOME not installed, this check will be N/A.
+DISA check will be False Positive, as DISA does not check for N/A
+
+~V-78995 If GNOME not installed, this check will be N/A.
+DISA check will be False Positive, as DISA does not check for N/A
+
+~V-78999 DISA False Positive in V2R3
+~V-79001 DISA False Positive in V2R3
+
+~V-78997 If GNOME not installed, this check will be N/A.
+DISA check will be False Positive, as DISA does not check for N/A
+
+~V-81007 For systems that use BIOS, this is Not Applicable.
+
+~V-92255 If another host-based intrusion detection application is in use, such as SELinux, this must be documented and approved by the local Authorizing Official.
+

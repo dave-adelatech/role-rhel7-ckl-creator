@@ -1,0 +1,51 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-05-13; New check. Instudes GNOME check for NA
+# Ver 1, 2019-05-14: New STIG V2R3. Code from 77819. JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-78995 Check 1
+  shell: yum list installed -q gnome* 2>&1; grep system-db /etc/dconf/profile/user 2>&1; grep lock-enabled /etc/dconf/db/local.d/locks/* 2>&1
+  args:
+    executable: /bin/bash
+  ignore_errors: True
+  register: check1_78995
+  #ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-78995 Check 2
+  shell: yum list installed -q gnome* 2>/dev/null |grep -i gnome
+  args:
+    executable: /bin/bash
+  register: check2_78995
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-78995 Check 3
+  shell: grep system-db /etc/dconf/profile/user 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check3_78995
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-78995 Check 4
+  shell: grep -x "/org/gnome/desktop/screensaver/lock-enabled" /etc/dconf/db/local.d/locks/* 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check4_78995
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-78995 Report
+  set_fact: 
+    status_78995: "{{ 'NA' if (check2_78995.stdout == '') else 'fail' if ((check3_78995.stdout == '') or (check4_78995.stdout == '')) else 'pass'}}"
+

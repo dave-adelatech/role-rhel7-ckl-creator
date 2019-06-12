@@ -1,0 +1,35 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-09: modified checks to better capture results. JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-72217 Check
+  shell: grep "maxlogins" /etc/security/limits.conf
+  args:
+    executable: /bin/bash
+  register: check1_72217
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72217 Check 2
+  # tabs below      
+  shell: grep -x "*	hard	maxlogins	10" /etc/security/limits.conf
+  args:
+    executable: /bin/bash
+  register: check2_72217
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72217 Report
+  set_fact: 
+    status_72217: "{{ 'fail' if (check2_72217.stdout == '') else 'pass'}}"
+

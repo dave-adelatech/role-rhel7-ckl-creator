@@ -1,0 +1,34 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-01: Updated to perform actual check
+#
+#----------
+
+- name: STIG RHEL7 V-72025 Check
+  shell: awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/' /etc/passwd
+  args:
+    executable: /bin/bash
+  register: check1_72025
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72025 Check 2
+  shell:  /installs/Ansible/redhat-7/roles/STIG-RHEL7-master/files/V-72025.sh
+  args:
+    executable: /bin/bash
+  register: check2_72025
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72025 Report
+  set_fact: 
+    status_72025: "{{ 'fail' if (check2_72025.stdout != '') else 'pass'}}"
+

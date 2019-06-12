@@ -1,0 +1,41 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-10: Mods to checks
+#
+#----------
+
+- name: STIG RHEL7 V-72041 Check
+  shell: awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/ {print $6}' /etc/passwd
+  args:
+    executable: /bin/bash
+  register: check1_72041
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72041 Check 2
+  shell: grep nosuid /etc/fstab
+  args:
+    executable: /bin/bash
+  register: check2_72041
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72041 Check 3
+  shell: for i in `awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/ {print $6}' /etc/passwd`;do df -h $i;done|grep -v Filesystem|awk '{print $6}'|sort|uniq|xargs -iFS grep FS /etc/fstab|grep nosuid
+  args:
+    executable: /bin/bash
+  register: check3_72041
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72041 Report
+  set_fact: 
+    status_72041: "{{ 'fail' if (check3_72041.stdout == '') else 'pass'}}"

@@ -1,0 +1,48 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-72239 Check 1
+  shell: cat /etc/redhat-release;grep -i RhostsRSAAuthentication /etc/ssh/sshd_config
+  args:
+    executable: /bin/bash
+  register: check1_72239
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72239 Check 2
+  shell: grep " 7.[0-3] " /etc/redhat-release
+  args:
+    executable: /bin/bash
+  register: check2_72239
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72239 Check 3
+  shell: grep -i ^RhostsRSAAuthentication /etc/ssh/sshd_config 2>&1 |wc -l
+  args:
+    executable: /bin/bash
+  register: check3_72239
+  ignore_errors: True
+  changed_when: False
+  
+- name: STIG RHEL7 V-72239 Check 4
+  shell: grep "^RhostsRSAAuthentication no$" /etc/ssh/sshd_config 2>&1 |wc -l
+  args:
+    executable: /bin/bash
+  register: check4_72239
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72239 Report
+  set_fact: 
+    status_72239: "{{ 'NA' if (check2_72239.stdout == '') else 'fail' if (check3_72239.stdout != '1') else 'fail' if (check4_72239.stdout != '1') else 'pass'}}"

@@ -1,0 +1,42 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-72299 Check
+  shell:  yum list installed -q vsftpd 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check1_72299
+  ignore_errors: True
+  changed_when: False
+
+- name: V-72299 Check 2
+  shell:  yum list installed -q vsftpd 2>/dev/null
+  args:
+    executable: /bin/bash
+  #yum:
+  #  list: vsftpd
+  register: check2_72299
+  ignore_errors: True
+  changed_when: False
+
+#- name: V-72299 Check 2
+#  yum:
+#    list: vsftpd
+#  register: check2_72299
+#  ignore_errors: True
+#  changed_when: False
+
+- name: STIG RHEL7 V-72299 Report
+  set_fact: 
+    status_72299: "{{ 'fail' if (check2_72299.stdout != '' ) else 'pass'}}"
+

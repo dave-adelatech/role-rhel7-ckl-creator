@@ -1,0 +1,45 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-72315 Check
+  shell: |
+      echo -e "\n     systemctl status firewalld ";  systemctl status firewalld; \
+      echo -e "\n     firewall-cmd --get-default-zone"; firewall-cmd --get-default-zone; \
+      echo -e "\n     firewall-cmd --list-all --zone=public"; firewall-cmd --list-all --zone=public; \
+      echo -e "\n     ls -al /etc/hosts.allow"; ls -al /etc/hosts.allow; \
+      echo -e "\n     ls -al /etc/hosts.deny"; ls -al /etc/hosts.deny; 
+  args:
+    executable: /bin/bash
+  register: check1_72315
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72315 Check 2
+  shell: systemctl status firewalld | awk '/^Active/'
+  args:
+    executable: /bin/bash
+  register: check2_72315
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72315 Check 3
+  shell: ls -la /etc/hosts.allow /etc/hosts.deny | wc -l | awk '/2/'
+  args:
+    executable: /bin/bash
+  register: check3_72315
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72315 Report
+  set_fact: 
+    status_72315: "{{ 'pass' if ((check2_72315.stdout != '' or check3_72315.stdout != '')) else 'fail'}}"

@@ -1,0 +1,41 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-08: Update check to actually check
+#
+#----------
+
+- name: STIG RHEL7 V-72019 Check
+  shell:  "ls -ld $(egrep ':[0-9]{4}' /etc/passwd | cut -d: -f6) 2>&1"
+  args:
+    executable: /bin/bash
+  register: check1_72019
+  ignore_errors: True
+  changed_when: False
+
+
+- name: STIG RHEL7 V-72019 Check 2
+  shell: egrep ':[0-9]{4}' /etc/passwd |egrep -v "/sbin/nologin|/bin/false"|awk "-F:" '{print $1, $6}'| while read NAME DIR; do find $DIR -maxdepth 0 ! -user $NAME -ls ; done
+  args:
+    executable: /bin/bash
+  register: check2_72019
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72019 Report
+  set_fact: 
+    status_72019: "{{ 'fail' if (check2_72019.stdout != '') else 'pass'}}"
+
+ 
+
+
+# old code
+# awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/ {print $1, $6}' /etc/passwd| while read NAME DIR; do find $DIR -maxdepth 0 ! -user $NAME -ls ; done
+# egrep ':[0-9]{4}' /etc/passwd |egrep -v "/sbin/nologin|/bin/false"|awk "-F:" '{print $1, $6}'| while read NAME DIR; do find $DIR -maxdepth 0 ! -user $NAME -ls ; donee

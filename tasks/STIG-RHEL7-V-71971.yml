@@ -1,0 +1,41 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-71971 Check
+  shell: echo -e "This check will need to be manually completed\n"; \
+        semanage login -l | more 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_71971
+  ignore_errors: True
+  changed_when: False
+ 
+#- name: STIG RHEL7 V-71971 Check 2
+#  shell: semanage login -l | awk '!/staff_u/' | awk '!/system_u/' | awk '!/user_t/' | awk '/root/' | awk '/__defualt__/' | more  2 >/dev/null
+#  args:
+#    executable: /bin/bash
+#  register: check2_71971
+#  ignore_errors: True
+#  changed_when: False
+ 
+
+- name: STIG RHEL7 V-71971 Report
+
+  set_fact: 
+
+    #status_71971: "{{ 'pass' if (check2_71971.stdout == '') else 'fail'}}"
+    status_71971: 'NR'
+
+ 
+ 
+#

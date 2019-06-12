@@ -1,0 +1,35 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 1.1, 2019-05-01: No need to "pwck -r" Check 2 performs needed check
+#
+#----------
+
+- name: STIG RHEL7 V-72015 Check
+  shell: ls -ld `cut -d":" -f1,3,6 /etc/passwd |egrep ':[0-9]{4}:'|cut -d":" -f3`
+  args:
+    executable: /bin/bash
+  register: check1_72015
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72015 Check 2
+  shell: cut "-d:" -f 1,3,6 /etc/passwd  | awk "-F:" '$2 > 1000 && $2 < 64999 { print $3}' | while read DIR; do ls -ld $DIR 2>&1; done | awk '/No such file or directory/'
+  args:
+    executable: /bin/bash
+  register: check2_72015
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72015 Report
+  set_fact: 
+    status_72015: "{{ 'fail' if (check2_72015.stdout != '') else 'pass'}}"
+
+

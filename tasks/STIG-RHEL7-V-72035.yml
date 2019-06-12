@@ -1,0 +1,27 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-09: added nologin shell, manually complete statement
+#
+#----------
+
+- name: STIG RHEL7 V-72035 Check
+  shell: echo -e "This check will need to be manually completed.\n"; \
+    awk "-F:" '$3 > 100 && $3 < 60000 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/  {print $4 " "$1 "  " $6}' /etc/passwd  | \
+    while read GRUP USER HOME; do ls -la $HOME/. 2>/dev/null | grep -v ^total | awk '$1 !~ /d/ && $9 ~ /^\./  {print HOME"/"$9}' HOME=$HOME ; done | xargs grep -i path= 
+  args:
+    executable: /bin/bash
+  register: check1_72035
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72035 Report
+  set_fact: 
+    status_72035: "{{'NR'}}"

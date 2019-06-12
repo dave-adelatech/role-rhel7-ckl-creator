@@ -1,0 +1,34 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-10 Tightened up the checks JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-72211 Check
+  shell: egrep -i "imtcp|imudp|imrelp" /etc/rsyslog.conf 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_72211
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72211 Check 2
+  shell: egrep -i "^$ModLoad imtcp$|^$ModLoad imudp$|^$ModLoad imrelp$" /etc/rsyslog.conf 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check2_72211
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72211 Report
+  set_fact: 
+    status_72211: "{{ 'fail' if (check2_72211.stdout != '') else 'pass'}}"
+

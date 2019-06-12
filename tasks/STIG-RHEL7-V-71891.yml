@@ -1,0 +1,45 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+# Ver 2, 2019-05-09: Included an NA check for RHEL Systems that do not have GNOME
+# Ver 3, 2019-05-14: incorporated V2R3 changes to STIG
+#----------
+- name: STIG RHEL7 V-71891 Check 1
+  shell: yum list installed -q gnome* 2>/dev/null |grep -i gnome
+  args:
+    executable: /bin/bash
+  ignore_errors: True
+  register: check1_71891
+  #ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71891 Check 2
+  #shell: grep -i lock-enabled /etc/dconf/db/local.d/00-screensaver 2>&1
+  shell: grep -i lock-enabled /etc/dconf/db/local.d/* 2>&1
+  args:
+    executable: /bin/bash
+  register: check2_71891
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71891 Check 3
+  shell: grep -i lock-enabled /etc/dconf/db/local.d/* 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check3_71891
+  ignore_errors: True
+  changed_when: False
+
+
+- name: STIG RHEL7 V-71891 Report
+  set_fact: 
+
+    status_71891: "{{ 'NA' if (check1_71891.stdout == '') else 'fail' if (check2_71891.stdout != '1') else 'fail' if (check3_71891.stdout != '1') else 'pass'}}"

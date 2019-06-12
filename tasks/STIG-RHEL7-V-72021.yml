@@ -1,0 +1,34 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-08: Updated to actually do check
+#
+#----------
+
+- name: STIG RHEL7 V-72021 Check
+  shell: ls -ld $(egrep ':[0-9]{4}' /etc/passwd | cut -d":" -f6)
+  args:
+    executable: /bin/bash
+  register: check1_72021
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72021 Check 2
+  shell: egrep ':[0-9]{4}' /etc/passwd |egrep -v "/sbin/nologin|/bin/false"|awk "-F:" '{print $4, $6}'| while read GRP DIR; do find $DIR -maxdepth 0 ! -group $GRP -ls ; done
+  args:
+    executable: /bin/bash
+  register: check2_72021
+  ignore_errors: True
+  changed_when: False
+ 
+- name: STIG RHEL7 V-72021 Report
+  set_fact: 
+    status_72021: "{{ 'fail' if (check2_72021.stdout != '') else 'pass'}}"
+

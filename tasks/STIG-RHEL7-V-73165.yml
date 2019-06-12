@@ -1,0 +1,34 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-73165 Check
+  shell: grep /etc/group /etc/audit/audit.rules 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_73165
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-73165 Check 2
+  shell: grep /etc/group /etc/audit/audit.rules 2>/dev/null | grep -x "\-w /etc/group \-p wa \-k identity"
+  args:
+    executable: /bin/bash
+  register: check2_73165
+  ignore_errors: True
+  changed_when: False
+
+
+- name: STIG RHEL7 V-73165 Report
+  set_fact: 
+    status_73165: "{{ 'fail' if (check2_73165.stdout == '' ) else 'pass'}}"
+

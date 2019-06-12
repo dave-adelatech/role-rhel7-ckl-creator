@@ -1,0 +1,61 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-72269 Check
+  shell: |
+      echo -e "\n     ps -ef | grep ntp";  ps -ef | grep ntp; \
+      echo -e "\n    grep maxpoll /etc/ntp.conf"; grep maxpoll /etc/ntp.conf; # \
+  #    echo -e "\n    grep –l ntpdate /etc/cron.daily"; grep –l ntpdate /etc/cron.daily;  \
+  #    echo -e "\n    ls -al /etc/cron.* | grep aide"; ls -al /etc/cron.* | grep aide;
+  args:
+    executable: /bin/bash
+  register: check1_72269
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72269 Check 2
+  shell: service ntpd status 2>/dev/null |grep "Active. active (running)"
+  args:
+    executable: /bin/bash
+  register: check2_72269
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72269 Check 3
+  shell: grep "maxpoll 10" /etc/ntp.conf | grep -v "^#"
+  args:
+    executable: /bin/bash
+  register: check3_72269
+  ignore_errors: True
+  changed_when: False
+
+#- name: STIG RHEL7 V-72269 Check 4
+#  shell: grep –l ntpdate /etc/cron.daily 2>/dev/null
+#  args:
+#    executable: /bin/bash
+#  register: check4_72269
+#  ignore_errors: True
+#  changed_when: False
+
+#- name: STIG RHEL7 V-72269 Check 5
+#  shell: command 2>/dev/null
+#  args:
+#    executable: /bin/bash
+#  register: check5_72269
+#  ignore_errors: True
+#  changed_when: False
+
+- name: STIG RHEL7 V-72269 Report
+  set_fact: 
+    status_72269: "{{ 'fail' if (check2_72269.stdout == '') or (check3_72269.stdout == '') else 'pass'}}"
+

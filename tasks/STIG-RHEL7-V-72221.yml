@@ -1,0 +1,35 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-09: Strengthened check JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-72221 Check
+  shell: grep -i ciphers /etc/ssh/sshd_config 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_72221
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72221 Check 2
+  #shell: grep -i ciphers /etc/ssh/sshd_config 2>/dev/null | awk '!/^#/'
+  shell: grep -x "Ciphers aes128-ctr,aes192-ctr,aes256-ctr" /etc/ssh/sshd_config 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check2_72221
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72221 Report
+  set_fact: 
+    status_72221: "{{ 'fail' if (check2_72221.stdout == '') else 'pass'}}"
+

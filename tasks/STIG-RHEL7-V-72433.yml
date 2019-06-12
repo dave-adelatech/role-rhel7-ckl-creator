@@ -1,0 +1,41 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-22: Added a line count. JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-72433 Check
+  shell:  grep cert_policy /etc/pam_pkcs11/pam_pkcs11.conf 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_72433
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72433 Check 2
+  shell:  grep cert_policy /etc/pam_pkcs11/pam_pkcs11.conf 2>/dev/null | awk '/cert_policy = ca, ocsp_on, signature;/'
+  args:
+    executable: /bin/bash
+  register: check2_72433
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72433 Check 3
+  shell:  grep cert_policy /etc/pam_pkcs11/pam_pkcs11.conf 2>/dev/null | awk '/cert_policy = ca, ocsp_on, signature;/' |wc -l
+  args:
+    executable: /bin/bash
+  register: check3_72433
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72433 Report
+  set_fact: 
+    status_72433: "{{ 'fail' if (check2_72433.stdout == '' or check3_72433.stdout != '3') else 'pass'}}"

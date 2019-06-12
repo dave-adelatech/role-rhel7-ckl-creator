@@ -1,0 +1,43 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+# check for only 1 occurance of permituserenvironment in file
+- name: STIG RHEL7 V-71957 Check 1
+  shell: grep -i permituserenvironment /etc/ssh/sshd_config
+  args:
+    executable: /bin/bash
+  register: check1_71957
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71957 Check 2
+  shell: grep -i ^permituserenvironment /etc/ssh/sshd_config |wc -l
+  args:
+    executable: /bin/bash
+  register: check2_71957
+  ignore_errors: True
+  changed_when: False
+
+# check for only 1 occurance of "permituserenvironment no" in file
+- name: STIG RHEL7 V-71957 Check 3
+  shell: grep -i "^permituserenvironment no$" /etc/ssh/sshd_config |wc -l
+  args:
+    executable: /bin/bash
+  register: check3_71957
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71957 Report
+  set_fact: 
+    status_71957: "{{ 'fail' if (check2_71957.stdout != '1' ) else 'fail' if (check3_71957.stdout != '1' ) else 'pass'}}"
+

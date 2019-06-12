@@ -1,0 +1,35 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-29: Adjusted checks to match DISA Text
+#
+#----------
+
+- name: STIG RHEL7 V-73159 Check
+  shell: cat /etc/pam.d/system-auth 2>&1 | grep pam_pwquality
+  args:
+    executable: /bin/bash
+  register: check1_73159
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-73159 Check 2
+  shell:  cat /etc/pam.d/system-auth 2>/dev/null |egrep "^password +required +pam_pwquality.so.+ retry=3 "
+  args:
+    executable: /bin/bash
+  register: check2_73159
+  ignore_errors: True
+  changed_when: False
+
+
+- name: STIG RHEL7 V-73159 Report
+  set_fact: 
+    status_73159: "{{ 'fail' if (check2_73159.stdout == '' ) else 'pass'}}"
+    

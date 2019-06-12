@@ -1,0 +1,34 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-81017 Check
+  shell: cat /etc/audisp/plugins.d/au-remote.conf | grep -v "^#" 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_81017
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-81017 Check 2
+  shell: cat /etc/audisp/plugins.d/au-remote.conf | grep -v "^#" 2>/dev/null | egrep -ix "direction = out|path = /sbin/audisp-remote|type = always"|sort|uniq|wc -l
+  args:
+    executable: /bin/bash
+  register: check2_81017
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-81017 Report
+  set_fact: 
+    status_81017: "{{ 'fail' if (check2_81017.stdout != '3') else 'pass'}}"
+
+# 

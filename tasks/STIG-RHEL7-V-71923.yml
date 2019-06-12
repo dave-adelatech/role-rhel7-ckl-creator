@@ -1,0 +1,34 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-71923 Check
+  shell: cat /etc/libuser.conf | grep -i sha512 
+  args:
+    executable: /bin/bash
+  register: check1_71923
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71923 Check 2
+  shell: cat /etc/libuser.conf | grep -i sha512 |  awk '!/^#/'
+  args:
+    executable: /bin/bash
+  register: check2_71923
+  ignore_errors: True
+  changed_when: False
+
+
+- name: STIG RHEL7 V-71923 Report
+  set_fact: 
+    status_71923: "{{ 'fail' if (check2_71923.stdout == '' ) else 'pass'}}"
+

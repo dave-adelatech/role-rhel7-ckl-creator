@@ -1,0 +1,34 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-21: changed check2 to not use "grep -v". JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-71943 Check
+  shell: awk '/pam_faillock.so/' /etc/pam.d/password-auth-ac 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_71943
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71943 Check 2
+  shell: awk '/pam_faillock.so/' /etc/pam.d/password-auth-ac 2>/dev/null | grep ^auth |grep 'unlock_time=604800'
+  args:
+    executable: /bin/bash
+  register: check2_71943
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71943 Report
+  set_fact: 
+    status_71943: "{{ 'fail' if (check2_71943.stdout == '' ) else 'pass'}}"
+

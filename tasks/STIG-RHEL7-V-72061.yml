@@ -1,0 +1,42 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-10: Ajusted(fixed) checks JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-72061 Check
+  shell: df -h
+  args:
+    executable: /bin/bash
+  register: check1_72061
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72061 Check 2
+  shell: grep "/var[ |        ]" /etc/fstab
+  args:
+    executable: /bin/bash
+  register: check2_72061
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72061 Check 3
+  shell: mount|grep "on /var type"
+  args:
+    executable: /bin/bash
+  register: check3_72061
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72061 Report
+  set_fact: 
+    status_72061: "{{ 'fail' if ((check2_72061.stdout == '') or (check3_72061.stdout == '')) else 'pass'}}"
+

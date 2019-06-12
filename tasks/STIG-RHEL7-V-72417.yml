@@ -1,0 +1,41 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-05-13: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-14: V2R3 updates. JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-72417 Check
+  shell: yum list -q installed esc pam_pkcs11 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_72417
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72417 Check 2
+  shell: yum list -q installed esc pam_pkcs11 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check2_72417
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72417 Check 3
+  shell: yum list -q installed esc pam_pkcs11 2>/dev/null |wc -l
+  args:
+    executable: /bin/bash
+  register: check3_72417
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72417 Report
+  set_fact: 
+    status_72417: "{{ 'fail' if (check3_72417.stdout != '3') else 'pass'}}"

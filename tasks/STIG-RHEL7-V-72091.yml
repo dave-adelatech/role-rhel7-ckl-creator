@@ -1,0 +1,32 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-05-06
+#
+# Change History:
+#
+# Ver 1, 2019-05-06: Baseline, based on DISA RHEL7 STIGS v2r2.
+# 
+#----------
+
+- name: STIG RHEL7 V-72091 Check
+  shell: grep -i space_left_action /etc/audit/auditd.conf 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_72091
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72091 Check 2
+  shell: grep -i space_left_action /etc/audit/auditd.conf | awk '/^space_left_action = email/' 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check2_72091
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72091 Report
+  set_fact:
+    status_72091: "{{ 'fail' if (check2_72091.stdout == '') else 'pass'}}"

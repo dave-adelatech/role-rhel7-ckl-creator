@@ -1,0 +1,42 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-71963 Check
+  shell: |
+      echo -e "\n    cat /etc/redhat-release"; cat /etc/redhat-release \
+      echo -e "\n    grep -i password /boot/efi/EFI/redhat/grub.cfg";grep -i password /boot/efi/EFI/redhat/grub.cfg
+  args:
+    executable: /bin/bash
+  register: check1_71963
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71963 Check 2
+  shell: grep " 7.[2-9] " /etc/redhat-release
+  args:
+    executable: /bin/bash
+  register: check2_71963
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71963 Check 3
+  shell: if [ "$(cat  /boot/efi/EFI/redhat/grub.cfg 2>/dev/null)" ]; then grep -i password /boot/efi/EFI/redhat/grub.cfg; else echo "This system does not use EFI"; fi
+  args:
+    executable: /bin/bash
+  register: check3_71963
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-71963 Report
+  set_fact: 
+    status_71963: "{{ 'NA' if (check2_71963.stdout != '' ) else 'fail' if (check3_71963.stdout != 'password_pbkdf2' ) else 'pass'}}"

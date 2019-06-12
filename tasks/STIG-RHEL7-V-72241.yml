@@ -1,0 +1,41 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-72241 Check
+  shell: cat /etc/redhat-release 2>&1 
+  args:
+    executable: /bin/bash
+  register: check1_72241
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72241 Check 2
+  shell: grep -i clientalivecount /etc/ssh/sshd_config 2>&1
+  args:
+    executable: /bin/bash
+  register: check2_72241
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72241 Check 3
+  shell: grep -i clientalivecount /etc/ssh/sshd_config 2>/dev/null | awk '/0/'
+  args:
+    executable: /bin/bash
+  register: check3_72241
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72241 Report
+  set_fact: 
+    status_72241: "{{ 'fail' if (check3_72241.stdout == '') else 'pass'}}"
+

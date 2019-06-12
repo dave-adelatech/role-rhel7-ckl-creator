@@ -1,0 +1,45 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-05-13: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-29; Fix by removing "wc", using cat
+#
+#----------
+
+- name: STIG RHEL7 V-73175 Check
+  shell: |
+     grep 'net.ipv4.conf.all.accept_redirects' /etc/sysctl.conf /etc/sysctl.d/*
+     /sbin/sysctl -a | grep 'net.ipv4.conf.all.accept_redirects'
+  args:
+    executable: /bin/bash
+  register: check1_73175
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-73175 Check 2
+  shell: cat /etc/sysctl.conf /etc/sysctl.d/* |grep -ix "net.ipv4.conf.all.accept_redirects = 0"
+  args:
+    executable: /bin/bash
+  register: check2_73175
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-73175 Check 3
+  shell: /sbin/sysctl -a 2>/dev/null | grep -x "net.ipv4.conf.all.accept_redirects = 0"
+  args:
+    executable: /bin/bash
+  register: check3_73175
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-73175 Report
+  set_fact: 
+    status_73175: "{{ 'fail' if ((check2_73175.stdout == '' or check3_73175.stdout == '' )) else 'pass'}}"
+
+#

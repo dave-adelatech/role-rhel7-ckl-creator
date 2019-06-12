@@ -1,0 +1,55 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-05-13: New check with V1R3 JHMF
+# Ver 2, 2019-05-29: Added checks to allow for NA
+#
+#----------
+
+- name: STIG RHEL7 V-81007 Check
+  shell: |
+      cat /etc/redhat-release
+      ls -l /boot/efi/EFI/redhat/user.cfg /boot/efi/EFI/redhat/grub.cfg 2>&1
+      grep -iw grub2_password /boot/efi/EFI/redhat/user.cfg 2>&1
+      grep -iw "superusers" /boot/efi/EFI/redhat/grub.cfg 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_81007
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-81007 Check 2
+  shell: ls /boot/efi/EFI/redhat/grub.cfg 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check2_81007
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-81007 Check 3
+  shell: grep "^GRUB2_PASSWORD=grub.pbkdf2.sha512" /boot/efi/EFI/redhat/user.cfg 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check3_81007
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-81007 Check 4
+  shell: egrep  -i "set superusers=\"root\"|export superusers" /boot/grub2/grub.cfg 2>/dev/null |wc -l
+  args:
+    executable: /bin/bash
+  register: check4_81007
+  ignore_errors: True
+  changed_when: False
+
+
+- name: STIG RHEL7 V-81007 Report
+  set_fact: 
+    status_81007: "{{ 'NA' if (check2_81007.stdout == '' ) else 'fail' if (check3_81007.stdout == '' or check4_81007.stdout != '2' ) else 'pass'}}"
+

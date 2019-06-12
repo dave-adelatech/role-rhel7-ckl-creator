@@ -1,0 +1,35 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-72279 Check
+  shell: ls / | while read DIR; do find /$DIR  -name '*shosts*' -o -fstype nfs -prune -o -fstype objfs -prune -o -fstype proc -prune  -type f 2>/dev/null; done | awk '/shost/'
+  args:
+    executable: /bin/bash
+  register: check1_72279
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72279 Check 2
+  shell: ls / | while read DIR; do find /$DIR  -name '*shosts*' -o -fstype nfs -prune -o -fstype objfs -prune -o -fstype proc -prune  -type f 2>/dev/null; done | awk '/shost/'
+  args:
+    executable: /bin/bash
+  register: check2_72279
+  ignore_errors: True
+  changed_when: False
+
+
+- name: STIG RHEL7 V-72279 Report
+  set_fact: 
+    status_72279: "{{ 'fail' if (check2_72279.stdout != '' ) else 'pass'}}"
+
+

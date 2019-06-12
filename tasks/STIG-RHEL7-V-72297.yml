@@ -1,0 +1,43 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-72297 Check
+  shell: |
+      echo -e "\n    yum list installed postfix - "; yum list installed postfix; \
+      echo -e "\n    postconf -n smtpd_client_restrictions"; postconf -n smtpd_client_restrictions
+  args:
+    executable: /bin/bash
+  register: check1_72297
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72297 Check 2
+  shell: yum list installed postfix
+  args:
+    executable: /bin/bash
+  register: check2_72297
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72297 Check 3
+  shell: postconf -n smtpd_client_restrictions | awk '/smtpd_client_restrictions/ && /reject/'
+  args:
+    executable: /bin/bash
+  register: check3_72297
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72297 Report
+  set_fact: 
+    status_72297: "{{ 'fail' if ((check2_72297.stdout != '' and check3_72297.stdout == '')) else 'pass'}}"
+

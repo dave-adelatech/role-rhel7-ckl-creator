@@ -1,0 +1,46 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-30: Corrected check to added both checks. JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-72287 Check
+  shell: |
+     grep net.ipv4.icmp_echo_ignore_broadcasts /etc/sysctl.conf /etc/sysctl.d/* 2>&1
+     echo ----------
+     /sbin/sysctl -a 2>&1 | grep net.ipv4.icmp_echo_ignore_broadcasts
+  args:
+    executable: /bin/bash
+  register: check1_72287
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72287 Check 2
+  shell: cat  /etc/sysctl.conf /etc/sysctl.d/* 2>/dev/null |grep -x "net.ipv4.icmp_echo_ignore_broadcasts = 1"
+  args:
+    executable: /bin/bash
+  register: check2_72287
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72287 Check 3
+  shell: /sbin/sysctl -a 2>/dev/null |grep -x "net.ipv4.icmp_echo_ignore_broadcasts = 1"
+  args:
+    executable: /bin/bash
+  register: check3_72287
+  ignore_errors: True
+  changed_when: False
+
+
+- name: STIG RHEL7 V-72287 Report
+  set_fact: 
+    status_72287: "{{ 'fail' if (check2_72287.stdout == '' or check3_72287.stdout == '') else 'pass'}}"
+

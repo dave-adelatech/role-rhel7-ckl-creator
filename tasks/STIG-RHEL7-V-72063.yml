@@ -1,0 +1,53 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-09: Better check
+#
+#----------
+
+- name: STIG RHEL7 V-72063 Check
+  shell: df -h 2>&1; \
+      echo -e "\n    grep /var/log/audit /etc/fstab"; grep /var/log/audit /etc/fstab; \
+      echo -e "\n    mount | grep \"/var/log/audit\""; mount | grep "/var/log/audit"; \
+      echo -e "\n    df -h /var/log/audit | awk '\$6 ~ /^\/var\/log\/audit/'"; df -h /var/log/audit | awk '$6 ~ /^\/var\/log\/audit/';
+  args:
+    executable: /bin/bash
+  register: check1_72063
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72063 Check 2
+  shell: grep "/var/log/audit[ |        ]" /etc/fstab 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check2_72063
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72063 Check 3
+  shell: mount|grep "on /var/log/audit type"
+  args:
+    executable: /bin/bash
+  register: check3_72063
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72063 Check 4
+  shell: grep -x "log_file = /var/log/audit/audit.log" /etc/audit/auditd.conf
+  args:
+    executable: /bin/bash
+  register: check4_72063
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72063 Report
+  set_fact: 
+    status_72063: "{{ 'fail' if ((check2_72063.stdout == '') or (check3_72063.stdout == '') or (check4_72063.stdout == '')) else 'pass'}}"
+

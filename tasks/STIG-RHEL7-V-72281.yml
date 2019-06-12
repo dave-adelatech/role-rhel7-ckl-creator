@@ -1,0 +1,37 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+#
+#----------
+
+- name: STIG RHEL7 V-72281 Check
+  shell: |
+      echo -e "\n    grep hosts /etc/nsswitch.conf"; grep hosts /etc/nsswitch.conf; \
+      echo -e "\n    ls -al /etc/resolv.conf"; ls -al /etc/resolv.conf; \
+      echo -e "\n    grep nameserver /etc/resolv.conf"; grep nameserver /etc/resolv.conf;
+  args:
+    executable: /bin/bash
+  register: check1_72281
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72281 Check 2
+  shell: grep nameserver /etc/resolv.conf | wc -l | awk '$1 >= 2' 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check2_72281
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72281 Report
+  set_fact: 
+    status_72281: "{{ 'fail' if (check2_72281.stdout == '') else 'pass'}}"
+
+# 

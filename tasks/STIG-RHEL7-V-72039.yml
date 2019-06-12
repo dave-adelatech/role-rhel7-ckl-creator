@@ -1,0 +1,37 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-09 Correct double quote placements
+#
+#----------
+
+- name: STIG RHEL7 V-72039 Check
+  shell: |
+      echo -e "\n    find /dev -context *:device_t:* \( -type c -o -type b \) -printf '%p %Z\n'"; find /dev -context *:device_t:* \( -type c -o -type b \) -printf "%p %Z\n"; \
+      echo -e "\n    find /dev -context *:unlabeled_t:* \( -type c -o -type b \) -printf '%p %Z\n'"; find /dev -context *:unlabeled_t:* \( -type c -o -type b \) -printf "%p %Z\n"; \
+  args:
+    executable: /bin/bash
+  register: check1_72039
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72039 Check 2
+  shell: |
+    find /dev -context *:device_t:* \( -type c -o -type b \) -printf "%p %Z\n"
+    find /dev -context *:unlabeled_t:* \( -type c -o -type b \) -printf "%p %Z\n"
+  args:
+    executable: /bin/bash
+  register: check2_72039
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72039 Report
+  set_fact: 
+    status_72039: "{{ 'fail' if (check2_72039.stdout != '') else 'pass'}}"

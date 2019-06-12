@@ -1,0 +1,43 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-16: Added V2R3 changes. JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-81013 Check
+  shell: cat /etc/fstab | grep /dev/shm 2>&1; mount | grep "/dev/shm" 2>&1
+  args:
+    executable: /bin/bash
+  register: check1_81013
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-81013 Check 2
+  shell: cat /etc/fstab | grep /dev/shm |grep -v noexec 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check2_81013
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-81013 Check 3
+  shell: mount | grep "/dev/shm" | grep noexec 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check3_81013
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-81013 Report
+  set_fact: 
+    status_81013: "{{ 'fail' if ((check2_81013.stdout != '') or (check3_81013.stdout == '')) else 'pass'}}"
+
+# 

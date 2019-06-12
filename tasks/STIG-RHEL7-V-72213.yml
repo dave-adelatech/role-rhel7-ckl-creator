@@ -1,0 +1,47 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-09: modified checks to better capture results. JHMF
+#
+#----------
+
+- name: STIG RHEL7 V-72213 Check
+  shell: |
+      echo "Date this check was run"; \
+      echo -e "\n    date"; date; \
+      echo -e "\n    crontab -l | awk '/uvscan|get-virus-defs-via-nfs/'"; crontab -l | awk '/uvscan|get-virus-defs-via-nfs/'; \
+      echo -e "\n    ls -la /opt/McAfee/av*.dat"; ls -la /opt/McAfee/av*.dat;
+      echo -e "\n     systemctl status nails | awk '/active/'";  systemctl status nails | awk '/active/'
+  args:
+    executable: /bin/bash
+  register: check1_72213
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72213 Check 2
+  shell: crontab -l | awk '/uvscan|get-virus-defs-via-nfs/' |grep -v ^# 2>/dev/null; find /opt/McAfee/av*.dat -mtime -60 -print >/dev/null |wc -l
+  args:
+    executable: /bin/bash
+  register: check2_72213
+  ignore_errors: True
+  changed_when: False
+
+- name: V-72213 Check 3
+  shell: systemctl status nails | grep 'Active. active'
+  args:
+    executable: /bin/bash
+  register: check3_72213
+  ignore_errors: True
+  changed_when: False
+
+- name: STIG RHEL7 V-72213 Report
+  set_fact: 
+    status_72213: "{{ 'fail' if ((check2_72213.stdout != '5') or (check3_72213.stdout == '' )) else 'pass'}}"
+
