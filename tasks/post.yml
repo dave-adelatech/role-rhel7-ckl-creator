@@ -3,7 +3,7 @@
 # Developed For 7.2.4 by: 
 # Darley, Andrew E CTR NAVAIR, 724000D <andrew.darley.ctr@navy.mil>  
 # Loscar, Joshua D CTR NAVAIR, 541400D  <joshua.loscar.ctr@navy.mil>
-#      
+#      Changes 17Jun2019 JHMF
 # Originally created for:
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide 
 # Release: 4 Benchmark Date: 26 Jan 2018
@@ -30,7 +30,7 @@
 
 - name: Write cvs
   template:
-    src: blank_rhel7_v2r3.ckl.status.cvs
+    src: "{{ role_path }}/templates/blank_rhel7_v2r3.ckl.status.cvs"
     dest: '{{cvs_file}}'
 
 - name: Send mail
@@ -39,7 +39,6 @@
     host: localhost
     port: '25'
     to: john.h.faber.ctr@navy.mil
-      #- Loscar Joshua D CTR NAVAIR 541400D  <joshua.loscar.ctr@navy.mil>
     subject: Ansible-report System - {{out_file}}
     body: 'System {{ ansible_hostname }} results are attached. {{out_file}}'
     attach: '{{out_file}}'
@@ -49,9 +48,9 @@
   # delegate_to: ss2111
   # delegate_to: localhost
 
-- name: Move Files
-  ignore_errors: True
-  shell: cp {{out_file}} /installs/andrew{{out_file}}; chown 2126:14 /installs/andrew{{out_file}}; chmod 755 /installs/andrew{{out_file}}
+#- name: Move Files
+#  ignore_errors: True
+#  shell: cp {{out_file}} /installs/andrew{{out_file}}; chown 2126:14 /installs/andrew{{out_file}}; chmod 755 /installs/andrew{{out_file}}
   # delegate_to: ps2260 
   # delegate_to: ss2111
   # delegate_to: localhost
