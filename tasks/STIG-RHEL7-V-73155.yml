@@ -8,11 +8,15 @@
 # Change History:
 #
 # Ver 1, 2019-05-13; New check. Instudes GNOME check for NA
+# Ver 3, 2019-06-18: Re-wrote yum checks to output text if package not found, per. IA.  JHMF
 #
 #----------
 
 - name: STIG RHEL7 V-73155 Check 1
-  shell: yum list installed -q gnome* 2>&1; grep system-db /etc/dconf/profile/user 2>&1; grep -i lock-delay /etc/dconf/db/local.d/locks/* 2>&1
+  shell: |
+     yum list installed -q gnome* 2>&1
+     grep system-db /etc/dconf/profile/user 2>&1
+     grep -i lock-delay /etc/dconf/db/local.d/locks/* 2>&1
   args:
     executable: /bin/bash
   ignore_errors: True
@@ -21,7 +25,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-73155 Check 2
-  shell: yum list installed -q gnome* 2>/dev/null
+  shell: yum list installed -q gnome* 2>&1 |egrep "gnome|^Error"
   args:
     executable: /bin/bash
   register: check2_73155
@@ -46,7 +50,7 @@
 
 - name: STIG RHEL7 V-73155 Report
   set_fact: 
-    status_73155: "{{ 'NA' if (check2_73155.stdout == '') else 'fail' if ((check3_73155.stdout == '') or (check4_73155.stdout == '')) else 'pass'}}"
+    status_73155: "{{ 'NA' if (check2_73155.stdout == 'Error: No matching Packages to list') else 'fail' if ((check3_73155.stdout == '') or (check4_73155.stdout == '')) else 'pass'}}"
 
 
 

@@ -9,6 +9,7 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-17: Modified so check1 and check2 print same output.  Result was incorrect. JHMF
+# Ver 3, 2019-06-18: DISA check includes only certain direcoties.  Added this into check. JHMF
 #
 #----------
 
@@ -21,7 +22,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-71855 Check 2
-  shell: rpm -Va | grep '^..5'  | awk '($2 != "c") {print $0}'
+  shell: rpm -Va | grep '^..5'  | awk '($2 != "c") {print $0}' |egrep "^/usr/|^/usr/local/|^/bin/|^/sbin/|^/lib/|^/lib64/|^/libexec"
   args:
     executable: /bin/bash
   register: check2_71855

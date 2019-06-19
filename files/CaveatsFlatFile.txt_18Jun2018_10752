@@ -1,4 +1,3 @@
-# 18Jun2019 Added additonal STIGS, mostly concerning auditing "perm=x" false negative issue. JHMF
 
 ~V-71849 Contents of script /installs/andrew/Ansible/redhat-7/roles/STIG-RHEL7-V-71849/V-71849.sh available upon request
 Scripts checks for elevated permission as well as user/group changes from original file/direcotry found in package
@@ -29,8 +28,6 @@ DISA check will be False Positive, as DISA does not check for N/A
 ~V-71901 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
 
-~V-71931 DISA check can, and does, report a FALSE POSITIVE
-
 ~V-71963 For systems that are running RHEL 7.2 or newer, this is Not Applicable.
 
 ~V-71971 This is a manual check due to complexity.
@@ -53,40 +50,6 @@ DISA check WILL produce a false positive, as they do not check for group ownersh
 If the value of the "enable_krb5" option is not set to "yes" or the line is commented out, ask the System Administrator to indicate how the audit logs are off-loaded to a different system or media.
 
 ~V-72095 May show up as a FALSE POSITIVE. Only 64bit architect is checked
-
-~V-72123 DISA check returns a possible false NEGATIVE as of V2R3, if both b64 rules (EPERM and EACCES) are NOT in place.
-~V-72125 DISA check returns a possible false NEGATIVE as of V2R3, if both b64 rules (EPERM and EACCES) are NOT in place.
-~V-72127 DISA check returns a possible false NEGATIVE as of V2R3, if both b64 rules (EPERM and EACCES) are NOT in place.
-~V-72129 DISA check returns a possible false NEGATIVE as of V2R3, if both b64 rules (EPERM and EACCES) are NOT in place.
-~V-72131 DISA check returns a possible false NEGATIVE as of V2R3, if both b64 rules (EPERM and EACCES) are NOT in place.
-~V-72133 DISA check returns a possible false NEGATIVE as of V2R3, if both b64 rules (EPERM and EACCES) are NOT in place.
-~V-72135 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72137 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72139 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72141 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72145 DISA check returns a possible false NEGATIVE as of V2R3. "/" after faillock not allowed.
-~V-72149 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72151 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72153 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72155 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72157 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72159 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72161 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72163 DISA check returns a possible false NEGATIVE as of V2R3. DISA check is not ending "/" compliant with check.
-~V-72165 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72167 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72171 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72173 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72175 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72177 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72179 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72183 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72185 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72199 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72201 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72203 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72205 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72207 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
 
 ~V-72149 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". Stated check vs. actual check in benchmark do not match
 
@@ -124,8 +87,6 @@ Firewall rules are customized per server/application as requested.
 
 ~V-73155 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
-
-~V-73159 BASED on Fix Text, DISA may report a FALSE NEGATIVE
 
 ~V-73157 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A

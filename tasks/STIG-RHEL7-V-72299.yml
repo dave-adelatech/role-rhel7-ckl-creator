@@ -8,6 +8,7 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 3, 2019-06-18: Re-wrote yum checks to output text if package not found, per. IA.  JHMF
 #
 #----------
 
@@ -20,7 +21,7 @@
   changed_when: False
 
 - name: V-72299 Check 2
-  shell:  yum list installed -q vsftpd 2>/dev/null
+  shell:  yum list installed -q vsftpd 2>&1 |egrep "vsftpd|^Error"
   args:
     executable: /bin/bash
   #yum:
@@ -29,14 +30,7 @@
   ignore_errors: True
   changed_when: False
 
-#- name: V-72299 Check 2
-#  yum:
-#    list: vsftpd
-#  register: check2_72299
-#  ignore_errors: True
-#  changed_when: False
-
 - name: STIG RHEL7 V-72299 Report
   set_fact: 
-    status_72299: "{{ 'fail' if (check2_72299.stdout != '' ) else 'pass'}}"
+    status_72299: "{{ 'fail' if (check2_72299.stdout != 'Error: No matching Packages to list' ) else 'pass'}}"
 
