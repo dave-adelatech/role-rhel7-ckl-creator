@@ -21,7 +21,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-72275 Check 2
-  shell: grep pam_lastlog /etc/pam.d/postlogin |egrep "^session +required.+ pam_lastlog.so +.+ showfailed"
+  shell: grep pam_lastlog /etc/pam.d/postlogin |egrep "^session +required +pam_lastlog.so +showfailed"
   args:
     executable: /bin/bash
   register: check2_72275
