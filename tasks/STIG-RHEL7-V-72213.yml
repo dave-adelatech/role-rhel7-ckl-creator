@@ -9,6 +9,7 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-09: modified checks to better capture results. JHMF
+# Ver 3, 2019-06-19: Split uvcan and .dat file checks.  Corrected redirect
 #
 #----------
 
@@ -26,22 +27,32 @@
   changed_when: False
 
 - name: STIG RHEL7 V-72213 Check 2
-  shell: crontab -l | awk '/uvscan|get-virus-defs-via-nfs/' |grep -v ^# 2>/dev/null; find /opt/McAfee/av*.dat -mtime -60 -print >/dev/null |wc -l
+  # should returen 2 lines
+  shell: crontab -l | awk '/uvscan|get-virus-defs-via-nfs/' |grep -v ^# 2>/dev/null |wc -l
   args:
     executable: /bin/bash
   register: check2_72213
   ignore_errors: True
   changed_when: False
 
-- name: V-72213 Check 3
-  shell: systemctl status nails | grep 'Active. active'
+- name: STIG RHEL7 V-72213 Check 3
+  # should be exacting 3 files: avvclean.dat, avvnames.dat avvscan.dat
+  shell: find /opt/McAfee/av*.dat -mtime -60 -print 2>/dev/null |wc -l
   args:
     executable: /bin/bash
   register: check3_72213
   ignore_errors: True
   changed_when: False
 
+- name: V-72213 Check 4
+  shell: systemctl status nails | grep 'Active. active'
+  args:
+    executable: /bin/bash
+  register: check4_72213
+  ignore_errors: True
+  changed_when: False
+
 - name: STIG RHEL7 V-72213 Report
   set_fact: 
-    status_72213: "{{ 'fail' if ((check2_72213.stdout != '5') or (check3_72213.stdout == '' )) else 'pass'}}"
+    status_72213: "{{ 'fail' if (((check2_72213.stdout != '2') or (check3_72213.stdout != '3' )) and (check4_72213.stdout == ''))  else 'pass'}}"
 
