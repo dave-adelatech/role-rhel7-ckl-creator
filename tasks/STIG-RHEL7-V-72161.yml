@@ -20,7 +20,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-72161 Check 2
-  shell: grep -iw /usr/bin/sudo /etc/audit/audit.rules '/sudo -F auid>=1000 -F auid!=4294967295 -k privileged-priv_change/' 2>/dev/null
+  shell: grep -iw /usr/bin/sudo /etc/audit/audit.rules |awk '/sudo -F auid>=1000 -F auid!=4294967295 -k privileged-priv_change/' 2>/dev/null
   args:
     executable: /bin/bash
   register: check2_72161

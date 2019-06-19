@@ -8,6 +8,7 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 3, 2019-06-18: Re-wrote yum checks to output text if package not found, per. IA.  JHMF
 #
 #----------
 
@@ -22,7 +23,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-72297 Check 2
-  shell: yum list installed postfix
+  shell: yum list installed -q postfix 2>&1 |egrep "postfix|^Error"
   args:
     executable: /bin/bash
   register: check2_72297
@@ -30,7 +31,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-72297 Check 3
-  shell: postconf -n smtpd_client_restrictions | awk '/smtpd_client_restrictions/ && /reject/'
+  shell: postconf -n smtpd_client_restrictions | egrep "^smtpd_client_restrictions = permit_mynetworks, reject$|^smtpd_client_restrictions = permit_mynetworks,reject$"
   args:
     executable: /bin/bash
   register: check3_72297
@@ -39,5 +40,5 @@
 
 - name: STIG RHEL7 V-72297 Report
   set_fact: 
-    status_72297: "{{ 'fail' if ((check2_72297.stdout != '' and check3_72297.stdout == '')) else 'pass'}}"
+    status_72297: "{{ 'NA' if (check2_72297.stdout == 'Error: No matching Packages to list' ) else 'fail' if (check3_72297.stdout == '') else 'pass'}}"
 

@@ -8,14 +8,14 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 3, 2019-06-18: Re-wrote yum checks to output text if package not found, per. IA.  JHMF
 #
 #----------
 
 - name: STIG RHEL7 V-72073 Check
   shell: |
-      echo -e "\n    yum list installed aide"; yum list installed aide; \
-      echo -e "\n    AIDE_CONF=`find / -xdev -name aide.conf`; echo $AIDE_CONF"; AIDE_CONF=`find / -xdev -name aide.conf`; echo $AIDE_CONF; \
-      echo -e "\n    awk '/^ALL /' $AIDE_CONF"; awk '/^ALL /' $AIDE_CONF; 2>&1
+      yum list installed -q aide 2>&1
+      grep sha512 /etc/aide.conf
   args:
     executable: /bin/bash
   register: check1_72073
@@ -23,7 +23,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-72073 Check 2
-  shell: yum list installed aide 2>/dev/null
+  shell: yum list installed -q aide 2>&1 |egrep "aide|^Error"
   args:
     executable: /bin/bash
   register: check2_72073
@@ -31,7 +31,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-72073 Check 3
-  shell: AIDE_CONF=`find / -xdev -name aide.conf`; awk '/^ALL /' $AIDE_CONF | awk '/sha512/'
+  shell: grep "^ALL " /etc/aide.conf |grep "+sha512+"
   args:
     executable: /bin/bash
   register: check3_72073
@@ -40,5 +40,4 @@
 
 - name: STIG RHEL7 V-72073 Report
   set_fact: 
-    status_72073: "{{ 'fail' if (check3_72073.stdout == '') else 'pass'}}"
-
+    status_72073: "{{ 'fail' if (check2_72073.stdout == 'Error: No matching Packages to list') else 'fail' if (check2_72073.stdout == '') else 'pass'}}"

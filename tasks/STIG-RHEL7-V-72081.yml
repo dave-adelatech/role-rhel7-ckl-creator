@@ -10,6 +10,7 @@
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-06: changed failure 2 to failure 1
 # Ver 2.1, 2019-05-20: DISA false positive
+# Ver 3, 2019-06-19: Updated check2 to include "failure 2"
 #----------
 
 - name: STIG RHEL7 V-72081 Check
@@ -21,7 +22,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-72081 Check 2
-  shell: auditctl -s | grep -x "failure 1"
+  shell: auditctl -s | grep -x "failure [1|2]"
   args:
     executable: /bin/bash
   register: check2_72081

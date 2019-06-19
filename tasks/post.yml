@@ -8,49 +8,26 @@
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide 
 # Release: 4 Benchmark Date: 26 Jan 2018
 # 
-# This is expected to run with a play book that defines these variables
-# REPORT
-# FIX
+# Version 5. 19Jun2019. General cleanup. Remove unneeded/wanted comment lines. JHMF
 ####################################################################
 
 - name: Write file 
   template:
     src: "{{ role_path }}/templates/red7-template.xml.j2"
     dest: '{{out_file}}'
-  # delegate_to: ps2260 
-  # delegate_to: ss2111
-  # delegate_to: localhost
-
-  # - shell: awk '/_XCCDF-Results/ {print $4}' /installs/andrew/SCAP-out/{{ansible_nodename}}/SCAP.out
-#   args:
-#       executable: /bin/bash
-#   register: XCCDF_File
-#   ignore_errors: True
-#   changed_when: False
 
 - name: Write cvs
   template:
     src: "{{ role_path }}/templates/blank_rhel7_v2r3.ckl.status.cvs"
     dest: '{{cvs_file}}'
 
-- name: Send mail
-  ignore_errors: True
-  mail:
-    host: localhost
-    port: '25'
-    to: john.h.faber.ctr@navy.mil
-    subject: Ansible-report System - {{out_file}}
-    body: 'System {{ ansible_hostname }} results are attached. {{out_file}}'
-    attach: '{{out_file}}'
-      #     - "{{item}}"
-  # with_items: '{{XCCDF_File.stdout_lines}}'
-  # delegate_to: ps2260 
-  # delegate_to: ss2111
-  # delegate_to: localhost
-
-#- name: Move Files
+#- name: Send mail
 #  ignore_errors: True
-#  shell: cp {{out_file}} /installs/andrew{{out_file}}; chown 2126:14 /installs/andrew{{out_file}}; chmod 755 /installs/andrew{{out_file}}
-  # delegate_to: ps2260 
-  # delegate_to: ss2111
-  # delegate_to: localhost
+#  mail:
+#    host: localhost
+#    port: '25'
+#    to: john.h.faber.ctr@navy.mil
+#    subject: Ansible-report System - {{out_file}}
+#    body: 'System {{ ansible_hostname }} results are attached. {{out_file}}'
+#    attach: '{{out_file}}'
+

@@ -8,13 +8,16 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
-#
 # Ver 2, 2019-05-09: Included an NA check for RHEL Systems that do not have GNOME
+# Ver 3, 2019-06-18: Re-wrote yum checks to output text if package not found, per. IA.  JHMF
+#
 #----------
 
 
 - name: STIG RHEL7 V-71899 Check 1
-  shell: yum list installed -q gnome* 2>/dev/null |grep -i gnome
+  shell: |
+     yum list installed -q gnome* 2>&1
+     grep -i "idle-activation-enabled" /etc/dconf/db/local.d/* 2>&1
   args:
     executable: /bin/bash
   ignore_errors: True
@@ -23,7 +26,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-71899 Check 2
-  shell: grep -i idle_activation_enabled /etc/dconf/db/local.d/* 2>&1
+  shell: yum list installed -q gnome* 2>&1 |egrep "gnome|^Error"
   args:
     executable: /bin/bash
   register: check2_71899
@@ -31,7 +34,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-71899 Check 3
-  shell: grep -i idle_activation_enabled /etc/dconf/db/local.d/*  2>/dev/null
+  shell: grep -i "idle-activation-enabled=true" /etc/dconf/db/local.d/*  2>/dev/null
   args:
     executable: /bin/bash
   register: check3_71899
@@ -40,4 +43,4 @@
 
 - name: STIG RHEL7 V-71899 Report
   set_fact: 
-    status_71899: "{{ 'NA' if (check1_71899.stdout == '') else 'fail' if (check2_71899.stdout != '1') else 'fail' if (check3_71899.stdout != '1') else 'pass'}}"
+    status_71899: "{{ 'NA' if (check2_71899.stdout == 'Error: No matching Packages to list') else 'fail' if (check3_71899.stdout == '') else 'pass'}}"
