@@ -32,7 +32,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-71897 Check 3
-  shell: yum list -q installed tmux 2>/dev/null |grep -i tmux
+  shell: yum list installed -q tmux 2>&1 |egrep "tmux|^Error"
   args:
     executable: /bin/bash
   register: check3_71897
