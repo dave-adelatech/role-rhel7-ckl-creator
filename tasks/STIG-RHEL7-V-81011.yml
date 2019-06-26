@@ -19,6 +19,9 @@
   register: check1_81011
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81011
+      - fstab
 
 - name: STIG RHEL7 V-81011 Check 2
   shell: cat /etc/fstab | grep /dev/shm |grep -v nosuid 2>/dev/null
@@ -27,6 +30,9 @@
   register: check2_81011
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81011
+      - fstab
 
 - name: STIG RHEL7 V-81011 Check 3
   shell: mount | grep "/dev/shm" | grep nosuid 2>/dev/null
@@ -35,9 +41,15 @@
   register: check3_81011
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81011
+      - fstab
 
 - name: STIG RHEL7 V-81011 Report
   set_fact: 
     status_81011: "{{ 'fail' if ((check2_81011.stdout != '') or (check3_81011.stdout == '')) else 'pass'}}"
+  tags:
+      - V-81011
+      - fstab
 
 # 

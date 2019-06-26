@@ -19,6 +19,9 @@
   register: check1_72211
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72211
+      - rsyslog
 
 - name: STIG RHEL7 V-72211 Check 2
   shell: egrep -i "^$ModLoad imtcp$|^$ModLoad imudp$|^$ModLoad imrelp$" /etc/rsyslog.conf 2>/dev/null
@@ -27,8 +30,14 @@
   register: check2_72211
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72211
+      - rsyslog
 
 - name: STIG RHEL7 V-72211 Report
   set_fact: 
     status_72211: "{{ 'fail' if (check2_72211.stdout != '') else 'pass'}}"
+  tags:
+      - V-72211
+      - rsyslog
 

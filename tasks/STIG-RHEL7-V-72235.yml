@@ -18,6 +18,9 @@
   register: check1_72235
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72235
+      - systemctl
 
 - name: STIG RHEL7 V-72235 Check 2
   shell: systemctl status sshd 2>/dev/null | awk '/active|running/'
@@ -26,8 +29,14 @@
   register: check2_72235
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72235
+      - systemctl
 
 - name: STIG RHEL7 V-72235 Report
   set_fact: 
     status_72235: "{{ 'fail' if (check2_72235.stdout == '') else 'pass'}}"
+  tags:
+      - V-72235
+      - systemctl
 

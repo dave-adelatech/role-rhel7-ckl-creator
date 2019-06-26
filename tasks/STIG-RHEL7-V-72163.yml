@@ -19,6 +19,9 @@
   register: check1_72163
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72163
+      - auditrules
 
 - name: STIG RHEL7 V-72163 Check 2
   shell: grep -i "/etc/sudoers" /etc/audit/audit.rules 2>/dev/null |grep -ix "\-w /etc/sudoers \-p wa \-k privileged\-actions"
@@ -27,6 +30,9 @@
   register: check2_72163
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72163
+      - auditrules
 
 - name: STIG RHEL7 V-72163 Check 3
   shell: grep -i "/etc/sudoers.d/" /etc/audit/audit.rules 2>/dev/null |grep -ix "\-w /etc/sudoers.d/ \-p wa \-k privileged\-actions"
@@ -35,7 +41,13 @@
   register: check3_72163
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72163
+      - auditrules
 
 - name: STIG RHEL7 V-72163 Report
   set_fact:
     status_72163: "{{ 'fail' if ((check2_72163.stdout == '') or (check3_72163.stdout == '')) else 'pass'}}"
+  tags:
+      - V-72163
+      - auditrules

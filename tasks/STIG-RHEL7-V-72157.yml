@@ -20,6 +20,9 @@
   register: check1_72157
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72157
+      - auditrules
 
 - name: STIG RHEL7 V-72157 Check 2
   shell: grep -i /usr/sbin/userhelper /etc/audit/audit.rules |grep -ix "\-a always,exit \-F path=/usr/sbin/userhelper \-F auid>=1000 \-F auid!=4294967295 \-k privileged\-passwd"
@@ -28,7 +31,13 @@
   register: check2_72157
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72157
+      - auditrules
 
 - name: STIG RHEL7 V-72157 Report
   set_fact:
     status_72157: "{{ 'fail' if (check2_72157.stdout == '') else 'pass'}}"
+  tags:
+      - V-72157
+      - auditrules

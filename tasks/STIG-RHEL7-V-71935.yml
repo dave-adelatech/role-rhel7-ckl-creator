@@ -18,6 +18,9 @@
   register: check1_71935
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71935
+      - pwquality
 
 - name: STIG RHEL7 V-71935 Check 2
   shell: grep minlen /etc/security/pwquality.conf | awk '!/^#/ && $3 > 14'
@@ -26,8 +29,14 @@
   register: check2_71935
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71935
+      - pwquality
 
 - name: STIG RHEL7 V-71935 Report
   set_fact: 
     status_71935: "{{ 'fail' if (check2_71935.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71935
+      - pwquality
 

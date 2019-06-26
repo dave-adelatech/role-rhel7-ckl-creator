@@ -20,6 +20,10 @@
   register: check1_72067
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72067
+      - yum
+      - grub
 
 - name: STIG RHEL7 V-72067 Check 2
   shell: yum list installed -q dracut-fips 2>&1 |egrep "dracut-fips|^Error"
@@ -28,6 +32,10 @@
   register: check2_72067
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72067
+      - yum
+      - grub
 
 - name: STIG RHEL7 V-72067 Check 3
   shell: grep linux16 /boot/grub2/grub.cfg|head -1 |grep "fips=1"
@@ -36,6 +44,10 @@
   register: check3_72067
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72067
+      - yum
+      - grub
 
 - name: STIG RHEL7 V-72067 Check 4
   shell: grep -x 1 /proc/sys/crypto/fips_enabled
@@ -44,7 +56,15 @@
   register: check4_72067
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72067
+      - yum
+      - grub
 
 - name: STIG RHEL7 V-72067 Report
   set_fact: 
     status_72067: "{{ 'fail' if ((check2_72067.stdout == 'Error: No matching Packages to list') or (check3_72067.stdout == '') or (check4_72067.stdout == '')) else 'pass'}}"
+  tags:
+      - V-72067
+      - yum
+      - grub

@@ -18,6 +18,9 @@
   register: check1_72263
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72263
+      - ssh
 
 - name: STIG RHEL7 V-72263 Check 2
   shell: grep -i strictmodes /etc/ssh/sshd_config 2>/dev/null | awk '!/^#/ && /yes/'
@@ -26,9 +29,15 @@
   register: check2_72263
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72263
+      - ssh
 
 
 - name: STIG RHEL7 V-72263 Report
   set_fact: 
-    status_72263: "{{ 'fail' if (check2_72263.stdout == '' ) else 'pass'}}" 
+    status_72263: "{{ 'fail' if (check2_72263.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72263
+      - ssh 
 

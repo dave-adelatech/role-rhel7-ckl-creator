@@ -18,6 +18,9 @@
   register: check1_81017
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81017
+      - auditrules
 
 - name: STIG RHEL7 V-81017 Check 2
   shell: cat /etc/audisp/plugins.d/au-remote.conf | grep -v "^#" 2>/dev/null | egrep -ix "direction = out|path = /sbin/audisp-remote|type = always"|sort|uniq|wc -l
@@ -26,9 +29,15 @@
   register: check2_81017
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81017
+      - auditrules
 
 - name: STIG RHEL7 V-81017 Report
   set_fact: 
     status_81017: "{{ 'fail' if (check2_81017.stdout != '3') else 'pass'}}"
+  tags:
+      - V-81017
+      - auditrules
 
 # 

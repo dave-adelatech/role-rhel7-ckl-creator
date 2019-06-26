@@ -18,6 +18,10 @@
   register: check1_72031
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72031
+      - find
+      - etcpasswd
 
 - name: STIG RHEL7 V-72031 Check 2
   shell: awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/  {print $4,$6}' /etc/passwd|while read GRP HOME;do find $HOME -name '.*' ! -group $GRP -ls;done
@@ -26,30 +30,15 @@
   register: check2_72031
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72031
+      - find
+      - etcpasswd
 
 - name: STIG RHEL7 V-72031 Report
   set_fact:
     status_72031: "{{ 'fail' if (check2_72031.stdout != '') else 'pass'}}"
-
-
-
-#- name: STIG RHEL7 V-72031 Check
-#  shell: awk "-F:" '$3 > 100 && $3 < 60000 && $7 !~ /false/ && $6 !~ /\/$/ && $1 !~ /ldap/  {print $4 " "$1 "  " $6}' /etc/passwd  | while read GRUP USER HOME; do echo " "; echo $HOME" "$USER" "$GRUP" "; ls -lan $HOME/. 2>/dev/null; done
-#  args:
-#    executable: /bin/bash
-#  register: check1_72031
-#  ignore_errors: True
-#  changed_when: False
-#
-#- name: STIG RHEL7 V-72031 Check 2
-#  shell:  awk "-F:" '$3 > 100 && $3 < 60000 && $7 !~ /false/ && $6 !~ /\/$/ && $1 !~ /ldap/  {print $4 " "$1 "  " $6}' /etc/passwd  | while read GRUP USER HOME;   do ls -lan $HOME/. 2>/dev/null | grep -v ^total | awk '$4 !~ /'$GRUP'|0/ {print "chgrp -R "USER" "HOME"/"$9}' USER=$GRUP HOME=$HOME ; done
-#  args:
-#    executable: /bin/bash
-#  register: check2_72031
-#  ignore_errors: True
-#  changed_when: False
-#
-#- name: STIG RHEL7 V-72031 Report
-#  set_fact: 
-#    status_72031: "{{ 'fail' if (check2_72031.stdout != '') else 'pass'}}"
-#
+  tags:
+      - V-72031
+      - find
+      - etcpasswd

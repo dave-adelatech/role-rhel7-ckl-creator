@@ -19,6 +19,9 @@
   register: check1_81015
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81015
+      - auditrules
 
 - name: STIG RHEL7 V-81015 Check 2
   shell: grep "active" /etc/audisp/plugins.d/au-remote.conf |grep -ix "active = yes" 2>/dev/null
@@ -27,8 +30,14 @@
   register: check2_81015
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81015
+      - auditrules
 
 - name: STIG RHEL7 V-81015 Report
   set_fact: 
     status_81015: "{{ 'fail' if (check2_81015.stdout == '') else 'pass'}}"
+  tags:
+      - V-81015
+      - auditrules
 

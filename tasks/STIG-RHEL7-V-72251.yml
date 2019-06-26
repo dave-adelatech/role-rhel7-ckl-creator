@@ -21,6 +21,10 @@
   register: check1_72251
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72251
+      - ssh
+      - redhatrelease
 
 - name: STIG RHEL7 V-72251 Check 2
   shell: grep " 7.[0-3] " /etc/redhat-release
@@ -29,6 +33,10 @@
   register: check2_72251
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72251
+      - ssh
+      - redhatrelease
 
 - name: STIG RHEL7 V-72251 Check 3
   shell: grep -i protocol /etc/ssh/sshd_config 2>/dev/null | awk '/^Protocol 2/'
@@ -37,10 +45,18 @@
   register: check3_72251
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72251
+      - ssh
+      - redhatrelease
 
 
 - name: STIG RHEL7 V-72251 Report
   set_fact: 
     status_72251: "{{ 'NA' if check2_72251.stdout == '' else 'fail' if (checks32_72251.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72251
+      - ssh
+      - redhatrelease
 
 

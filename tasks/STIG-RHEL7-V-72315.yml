@@ -23,6 +23,9 @@
   register: check1_72315
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72315
+      - systemctl
 
 - name: STIG RHEL7 V-72315 Check 2
   shell: systemctl status firewalld | awk '/^Active/'
@@ -31,6 +34,9 @@
   register: check2_72315
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72315
+      - systemctl
 
 - name: STIG RHEL7 V-72315 Check 3
   shell: ls -la /etc/hosts.allow /etc/hosts.deny | wc -l | awk '/2/'
@@ -39,7 +45,13 @@
   register: check3_72315
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72315
+      - systemctl
 
 - name: STIG RHEL7 V-72315 Report
   set_fact: 
     status_72315: "{{ 'pass' if ((check2_72315.stdout != '' or check3_72315.stdout != '')) else 'fail'}}"
+  tags:
+      - V-72315
+      - systemctl

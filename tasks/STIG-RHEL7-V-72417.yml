@@ -20,6 +20,10 @@
   register: check1_72417
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72417
+      - yum
+      - pam
 
 - name: STIG RHEL7 V-72417 Check 2
   shell: yum list installed -q esc 2>&1 |egrep "esc|^Error"
@@ -28,6 +32,10 @@
   register: check2_72417
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72417
+      - yum
+      - pam
 
 - name: STIG RHEL7 V-72417 Check 3
   shell: yum list installed -q pam_pkcs11 2>&1 |egrep "pam_pkcs11|^Error"
@@ -36,7 +44,15 @@
   register: check3_72417
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72417
+      - yum
+      - pam
 
 - name: STIG RHEL7 V-72417 Report
   set_fact: 
     status_72417: "{{ 'fail' if (check2_72417.stdout == 'Error: No matching Packages to list' or check3_72417.stdout == 'Error: No matching Packages to list') else 'pass'}}"
+  tags:
+      - V-72417
+      - yum
+      - pam

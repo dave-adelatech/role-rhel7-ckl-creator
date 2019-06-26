@@ -18,6 +18,10 @@
   register: check1_73165
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73165
+      - etcpasswd
+      - auditrules
 
 - name: STIG RHEL7 V-73165 Check 2
   shell: grep /etc/group /etc/audit/audit.rules 2>/dev/null | grep -x "\-w /etc/group \-p wa \-k identity"
@@ -26,9 +30,17 @@
   register: check2_73165
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73165
+      - etcpasswd
+      - auditrules
 
 
 - name: STIG RHEL7 V-73165 Report
   set_fact: 
     status_73165: "{{ 'fail' if (check2_73165.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-73165
+      - etcpasswd
+      - auditrules
 

@@ -24,6 +24,9 @@
   register: check1_71849
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71849
+      - yum
 
 - name: STIG RHEL7 V-71849 Check 2
   shell:  /installs/Ansible/redhat-7/roles/STIG-RHEL7-master/files/V-71849.sh
@@ -32,8 +35,14 @@
   register: check2_71849
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71849
+      - yum
 
 - name: STIG RHEL7 V-71849 Report
   set_fact: 
-    status_71849: "{{ 'fail' if (check2_71849.stdout != '' ) else 'pass'}}" 
+    status_71849: "{{ 'fail' if (check2_71849.stdout != '' ) else 'pass'}}"
+  tags:
+      - V-71849
+      - yum 
 

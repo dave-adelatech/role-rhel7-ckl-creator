@@ -17,6 +17,9 @@
   register: check1_73173
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73173
+      - auditrules
 
 - name: STIG RHEL7 V-73173 Check 2
   shell: grep -x "\-w /etc/security/opasswd \-p wa \-k identity" /etc/audit/audit.rules 2>/dev/null
@@ -25,7 +28,13 @@
   register: check2_73173
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73173
+      - auditrules
 
 - name: STIG RHEL7 V-73173 Report
   set_fact:
     status_73173: "{{ 'fail' if (check2_73173.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-73173
+      - auditrules

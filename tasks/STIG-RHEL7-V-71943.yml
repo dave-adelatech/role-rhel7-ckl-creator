@@ -19,6 +19,9 @@
   register: check1_71943
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71943
+      - pam
 
 - name: STIG RHEL7 V-71943 Check 2
   shell: awk '/pam_faillock.so/' /etc/pam.d/password-auth-ac 2>/dev/null | grep ^auth |grep 'unlock_time=604800'
@@ -27,8 +30,14 @@
   register: check2_71943
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71943
+      - pam
 
 - name: STIG RHEL7 V-71943 Report
   set_fact: 
     status_71943: "{{ 'fail' if (check2_71943.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71943
+      - pam
 

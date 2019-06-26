@@ -18,6 +18,9 @@
   register: check1_71995
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71995
+      - logindefs
 
 - name: STIG RHEL7 V-71995 Check 2
   shell: grep -i umask /etc/login.defs 2>&1 | awk '/077/'
@@ -26,8 +29,14 @@
   register: check2_71995
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71995
+      - logindefs
 
 - name: STIG RHEL7 V-71995 Report
   set_fact: 
     status_71995: "{{ 'fail' if (check2_71995.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71995
+      - logindefs
 

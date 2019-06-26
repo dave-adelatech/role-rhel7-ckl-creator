@@ -18,6 +18,9 @@
   register: check1_72083
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72083
+      - auditrules
 
 - name: STIG RHEL7 V-72083 Check 2
   shell: egrep 'remote_server|172.30.20.61|172.16.5.35|cloudIP' /etc/audisp/audisp-remote.conf | awk '/^remote_server = /' 2>/dev/null
@@ -26,8 +29,14 @@
   register: check2_72083
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72083
+      - auditrules
 
 - name: STIG RHEL7 V-72083 Report
   set_fact: 
     status_72083: "{{ 'fail' if (check2_72083.stdout == '') else 'pass'}}"
+  tags:
+      - V-72083
+      - auditrules
 

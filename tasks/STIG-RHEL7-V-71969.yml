@@ -18,6 +18,9 @@
   register: check1_71969
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71969
+      - yum
 
 - name: STIG RHEL7 V-71969 Check 2
   shell: rpm -qa | grep ypserv
@@ -26,8 +29,14 @@
   register: check2_71969
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71969
+      - yum
 
 - name: STIG RHEL7 V-71969 Report
   set_fact: 
     status_71969: "{{ 'fail' if (check2_71969.stdout != '' ) else 'pass'}}"
+  tags:
+      - V-71969
+      - yum
 

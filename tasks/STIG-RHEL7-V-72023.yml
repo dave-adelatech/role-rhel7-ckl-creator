@@ -19,6 +19,10 @@
   register: check1_72023
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72023
+      - find
+      - etcpasswd
 
 - name: STIG RHEL7 V-72023 Check 2
   shell: cut -d":" -f1,3,6 /etc/passwd |egrep ':[0-9]{4}:'|cut -d":" -f1| while read USER; do find `grep ^$USER":" /etc/passwd |cut -d":" -f6` ! -user $USER -ls ;done
@@ -27,9 +31,17 @@
   register: check2_72023
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72023
+      - find
+      - etcpasswd
 
 - name: STIG RHEL7 V-72023 Report
   set_fact: 
     status_72023: "{{ 'fail' if (check2_72023.stdout != '') else 'pass'}}"
+  tags:
+      - V-72023
+      - find
+      - etcpasswd
 
 

@@ -18,6 +18,9 @@
   register: check1_72301
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72301
+      - yum
 
 - name: STIG RHEL7 V-72301 Check 2
   shell: rpm -qa | grep tftp-server 2>/dev/null
@@ -26,9 +29,15 @@
   register: check2_72301
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72301
+      - yum
 
 
 - name: STIG RHEL7 V-72301 Report
   set_fact: 
     status_72301: "{{ 'fail' if (check2_72301.stdout != '' ) else 'pass'}}"
+  tags:
+      - V-72301
+      - yum
 

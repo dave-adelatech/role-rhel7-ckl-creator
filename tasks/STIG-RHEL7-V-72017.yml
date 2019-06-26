@@ -19,6 +19,9 @@
   register: check1_72017
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72017
+      - etcpasswd
 
 - name: STIG RHEL7 V-72017 Check 2
   shell: ls -ld `cut -d":" -f1,3,6 /etc/passwd |egrep ':[0-9]{4}:'|cut -d":" -f3`|grep -v "^.....-.---"
@@ -27,9 +30,15 @@
   register: check2_72017
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72017
+      - etcpasswd
 
 - name: STIG RHEL7 V-72017 Report
   set_fact: 
     status_72017: "{{ 'fail' if (check2_72017.stdout != '') else 'pass'}}"
+  tags:
+      - V-72017
+      - etcpasswd
 
 

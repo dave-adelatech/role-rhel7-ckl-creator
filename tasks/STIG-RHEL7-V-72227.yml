@@ -8,35 +8,49 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-05-28: Added ldap usage check for NA
+# Ver 3, 2019-06-14: Wromg check in place.  Corrected. JHMF
 #
 #----------
 
 - name: STIG RHEL7 V-72227 Check
   shell: |
-      echo -e "\n    grep -i useldapauth /etc/sysconfig/authconfig 2>&1"; grep -i useldapauth /etc/sysconfig/authconfig 2>&1; \
-      echo -e "\n    grep -i ssl /etc/pam_ldap.conf"; grep -i ssl /etc/pam_ldap.conf; 
+      systemctl status sssd.service 2>&1
+      grep -i "start_tls" /etc/sssd/sssd.conf 2>&1
   args:
     executable: /bin/bash
   register: check1_72227
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72227
+      - systemctl
 
 - name: STIG RHEL7 V-72227 Check 2
-  shell: grep -i useldapauth /etc/sysconfig/authconfig 2>/dev/null | awk '/USELDAPAUTH=yes/'
+  shell: systemctl status sssd.service 2>&1 |egrep -i "   Active. inactive|Unit sssd.service could not be found"
   args:
     executable: /bin/bash
   register: check2_72227
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72227
+      - systemctl
 
 - name: STIG RHEL7 V-72227 Check 3
-  shell: grep -i ssl /etc/pam_ldap.conf | awk '/ssl start_tls/'
+  shell: grep -i "start_tls" /etc/sssd/sssd.conf |egrep -x "ldap_id_use_start_tls = true"
   args:
     executable: /bin/bash
   register: check3_72227
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72227
+      - systemctl
 
 - name: STIG RHEL7 V-72227 Report
   set_fact: 
-    status_72227: "{{ 'NA' if (check3_72227.stdout == '') else 'fail' if (check2_72227.stdout == '') else 'pass'}}"
+    status_72227: "{{ 'NA' if check2_72227.stdout != '' else 'fail' if (check3_72227.stdout == '') else 'pass'}}"
+  tags:
+      - V-72227
+      - systemctl

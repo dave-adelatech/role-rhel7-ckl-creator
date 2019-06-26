@@ -18,6 +18,9 @@
   register: check1_72171
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72171
+      - auditrules
 
 - name: STIG RHEL7 V-72171 Check 2
   shell: grep -iw "mount" /etc/audit/audit.rules |grep -ix "\-a always,exit \-F arch=b64 \-S mount \-F auid>=1000 \-F auid!=4294967295 \-k privileged\-mount"
@@ -26,6 +29,9 @@
   register: check2_72171
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72171
+      - auditrules
 
 - name: STIG RHEL7 V-72171 Check 3
   shell: grep -iw "/usr/bin/mount" /etc/audit/audit.rules |grep -ix "\-a always,exit \-F path=/usr/bin/mount \-F auid>=1000 \-F auid!=4294967295 \-k privileged\-mount"
@@ -34,8 +40,14 @@
   register: check3_72171
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72171
+      - auditrules
 
 
 - name: STIG RHEL7 V-72171 Report
   set_fact:
     status_72171: "{{ 'fail' if ((check2_72171.stdout == '') or (check3_72171.stdout == '')) else 'pass'}}"
+  tags:
+      - V-72171
+      - auditrules

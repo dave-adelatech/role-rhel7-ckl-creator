@@ -20,6 +20,9 @@
   register: check1_72047
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72047
+      - find
 
 - name: STIG RHEL7 V-72047 Check 2
   shell: find / \( -fstype nfs -o -fstype proc \) -prune -o -perm +o+w -ls 2>/dev/null |awk '$5 !~ /root|sys|bin/'
@@ -28,9 +31,15 @@
   register: check2_72047
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72047
+      - find
 
 - name: STIG RHEL7 V-72047 Report
   set_fact: 
     status_72047: "{{ 'fail' if (check2_72047.stdout != '') else 'pass'}}"
+  tags:
+      - V-72047
+      - find
 
 

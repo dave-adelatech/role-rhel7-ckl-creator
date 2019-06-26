@@ -19,6 +19,9 @@
   register: check1_72071
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72071
+      - yum
 
 - name: STIG RHEL7 V-72071 Check 2
   shell: yum list installed -q aide 2>&1 |egrep "aide|^Error"
@@ -27,6 +30,9 @@
   register: check2_72071
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72071
+      - yum
 
 - name: STIG RHEL7 V-72071 Check 3
   shell: grep "^ALL " /etc/aide.conf |grep "+xattrs+"
@@ -35,8 +41,14 @@
   register: check3_72071
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72071
+      - yum
 
 - name: STIG RHEL7 V-72071 Report
   set_fact: 
     status_72071: "{{ 'fail' if (check2_72071.stdout == 'Error: No matching Packages to list') else 'fail' if (check3_72071.stdout == '') else 'pass'}}"
+  tags:
+      - V-72071
+      - yum
 

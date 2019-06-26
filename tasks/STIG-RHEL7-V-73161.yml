@@ -18,6 +18,10 @@
   register: check1_73161
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73161
+      - nfs
+      - fstab
 
 - name: STIG RHEL7 V-73161 Check 2
   shell: cat /etc/fstab | grep nfs|grep -v "noexec"
@@ -26,7 +30,15 @@
   register: check2_73161
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73161
+      - nfs
+      - fstab
 
 - name: STIG RHEL7 V-73161 Report
   set_fact: 
     status_73161: "{{ 'fail' if (check2_73161.stdout != '') else 'pass'}}"
+  tags:
+      - V-73161
+      - nfs
+      - fstab

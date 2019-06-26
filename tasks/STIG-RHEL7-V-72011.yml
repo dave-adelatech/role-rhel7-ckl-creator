@@ -18,6 +18,9 @@
   register: check1_72011
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72011
+      - etcpasswd
 
 - name: STIG RHEL7 V-72011 Check 2
   shell: cut "-d:" -f 1,3,6 /etc/passwd  | awk "-F:" '$2 > 1000 && $2 < 64999 { print $3}' | while read DIR; do ls -ld $DIR 2>&1; done | awk '/No such file or directory/'
@@ -26,7 +29,13 @@
   register: check2_72011
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72011
+      - etcpasswd
 
 - name: STIG RHEL7 V-72011 Report
   set_fact: 
     status_72011: "{{ 'fail' if (check2_72011.stdout != '') else 'pass'}}"
+  tags:
+      - V-72011
+      - etcpasswd

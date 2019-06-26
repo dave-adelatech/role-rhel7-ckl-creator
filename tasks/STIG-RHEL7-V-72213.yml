@@ -25,6 +25,10 @@
   register: check1_72213
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72213
+      - systemctl
+      - find
 
 - name: STIG RHEL7 V-72213 Check 2
   # should returen 2 lines
@@ -34,6 +38,10 @@
   register: check2_72213
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72213
+      - systemctl
+      - find
 
 - name: STIG RHEL7 V-72213 Check 3
   # should be exacting 3 files: avvclean.dat, avvnames.dat avvscan.dat
@@ -43,6 +51,10 @@
   register: check3_72213
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72213
+      - systemctl
+      - find
 
 - name: V-72213 Check 4
   shell: systemctl status nails | grep 'Active. active'
@@ -51,8 +63,16 @@
   register: check4_72213
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72213
+      - systemctl
+      - find
 
 - name: STIG RHEL7 V-72213 Report
   set_fact: 
     status_72213: "{{ 'fail' if (((check2_72213.stdout != '2') or (check3_72213.stdout != '3' )) and (check4_72213.stdout == ''))  else 'pass'}}"
+  tags:
+      - V-72213
+      - systemctl
+      - find
 

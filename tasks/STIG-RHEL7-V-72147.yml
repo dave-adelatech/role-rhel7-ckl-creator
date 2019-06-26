@@ -18,6 +18,9 @@
   register: check1_72147
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72147
+      - auditrules
 
 - name: STIG RHEL7 V-72147 Check 2
   shell: grep -i /var/log/lastlog /etc/audit/audit.rules | awk '/lastlog -p wa -k logins/' 2>/dev/null
@@ -26,8 +29,14 @@
   register: check2_72147
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72147
+      - auditrules
 
 
 - name: STIG RHEL7 V-72147 Report
   set_fact:
     status_72147: "{{ 'fail' if (check2_72147.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72147
+      - auditrules

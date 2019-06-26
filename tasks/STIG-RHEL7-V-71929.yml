@@ -19,6 +19,9 @@
   register: check1_71929
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71929
+      - logindefs
 
 - name: STIG RHEL7 V-71929 Check 2
   shell:  grep -i pass_max_days /etc/login.defs |  awk '!/^#/ && $ 2 <= 60'
@@ -27,8 +30,14 @@
   register: check2_71929
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71929
+      - logindefs
 
 - name: STIG RHEL7 V-71929 Report
   set_fact: 
     status_71929: "{{ 'fail' if (check2_71929.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71929
+      - logindefs
     

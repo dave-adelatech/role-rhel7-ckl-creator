@@ -18,6 +18,9 @@
   register: check1_72133
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72133
+      - auditrules
 
 - name: STIG RHEL7 V-72133 Check 2
   shell: grep -i ftruncate /etc/audit/audit.rules | awk '/-a always,exit -F arch=b64 -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access/' 2>/dev/null
@@ -26,6 +29,9 @@
   register: check2_72133
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72133
+      - auditrules
 
 - name: STIG RHEL7 V-72133 Check 3
   shell: grep -i ftruncate /etc/audit/audit.rules | awk '/-a always,exit -F arch=b64 -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access/' 2>/dev/null
@@ -34,7 +40,13 @@
   register: check3_72133
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72133
+      - auditrules
 
 - name: STIG RHEL7 V-72133 Report
   set_fact:
     status_72133: "{{ 'fail' if ((check2_72133.stdout == '') or (check3_72133.stdout == '')) else 'pass'}}"
+  tags:
+      - V-72133
+      - auditrules

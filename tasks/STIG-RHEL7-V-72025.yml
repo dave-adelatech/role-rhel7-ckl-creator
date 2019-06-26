@@ -19,6 +19,9 @@
   register: check1_72025
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72025
+      - etcpasswd
 
 - name: STIG RHEL7 V-72025 Check 2
   shell:  /installs/Ansible/redhat-7/roles/STIG-RHEL7-master/files/V-72025.sh
@@ -27,8 +30,14 @@
   register: check2_72025
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72025
+      - etcpasswd
 
 - name: STIG RHEL7 V-72025 Report
   set_fact: 
     status_72025: "{{ 'fail' if (check2_72025.stdout != '') else 'pass'}}"
+  tags:
+      - V-72025
+      - etcpasswd
 

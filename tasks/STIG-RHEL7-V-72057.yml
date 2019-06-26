@@ -19,6 +19,9 @@
   register: check1_72057
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72057
+      - systemctl
  
 - name: STIG RHEL7 V-72057 Check 2
   shell: systemctl status kdump.service |grep "^   Active. inactive (dead)$" 2>/dev/null
@@ -27,9 +30,13 @@
   register: check2_72057
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72057
+      - systemctl
 
 - name: V-72057 Pass
   set_fact:
-    #status_72057: "{{ 'fail' if (check2_72057.stdout == '' and REPORT == 1) else 'pass'}}"
     status_72057: "{{ 'fail' if (check2_72057.stdout == '' ) else 'pass'}}"
-
+  tags:
+      - V-72057
+      - systemctl

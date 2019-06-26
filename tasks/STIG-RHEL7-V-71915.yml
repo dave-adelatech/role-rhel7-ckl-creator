@@ -18,6 +18,9 @@
   register: check1_71915
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71915
+      - pwquality
 
 - name: STIG RHEL7 V-71915 Check 2
   shell: grep maxrepeat /etc/security/pwquality.conf 2>/dev/null | awk '!/^#/ && $3 > /2/'
@@ -26,8 +29,14 @@
   register: check2_71915
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71915
+      - pwquality
 
 - name: STIG RHEL7 V-71915 Report
   set_fact: 
     status_71915: "{{ 'fail' if (check2_71915.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71915
+      - pwquality
 

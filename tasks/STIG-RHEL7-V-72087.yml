@@ -18,6 +18,9 @@
   register: check1_72087
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72087
+      - auditrules
 
 - name: STIG RHEL7 V-72087 Check 2
   shell: grep -i disk_full_action /etc/audisp/audisp-remote.conf | awk '/^disk_full_action/'
@@ -26,8 +29,14 @@
   register: check2_72087
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72087
+      - auditrules
 
 - name: STIG RHEL7 V-72087 Report
   set_fact: 
     status_72087: "{{ 'fail' if (check2_72087.stdout == '') else 'pass'}}"
+  tags:
+      - V-72087
+      - auditrules
 

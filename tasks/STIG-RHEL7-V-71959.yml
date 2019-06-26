@@ -18,6 +18,9 @@
   register: check1_71959
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71959
+      - ssh
 
 - name: STIG RHEL7 V-71959 Check 2
   shell: grep -i hostbasedauthentication /etc/ssh/sshd_config  | awk '!/^#/ && $2 = /no/'
@@ -26,8 +29,14 @@
   register: check2_71959
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71959
+      - ssh
 
 - name: STIG RHEL7 V-71959 Report
   set_fact: 
     status_71959: "{{ 'fail' if (check2_71959.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71959
+      - ssh
 

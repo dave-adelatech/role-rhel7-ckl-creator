@@ -19,6 +19,9 @@
   register: check1_72233
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72233
+      - yum
   async: 1000
   poll: 30
 
@@ -29,10 +32,16 @@
   register: check2_72233
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72233
+      - yum
   async: 1000
   poll: 30
 
 - name: STIG RHEL7 V-72233 Report
   set_fact: 
     status_72233: "{{ 'fail' if (check2_72233.stdout == 'Error: No matching Packages to list') else 'pass'}}"
+  tags:
+      - V-72233
+      - yum
 

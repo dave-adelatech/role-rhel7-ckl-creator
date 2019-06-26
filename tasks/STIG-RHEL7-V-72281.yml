@@ -21,6 +21,9 @@
   register: check1_72281
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72281
+      - other
 
 - name: STIG RHEL7 V-72281 Check 2
   shell: grep nameserver /etc/resolv.conf | wc -l | awk '$1 >= 2' 2>/dev/null
@@ -29,9 +32,15 @@
   register: check2_72281
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72281
+      - other
 
 - name: STIG RHEL7 V-72281 Report
   set_fact: 
     status_72281: "{{ 'fail' if (check2_72281.stdout == '') else 'pass'}}"
+  tags:
+      - V-72281
+      - other
 
 # 

@@ -18,6 +18,9 @@
   register: check1_72109
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72109
+      - auditrules
 
 - name: STIG RHEL7 V-72109 Check 2
   shell: grep -iw fchmodat /etc/audit/audit.rules | awk '/-a always,exit -F arch=b64 -S fchmodat -F auid>=1000 -F auid!=4294967295 -k perm_mod/' 2>/dev/null
@@ -26,7 +29,13 @@
   register: check2_72109
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72109
+      - auditrules
 
 - name: STIG RHEL7 V-72109 Report
   set_fact:
     status_72109: "{{ 'fail' if (check2_72109.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72109
+      - auditrules

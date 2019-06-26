@@ -19,6 +19,9 @@
   register: check1_73163
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73163
+      - auditrules
 
 - name: STIG RHEL7 V-73163 Check 2
   shell: grep -ix "network_failure_action = syslog" /etc/audisp/audisp-remote.conf 2>/dev/null
@@ -27,8 +30,14 @@
   register: check2_73163
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73163
+      - auditrules
 
 - name: STIG RHEL7 V-73163 Report
   set_fact: 
     status_73163: "{{ 'fail' if ((check2_73163.stdout == '' )) else 'pass'}}"
+  tags:
+      - V-73163
+      - auditrules
 

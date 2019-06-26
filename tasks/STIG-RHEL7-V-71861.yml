@@ -21,6 +21,10 @@
   register: check1_71861
   #ignore_errors: True
   changed_when: False
+  tags:
+      - V-71861
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-71861 Check 2
   shell: grep banner-message-text /etc/dconf/db/local.d/* 2>&1
@@ -29,6 +33,10 @@
   register: check2_71861
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71861
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-71861 Check 3
   shell: grep banner-message-text /etc/dconf/db/local.d/* | awk '/-Notwithstanding the above, using this IS/'
@@ -37,11 +45,19 @@
   register: check3_71861
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71861
+      - yum
+      - gnome
 
 
 - name: STIG RHEL7 V-71861 Report
   set_fact: 
     status_71861: "{{ 'NA' if (check1_71861.stdout == 'Error: No matching Packages to list') else 'fail' if (check2_71861.stdout == '') else 'fail' if (check3_71861.stdout == '') else 'pass'}}"
+  tags:
+      - V-71861
+      - yum
+      - gnome
 
 
 

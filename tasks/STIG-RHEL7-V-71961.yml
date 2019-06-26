@@ -20,6 +20,9 @@
   register: check1_71961
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71961
+      - grub
 
 - name: STIG RHEL7 V-71961 Check 2
   shell: grep -i "password_pbkdf2" /boot/grub2/grub.cfg 2>/dev/null |grep -v "^#" | wc -l
@@ -28,6 +31,9 @@
   register: check2_71961
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71961
+      - grub
 
 - name: STIG RHEL7 V-71961 Check 3
   shell: grep -i "password_pbkdf2 root " /boot/grub2/grub.cfg 2>/dev/null |grep -v "^#" | wc -l
@@ -36,8 +42,14 @@
   register: check3_71961
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71961
+      - grub
 
 - name: STIG RHEL7 V-71961 Report
   set_fact: 
     status_71961: "{{ 'fail' if (check2_71961.stdout != '1') or (check3_71961.stdout != '1') else 'pass'}}"
+  tags:
+      - V-71961
+      - grub
 

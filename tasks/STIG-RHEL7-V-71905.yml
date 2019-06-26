@@ -18,6 +18,9 @@
   register: check1_71905
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71905
+      - pwquality
 
 - name: STIG RHEL7 V-71905 Check 2
   shell: grep lcredit /etc/security/pwquality.conf 2>/dev/null | awk '!/^#/ && /-1/'
@@ -26,8 +29,14 @@
   register: check2_71905
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71905
+      - pwquality
 
 - name: STIG RHEL7 V-71905 Report
   set_fact: 
     status_71905: "{{ 'fail' if (check2_71905.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71905
+      - pwquality
 

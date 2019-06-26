@@ -19,6 +19,10 @@
   register: check1_72059
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72059
+      - fstab
+      - etcpasswd
 
 - name: STIG RHEL7 V-72059 Check 2
   shell: for i in `awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/ {print $6}' /etc/passwd`;do df -h $i;done|grep -v Filesystem|awk '{print $6}'|sort|uniq|xargs -iFS grep FS /etc/fstab
@@ -27,8 +31,16 @@
   register: check2_72059
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72059
+      - fstab
+      - etcpasswd
 
 - name: STIG RHEL7 V-72059 Report
   set_fact: 
     status_72059: "{{ 'fail' if (check2_72059.stdout == '') else 'pass'}}"
+  tags:
+      - V-72059
+      - fstab
+      - etcpasswd
 

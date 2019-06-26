@@ -19,6 +19,9 @@
   register: check1_72007
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72007
+      - find
   async: 5000
   poll: 10
 
@@ -30,6 +33,9 @@
   register: check2_72007
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72007
+      - find
   async: 5000
   poll: 10
 
@@ -37,3 +43,6 @@
 - name: STIG RHEL7 V-72007 Report
   set_fact: 
     status_72007: "{{ 'fail' if (check2_72007.stdout != '' ) else 'pass'}}"
+  tags:
+      - V-72007
+      - find

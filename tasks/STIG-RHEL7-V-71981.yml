@@ -18,6 +18,9 @@
   register: check1_71981
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71981
+      - yum
 
 - name: STIG RHEL7 V-71981 Check 2
   shell: grep repo_gpgcheck /etc/yum.conf 2>/dev/null | awk '/repo_gpgcheck=1/'
@@ -26,8 +29,14 @@
   register: check2_71981
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71981
+      - yum
 
 - name: STIG RHEL7 V-71981 Report
   set_fact: 
     status_71981: "{{ 'fail' if (check2_71981.stdout != '') else 'pass'}}"
+  tags:
+      - V-71981
+      - yum
 

@@ -20,6 +20,9 @@
   register: check1_72219
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72219
+      - other
 
 - name: STIG RHEL7 V-72219 Check 2
   shell: firewall-cmd --list-all 2>/dev/null
@@ -28,9 +31,14 @@
   register: check2_72219
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72219
+      - other
 
 - name: STIG RHEL7 V-72219 Report
   set_fact: 
-    #status_72219: "{{ 'fail' if (check2_72219.stdout == '') else 'pass'}}"
     status_72219: 'NR'
+  tags:
+      - V-72219
+      - other
 

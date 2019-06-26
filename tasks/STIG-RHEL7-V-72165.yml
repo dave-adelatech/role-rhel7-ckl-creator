@@ -20,6 +20,9 @@
   register: check1_72165
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72165
+      - auditrules
 
 - name: STIG RHEL7 V-72165 Check 2
   shell: grep -i /usr/bin/newgrp /etc/audit/audit.rules 2>/dev/null |grep -ix "\-a always,exit \-F path=/usr/bin/newgrp \-F auid>=1000 \-F auid!=4294967295 \-k privileged\-priv_change"
@@ -28,7 +31,13 @@
   register: check2_72165
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72165
+      - auditrules
 
 - name: STIG RHEL7 V-72165 Report
   set_fact:
     status_72165: "{{ 'fail' if (check2_72165.stdout == '') else 'pass'}}"
+  tags:
+      - V-72165
+      - auditrules

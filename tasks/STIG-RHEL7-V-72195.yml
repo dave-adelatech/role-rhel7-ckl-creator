@@ -18,6 +18,10 @@
   register: check1_72195
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72195
+      - modprobe
+      - auditrules
 
 - name: STIG RHEL7 V-72195 Check 2
   shell: grep -i modprobe /etc/audit/audit.rules 2>/dev/null
@@ -26,8 +30,16 @@
   register: check2_72195
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72195
+      - modprobe
+      - auditrules
 
 - name: STIG RHEL7 V-72195 Report
   set_fact: 
     status_72195: "{{ 'fail' if (check2_72195.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72195
+      - modprobe
+      - auditrules
 

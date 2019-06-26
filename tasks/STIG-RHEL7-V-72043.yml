@@ -19,6 +19,10 @@
   register: check1_72043
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72043
+      - modprobe
+      - fstab
  
 - name: STIG RHEL7 V-72043 Check 2
   shell: more /etc/fstab | awk '( /usbflash/ || /removable/)' 2>/dev/null
@@ -27,6 +31,10 @@
   register: check2_72043
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72043
+      - modprobe
+      - fstab
  
 - name: STIG RHEL7 V-72043 Check 3
   shell: grep -ri "^install usb-storage /bin/true$" /etc/modprobe.d/* 2>/dev/null
@@ -35,8 +43,16 @@
   register: check3_72043
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72043
+      - modprobe
+      - fstab
 
 - name: STIG RHEL7 V-72043 Report
   set_fact: 
     status_72043: "{{ 'pass' if ((check2_72043.stdout == '') and (check3_72043.stdout != '')) else 'fail'}}"
+  tags:
+      - V-72043
+      - modprobe
+      - fstab
 

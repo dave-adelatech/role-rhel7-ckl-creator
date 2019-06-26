@@ -19,6 +19,9 @@
   register: check1_72221
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72221
+      - ssh
 
 - name: STIG RHEL7 V-72221 Check 2
   #shell: grep -i ciphers /etc/ssh/sshd_config 2>/dev/null | awk '!/^#/'
@@ -28,8 +31,14 @@
   register: check2_72221
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72221
+      - ssh
 
 - name: STIG RHEL7 V-72221 Report
   set_fact: 
     status_72221: "{{ 'fail' if (check2_72221.stdout == '') else 'pass'}}"
+  tags:
+      - V-72221
+      - ssh
 

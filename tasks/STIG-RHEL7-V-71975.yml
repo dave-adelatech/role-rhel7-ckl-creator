@@ -22,6 +22,9 @@
   register: check1_71975
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71975
+      - yum
 
 - name: STIG RHEL7 V-71975 Check 2
   shell: yum list installed -q aide 2>&1 |egrep "aide|^Error"
@@ -30,6 +33,9 @@
   register: check2_71975
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71975
+      - yum
 
 - name: STIG RHEL7 V-71975 Check 3
   shell:  grep -ri "aide --check" /etc/cron* /var/spool/cron/root 2>/dev/null
@@ -38,7 +44,13 @@
   register: check3_71975
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71975
+      - yum
 
 - name: STIG RHEL7 V-71975 Report
   set_fact: 
     status_71975: "{{ 'fail' if (check2_71975.stdout == 'Error: No matching Packages to list' ) or (check3_71975.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71975
+      - yum

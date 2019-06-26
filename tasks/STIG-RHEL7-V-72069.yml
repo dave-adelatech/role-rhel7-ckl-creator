@@ -22,6 +22,10 @@
   register: check1_72069
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72069
+      - yum
+      - find
 
 - name: STIG RHEL7 V-72069 Check 2
   shell: yum list installed -q aide 2>&1 |egrep "aide|^Error"
@@ -30,6 +34,10 @@
   register: check2_72069
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72069
+      - yum
+      - find
 
 - name: STIG RHEL7 V-72069 Check 3
   shell: grep "^ALL " /etc/aide.conf |grep "+acl+"
@@ -38,7 +46,15 @@
   register: check3_72069
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72069
+      - yum
+      - find
 
 - name: STIG RHEL7 V-72069 Report
   set_fact: 
     status_72069: "{{ 'fail' if (check2_72069.stdout == 'Error: No matching Packages to list') else 'fail' if (check3_72069.stdout == '') else 'pass'}}"
+  tags:
+      - V-72069
+      - yum
+      - find

@@ -19,6 +19,10 @@
   register: check1_72041
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72041
+      - fstab
+      - etcpasswd
 
 - name: STIG RHEL7 V-72041 Check 2
   shell: grep nosuid /etc/fstab
@@ -27,6 +31,10 @@
   register: check2_72041
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72041
+      - fstab
+      - etcpasswd
 
 - name: STIG RHEL7 V-72041 Check 3
   shell: for i in `awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/ {print $6}' /etc/passwd`;do df -h $i;done|grep -v Filesystem|awk '{print $6}'|sort|uniq|xargs -iFS grep FS /etc/fstab|grep nosuid
@@ -35,7 +43,15 @@
   register: check3_72041
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72041
+      - fstab
+      - etcpasswd
 
 - name: STIG RHEL7 V-72041 Report
   set_fact: 
     status_72041: "{{ 'fail' if (check3_72041.stdout == '') else 'pass'}}"
+  tags:
+      - V-72041
+      - fstab
+      - etcpasswd

@@ -21,7 +21,13 @@
   register: check1_72035
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72035
+      - etcpasswd
 
 - name: STIG RHEL7 V-72035 Report
   set_fact: 
     status_72035: "{{'NR'}}"
+  tags:
+      - V-72035
+      - etcpasswd
