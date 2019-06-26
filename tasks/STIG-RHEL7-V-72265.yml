@@ -18,6 +18,9 @@
   register: check1_72265
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72265
+      - ssh
 
 - name: STIG RHEL7 V-72265 Check 2
   shell: grep -i usepriv /etc/ssh/sshd_config 2>/dev/null | awk '!/^#/ && /sandbox|yes/'
@@ -26,10 +29,16 @@
   register: check2_72265
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72265
+      - ssh
 
 
 - name: STIG RHEL7 V-72265 Report
   set_fact: 
     status_72265: "{{ 'fail' if (check2_72265.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72265
+      - ssh
 
 

@@ -20,9 +20,11 @@
       "{{ 'caveat_' + item.split(' ',1)[0] | lower | replace('v-','') }}": "{{ item.split(' ',1)[1] }}"
     when: item[0:2] | lower == 'v-'
     loop: "{{ ('\n' + lookup('file','../files/CaveatsFlatFile.txt')).split('\n~') }}"
+    tags: always
 
   - name: prep.yml
     import_tasks: prep.yml
+    tags: always
 
 # - name: Loop through vulnerability checks
 #   include_tasks: "{{ item }}.yml"
@@ -772,6 +774,7 @@
 
   - name: post.yml
     import_tasks: post.yml
+    tags: always
   
   when: "ansible_facts['os_family'] == 'RedHat' and ansible_facts['distribution_major_version'] == '7'"
 

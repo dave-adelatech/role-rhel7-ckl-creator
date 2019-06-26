@@ -18,6 +18,9 @@
   register: check1_71951
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71951
+      - logindefs
 
 - name: STIG RHEL7 V-71951 Check 2
   shell: grep -i fail_delay /etc/login.defs | awk  '!/^#/ && $2 > 3'
@@ -26,8 +29,14 @@
   register: check2_71951
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71951
+      - logindefs
 
 - name: STIG RHEL7 V-71951 Report
   set_fact: 
     status_71951: "{{ 'fail' if (check2_71951.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71951
+      - logindefs
 

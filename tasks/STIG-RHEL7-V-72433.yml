@@ -19,6 +19,9 @@
   register: check1_72433
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72433
+      - pam
 
 - name: STIG RHEL7 V-72433 Check 2
   shell:  grep cert_policy /etc/pam_pkcs11/pam_pkcs11.conf 2>/dev/null | awk '/cert_policy = ca, ocsp_on, signature;/'
@@ -27,6 +30,9 @@
   register: check2_72433
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72433
+      - pam
 
 - name: STIG RHEL7 V-72433 Check 3
   shell:  grep cert_policy /etc/pam_pkcs11/pam_pkcs11.conf 2>/dev/null | awk '/cert_policy = ca, ocsp_on, signature;/' |wc -l
@@ -35,7 +41,13 @@
   register: check3_72433
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72433
+      - pam
 
 - name: STIG RHEL7 V-72433 Report
   set_fact: 
     status_72433: "{{ 'fail' if (check2_72433.stdout == '' or check3_72433.stdout != '3') else 'pass'}}"
+  tags:
+      - V-72433
+      - pam

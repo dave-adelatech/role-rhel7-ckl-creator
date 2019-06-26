@@ -19,6 +19,9 @@
   register: check1_71993
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71993
+      - systemctl
 
 - name: STIG RHEL7 V-71993 Check 2
   shell: systemctl status ctrl-alt-del.target |grep "Active. active"
@@ -27,6 +30,9 @@
   register: check2_71993
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71993
+      - systemctl
 
 - name: STIG RHEL7 V-71993 Check 3
   shell: systemctl status ctrl-alt-del.target |grep "Loaded. masked"
@@ -35,8 +41,14 @@
   register: check3_71993
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71993
+      - systemctl
 
 - name: STIG RHEL7 V-71993 Report
   set_fact: 
     status_71993: "{{ 'fail' if ((check2_71993.stdout != '') or (check3_71993.stdout == '')) else 'pass'}}"
+  tags:
+      - V-71993
+      - systemctl
 

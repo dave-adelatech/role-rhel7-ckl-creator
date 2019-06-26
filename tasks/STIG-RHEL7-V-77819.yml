@@ -20,6 +20,10 @@
   register: check1_77819
   #ignore_errors: True
   changed_when: False
+  tags:
+      - V-77819
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-77819 Check 2
   shell: yum list installed -q gnome* 2>&1 |egrep "gnome|^Error"
@@ -28,6 +32,10 @@
   register: check2_77819
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-77819
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-77819 Check 3
   shell: grep system-db /etc/dconf/profile/user 2>/dev/null
@@ -36,6 +44,10 @@
   register: check3_77819
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-77819
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-77819 Check 4
   shell: grep -x "enable-smartcard-authentication=true" /etc/dconf/db/local.d/locks/* 2>/dev/null
@@ -44,8 +56,16 @@
   register: check4_77819
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-77819
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-77819 Report
   set_fact: 
     status_77819: "{{ 'NA' if (check2_77819.stdout == 'Error: No matching Packages to list') else 'fail' if ((check3_77819.stdout == '') or (check4_77819.stdout == '')) else 'pass'}}"
+  tags:
+      - V-77819
+      - yum
+      - gnome
 

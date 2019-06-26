@@ -18,6 +18,9 @@
   register: check1_72183
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72183
+      - auditrules
 
 - name: STIG RHEL7 V-72183 Check 2
   shell: grep -iw /usr/bin/crontab /etc/audit/audit.rules | awk '/crontab -F auid>=1000 -F auid!=4294967295 -k privileged-cron/' 2>/dev/null
@@ -26,7 +29,13 @@
   register: check2_72183
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72183
+      - auditrules
 
 - name: STIG RHEL7 V-72183 Report
   set_fact:
     status_72183: "{{ 'fail' if (check2_72183.stdout == '') else 'pass'}}"
+  tags:
+      - V-72183
+      - auditrules

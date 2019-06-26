@@ -18,6 +18,9 @@
   register: check1_71937
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71937
+      - pam
 
 - name: STIG RHEL7 V-71937 Check 2
   shell: grep nullok /etc/pam.d/system-auth-ac 2>/dev/null
@@ -26,9 +29,15 @@
   register: check2_71937
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71937
+      - pam
 
 
 - name: STIG RHEL7 V-71937 Report
   set_fact: 
     status_71937: "{{ 'fail' if (check2_71937.stdout != '' ) else 'pass'}}"
+  tags:
+      - V-71937
+      - pam
 

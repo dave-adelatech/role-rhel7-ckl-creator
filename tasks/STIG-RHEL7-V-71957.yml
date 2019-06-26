@@ -19,6 +19,9 @@
   register: check1_71957
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71957
+      - ssh
 
 - name: STIG RHEL7 V-71957 Check 2
   shell: grep -i ^permituserenvironment /etc/ssh/sshd_config |wc -l
@@ -27,6 +30,9 @@
   register: check2_71957
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71957
+      - ssh
 
 # check for only 1 occurance of "permituserenvironment no" in file
 - name: STIG RHEL7 V-71957 Check 3
@@ -36,8 +42,14 @@
   register: check3_71957
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71957
+      - ssh
 
 - name: STIG RHEL7 V-71957 Report
   set_fact: 
     status_71957: "{{ 'fail' if (check2_71957.stdout != '1' ) else 'fail' if (check3_71957.stdout != '1' ) else 'pass'}}"
+  tags:
+      - V-71957
+      - ssh
 

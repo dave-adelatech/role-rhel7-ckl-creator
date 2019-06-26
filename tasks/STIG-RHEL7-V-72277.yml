@@ -18,6 +18,9 @@
   register: check1_72277
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72277
+      - find
 
 - name: STIG RHEL7 V-72277 Check 2
   shell: ls / | while read DIR; do find /$DIR  -name '*shosts*' -o -fstype nfs -prune -o -fstype objfs -prune -o -fstype proc -prune  -type f 2>/dev/null; done | awk '/shost/'
@@ -26,9 +29,15 @@
   register: check2_72277
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72277
+      - find
 
 
 - name: STIG RHEL7 V-72277 Report
   set_fact: 
-    status_72277: "{{ 'fail' if (check2_72277.stdout != '' ) else 'pass'}}" 
+    status_72277: "{{ 'fail' if (check2_72277.stdout != '' ) else 'pass'}}"
+  tags:
+      - V-72277
+      - find 
 

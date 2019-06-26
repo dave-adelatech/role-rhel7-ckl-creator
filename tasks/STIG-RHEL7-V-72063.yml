@@ -22,6 +22,10 @@
   register: check1_72063
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72063
+      - fstab
+      - auditrules
 
 - name: STIG RHEL7 V-72063 Check 2
   shell: grep "/var/log/audit[ |        ]" /etc/fstab 2>/dev/null
@@ -30,6 +34,10 @@
   register: check2_72063
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72063
+      - fstab
+      - auditrules
 
 - name: STIG RHEL7 V-72063 Check 3
   shell: mount|grep "on /var/log/audit type"
@@ -38,6 +46,10 @@
   register: check3_72063
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72063
+      - fstab
+      - auditrules
 
 - name: STIG RHEL7 V-72063 Check 4
   shell: grep -x "log_file = /var/log/audit/audit.log" /etc/audit/auditd.conf
@@ -46,8 +58,16 @@
   register: check4_72063
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72063
+      - fstab
+      - auditrules
 
 - name: STIG RHEL7 V-72063 Report
   set_fact: 
     status_72063: "{{ 'fail' if ((check2_72063.stdout == '') or (check3_72063.stdout == '') or (check4_72063.stdout == '')) else 'pass'}}"
+  tags:
+      - V-72063
+      - fstab
+      - auditrules
 

@@ -19,7 +19,7 @@
   file: path={{cvs_file}} owner=scanuser group=wheel mode=640 state=touch
 
 - name: yum makecache fast
-  shell: yum makecache fast
+  shell: yum makecache fast >/dev/null 2>&1;echo
   args:
     executable: /bin/bash
   ignore_errors: True

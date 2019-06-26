@@ -19,6 +19,9 @@
   register: check1_71965
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71965
+      - pam
 
 - name: STIG RHEL7 V-71965 Check 2
   shell: authconfig --test | grep "pam_pkcs11 is enabled"
@@ -27,6 +30,9 @@
   register: check2_71965
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71965
+      - pam
 
 - name: STIG RHEL7 V-71965 Check 3
   shell: authconfig --test | grep "smartcard removal action = \"Ignore\""
@@ -35,6 +41,9 @@
   register: check3_71965
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71965
+      - pam
 
 - name: STIG RHEL7 V-71965 Check 4
   shell: authconfig --test | grep "smartcard module = \"coolkey\""
@@ -43,9 +52,15 @@
   register: check4_71965
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71965
+      - pam
 
 - name: STIG RHEL7 V-71965 Report
   set_fact: 
     status_71965: "{{ 'pass' if ((check2_71965.stdout != '') and (check3_71965.stdout != '') and (check4_71965.stdout != '')) else 'fail'}}"
+  tags:
+      - V-71965
+      - pam
 
 #

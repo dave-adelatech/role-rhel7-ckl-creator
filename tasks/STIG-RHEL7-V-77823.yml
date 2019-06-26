@@ -18,6 +18,9 @@
   register: check1_77823
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-77823
+      - systemctl
 
 - name: STIG RHEL7 V-77823 Check 2
   shell: grep -i execstart /usr/lib/systemd/system/rescue.service 2>/dev/null | awk '/\/usr\/sbin\/sulogin; \/usr\/bin\/systemctl --fail --no-block default/'
@@ -26,8 +29,14 @@
   register: check2_77823
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-77823
+      - systemctl
 
 - name: STIG RHEL7 V-77823 Report
   set_fact: 
     status_77823: "{{ 'fail' if (check2_77823.stdout == '') else 'pass'}}"
+  tags:
+      - V-77823
+      - systemctl
 

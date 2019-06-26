@@ -18,6 +18,9 @@
   register: check1_71983
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71983
+      - modprobe
 
 - name: STIG RHEL7 V-71983 Check 2
   shell: grep -ir "^install usb-storage /bin/true$" /etc/modprobe.d*
@@ -26,8 +29,14 @@
   register: check2_71983
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71983
+      - modprobe
 
 - name: STIG RHEL7 V-71983 Report
   set_fact: 
     status_71983: "{{ 'fail' if (check2_71983.stdout == '') else 'pass'}}"
+  tags:
+      - V-71983
+      - modprobe
 

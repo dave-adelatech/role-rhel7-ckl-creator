@@ -21,6 +21,9 @@
   register: check1_73175
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73175
+      - sysctl
 
 - name: STIG RHEL7 V-73175 Check 2
   shell: cat /etc/sysctl.conf /etc/sysctl.d/* |grep -ix "net.ipv4.conf.all.accept_redirects = 0"
@@ -29,6 +32,9 @@
   register: check2_73175
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73175
+      - sysctl
 
 - name: STIG RHEL7 V-73175 Check 3
   shell: /sbin/sysctl -a 2>/dev/null | grep -x "net.ipv4.conf.all.accept_redirects = 0"
@@ -37,9 +43,15 @@
   register: check3_73175
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73175
+      - sysctl
 
 - name: STIG RHEL7 V-73175 Report
   set_fact: 
     status_73175: "{{ 'fail' if ((check2_73175.stdout == '' or check3_73175.stdout == '' )) else 'pass'}}"
+  tags:
+      - V-73175
+      - sysctl
 
 #

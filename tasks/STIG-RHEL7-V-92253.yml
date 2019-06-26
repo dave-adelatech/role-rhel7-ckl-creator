@@ -21,6 +21,9 @@
   register: check1_92253
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-92253
+      - sysctl
 
 - name: STIG RHEL7 V-92253 Check 2
   shell: cat /etc/sysctl.conf /etc/sysctl.d/* 2>/dev/null |grep -ix "net.ipv4.conf.default.rp_filter = 1"
@@ -29,6 +32,9 @@
   register: check2_92253
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-92253
+      - sysctl
 
 - name: STIG RHEL7 V-92253 Check 3
   shell:  /sbin/sysctl -a 2>/dev/null | grep -ix "net.ipv4.conf.default.rp_filter = 1"
@@ -37,9 +43,15 @@
   register: check3_92253
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-92253
+      - sysctl
 
 - name: STIG RHEL7 V-92253 Report
   set_fact: 
     status_92253: "{{ 'fail' if (check2_92253.stdout == '' or check3_92253.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-92253
+      - sysctl
 
 #

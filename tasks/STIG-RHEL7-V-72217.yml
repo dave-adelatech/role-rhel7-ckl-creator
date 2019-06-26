@@ -19,6 +19,9 @@
   register: check1_72217
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72217
+      - other
 
 - name: STIG RHEL7 V-72217 Check 2
   # tabs below      
@@ -28,8 +31,14 @@
   register: check2_72217
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72217
+      - other
 
 - name: STIG RHEL7 V-72217 Report
   set_fact: 
     status_72217: "{{ 'fail' if (check2_72217.stdout == '') else 'pass'}}"
+  tags:
+      - V-72217
+      - other
 

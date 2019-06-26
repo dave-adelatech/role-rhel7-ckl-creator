@@ -22,6 +22,9 @@
   register: check1_71897
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71897
+      - yum
 
 - name: STIG RHEL7 V-71897 Check 2
   shell: yum list installed -q screen 2>&1 |egrep "screen|^Error"
@@ -30,6 +33,9 @@
   register: check2_71897
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71897
+      - yum
 
 - name: STIG RHEL7 V-71897 Check 3
   shell: yum list installed -q tmux 2>&1 |egrep "tmux|^Error"
@@ -38,8 +44,14 @@
   register: check3_71897
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71897
+      - yum
 
 
 - name: STIG RHEL7 V-71897 Report
   set_fact: 
     status_71897: "{{ 'fail' if ((check2_71897.stdout == 'Error: No matching Packages to list') and (check3_71897.stdout == 'Error: No matching Packages to list')) else 'pass'}}"
+  tags:
+      - V-71897
+      - yum

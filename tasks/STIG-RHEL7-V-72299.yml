@@ -19,6 +19,9 @@
   register: check1_72299
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72299
+      - yum
 
 - name: V-72299 Check 2
   shell:  yum list installed -q vsftpd 2>&1 |egrep "vsftpd|^Error"
@@ -29,8 +32,14 @@
   register: check2_72299
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72299
+      - yum
 
 - name: STIG RHEL7 V-72299 Report
   set_fact: 
     status_72299: "{{ 'fail' if (check2_72299.stdout != 'Error: No matching Packages to list' ) else 'pass'}}"
+  tags:
+      - V-72299
+      - yum
 

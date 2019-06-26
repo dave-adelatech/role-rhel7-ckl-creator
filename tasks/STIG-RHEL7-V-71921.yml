@@ -18,6 +18,9 @@
   register: check1_71921
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71921
+      - logindefs
 
 - name: STIG RHEL7 V-71921 Check 2
   shell: grep -i encrypt /etc/login.defs 2>/dev/null | awk '!/^#/ && /SHA512/'
@@ -26,8 +29,14 @@
   register: check2_71921
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71921
+      - logindefs
 
 - name: STIG RHEL7 V-71921 Report
   set_fact: 
     status_71921: "{{ 'fail' if (check2_71921.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71921
+      - logindefs
 

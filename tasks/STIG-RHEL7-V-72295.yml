@@ -18,6 +18,9 @@
   register: check1_72295
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72295
+      - other
 
 - name: STIG RHEL7 V-72295 Check 2
   shell: ip link | grep -i promisc 2>/dev/null
@@ -26,7 +29,13 @@
   register: check2_72295
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72295
+      - other
 
 - name: STIG RHEL7 V-72295 Report
   set_fact: 
     status_72295: "{{ 'fail' if (check2_72295.stdout != '') else 'pass'}}"
+  tags:
+      - V-72295
+      - other

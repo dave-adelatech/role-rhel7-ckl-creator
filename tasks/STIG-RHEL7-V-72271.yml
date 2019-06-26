@@ -18,6 +18,9 @@
   register: check1_72271
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72271
+      - other
 
 - name: STIG RHEL7 V-72271 Check 2
   shell: rule ipv4 filter IN_public_allow 0 -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT | awk '/command not found/'
@@ -26,8 +29,14 @@
   register: check2_72271
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72271
+      - other
 
 - name: STIG RHEL7 V-72271 Report
   set_fact: 
     status_72271: "{{ 'fail' if (check2_72271.stdout != '') else 'pass'}}"
+  tags:
+      - V-72271
+      - other
 

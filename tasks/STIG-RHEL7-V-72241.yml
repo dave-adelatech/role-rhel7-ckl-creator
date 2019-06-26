@@ -18,6 +18,10 @@
   register: check1_72241
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72241
+      - ssh
+      - redhatrelease
 
 - name: STIG RHEL7 V-72241 Check 2
   shell: grep -i clientalivecount /etc/ssh/sshd_config 2>&1
@@ -26,6 +30,10 @@
   register: check2_72241
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72241
+      - ssh
+      - redhatrelease
 
 - name: STIG RHEL7 V-72241 Check 3
   shell: grep -i clientalivecount /etc/ssh/sshd_config 2>/dev/null | awk '/0/'
@@ -34,8 +42,16 @@
   register: check3_72241
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72241
+      - ssh
+      - redhatrelease
 
 - name: STIG RHEL7 V-72241 Report
   set_fact: 
     status_72241: "{{ 'fail' if (check3_72241.stdout == '') else 'pass'}}"
+  tags:
+      - V-72241
+      - ssh
+      - redhatrelease
 

@@ -19,6 +19,9 @@
   register: check1_81003
   #ignore_errors: True
   changed_when: False
+  tags:
+      - V-81003
+      - pam
 
 - name: STIG RHEL7 V-81003 Check 2
   shell: cat /etc/pam.d/passwd | grep -i ^password |grep -i substack | grep -i system-auth$ 2>&1
@@ -27,8 +30,14 @@
   register: check2_81003
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81003
+      - pam
 
 - name: STIG RHEL7 V-81003 Report
   set_fact: 
     status_81003: "{{ 'fail' if (check2_81003.stdout == '') else 'pass'}}"
+  tags:
+      - V-81003
+      - pam
 

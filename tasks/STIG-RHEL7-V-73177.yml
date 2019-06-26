@@ -18,6 +18,9 @@
   register: check1_73177
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73177
+      - other
 
 - name: STIG RHEL7 V-73177 Check 2
   shell: nmcli device|grep "wifi connected"
@@ -26,9 +29,15 @@
   register: check2_73177
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73177
+      - other
 
 - name: STIG RHEL7 V-73177 Report
   set_fact: 
     status_73177: "{{ 'fail' if (check2_73177.stdout != '') else 'NA'}}"
+  tags:
+      - V-73177
+      - other
 
 #

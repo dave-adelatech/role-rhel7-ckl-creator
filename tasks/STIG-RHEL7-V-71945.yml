@@ -18,6 +18,9 @@
   register: check1_71945
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71945
+      - pam
 
 - name: STIG RHEL7 V-71945 Check 2
   shell: egrep -x "auth +required +pam_faillock.so +preauth +silent +audit +deny=3 +even_deny_root +fail_interval=900 +unlock_time=604800|auth +sufficient +pam_unix.so +try_first_pass|auth +\[default=die\] +pam_faillock.so +authfail +audit +deny=3 +even_deny_root +fail_interval=900 +unlock_time=604800|account +required +pam_faillock.so" /etc/pam.d/password-auth /etc/pam.d/system-auth
@@ -26,6 +29,9 @@
   register: check2_71945
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71945
+      - pam
 
 - name: STIG RHEL7 V-71945 Check 3
   shell: egrep -x "auth +required +pam_faillock.so +preauth +silent +audit +deny=3 +even_deny_root +fail_interval=900 +unlock_time=604800|auth +sufficient +pam_unix.so +try_first_pass|auth +\[default=die\] +pam_faillock.so +authfail +audit +deny=3 +even_deny_root +fail_interval=900 +unlock_time=604800|account +required +pam_faillock.so" /etc/pam.d/password-auth /etc/pam.d/system-auth|wc -l
@@ -34,7 +40,13 @@
   register: check3_71945
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71945
+      - pam
 
 - name: STIG RHEL7 V-71945 Report
   set_fact: 
     status_71945: "{{ 'fail' if (check3_71945.stdout != '8' ) else 'pass'}}"
+  tags:
+      - V-71945
+      - pam

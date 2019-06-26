@@ -19,6 +19,9 @@
   register: check1_71941
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71941
+      - other
 
 - name: STIG RHEL7 V-71941 Check 2
   shell: grep -i inactive /etc/default/useradd | awk -F= '!/^#/ && $2 == 0'
@@ -27,8 +30,14 @@
   register: check2_71941
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71941
+      - other
 
 - name: STIG RHEL7 V-71941 Report
   set_fact: 
     status_71941: "{{ 'fail' if (check2_71941.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71941
+      - other
 

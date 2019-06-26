@@ -21,6 +21,10 @@
   register: check1_72075
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72075
+      - grub
+      - find
 
 - name: STIG RHEL7 V-72075 Check 2
   shell:  ls / | while read DIR; do find /$DIR \( -fstype nfs -o -fstype objfs -o -fstype proc \) -prune -o -name grub.cfg -exec ls -la {} \; ; done | awk '!/\/boot\/grub2\/grub.cfg/' 2>/dev/null
@@ -29,6 +33,10 @@
   register: check2_72075
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72075
+      - grub
+      - find
 
 - name: STIG RHEL7 V-72075 Check 3
   shell: grep 'set root' /boot/grub2/grub.cfg | awk '!/hd0/' 2>/dev/null
@@ -37,7 +45,15 @@
   register: check3_72075
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72075
+      - grub
+      - find
 
 - name: STIG RHEL7 V-72075 Report
   set_fact: 
     status_72075: "{{ 'fail' if (check2_72075.stdout != '' or check3_72075.stdout != '' ) else 'pass'}}"
+  tags:
+      - V-72075
+      - grub
+      - find

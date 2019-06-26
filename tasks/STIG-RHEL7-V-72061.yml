@@ -19,6 +19,9 @@
   register: check1_72061
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72061
+      - fstab
 
 - name: STIG RHEL7 V-72061 Check 2
   shell: grep "/var[ |        ]" /etc/fstab
@@ -27,6 +30,9 @@
   register: check2_72061
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72061
+      - fstab
 
 - name: STIG RHEL7 V-72061 Check 3
   shell: mount|grep "on /var type"
@@ -35,8 +41,14 @@
   register: check3_72061
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72061
+      - fstab
 
 - name: STIG RHEL7 V-72061 Report
   set_fact: 
     status_72061: "{{ 'fail' if ((check2_72061.stdout == '') or (check3_72061.stdout == '')) else 'pass'}}"
+  tags:
+      - V-72061
+      - fstab
 

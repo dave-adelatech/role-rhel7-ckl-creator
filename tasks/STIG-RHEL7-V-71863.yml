@@ -19,6 +19,9 @@
   register: check1_71863
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71863
+      - ssh
 
 - name: STIG RHEL7 V-71863 Check 2
 #  shell: more /etc/issue 2>/dev/null | awk '!/You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only. /'
@@ -28,8 +31,14 @@
   register: check2_71863
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71863
+      - ssh
 
 - name: STIG RHEL7 V-71863 Report
   set_fact: 
     status_71863: "{{ 'fail' if (check2_71863.stdout != '19') else 'pass'}}"
+  tags:
+      - V-71863
+      - ssh
 

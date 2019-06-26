@@ -18,6 +18,9 @@
   register: check1_78999
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-78999
+      - auditrules
 
 - name: STIG RHEL7 V-78999 Check 2
   shell: grep -iw create_module /etc/audit/audit.rules 2>/dev/null | awk '/-a always,exit -F arch=b64 -S create_module -k module-change/'
@@ -26,8 +29,14 @@
   register: check2_78999
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-78999
+      - auditrules
 
 - name: STIG RHEL7 V-78999 Report
   set_fact: 
     status_78999: "{{ 'fail' if (check2_78999.stdout == '') else 'pass'}}"
+  tags:
+      - V-78999
+      - auditrules
 

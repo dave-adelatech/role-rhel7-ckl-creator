@@ -18,6 +18,9 @@
   register: check1_72313
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72313
+      - other
 
 - name: STIG RHEL7 V-72313 Check 2
   shell: if [ "$(ls -al /etc/snmp/snmpd.conf 2>/dev/null)" ]; then awk '/public|private/' /etc/snmp/snmpd.conf; fi
@@ -26,9 +29,15 @@
   register: check2_72313
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72313
+      - other
 
 
 - name: STIG RHEL7 V-72313 Report
   set_fact: 
     status_72313: "{{ 'fail' if (check2_72313.stdout != '' ) else 'pass'}}"
+  tags:
+      - V-72313
+      - other
 

@@ -23,6 +23,10 @@
   register: check1_81007
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81007
+      - redhatrelease
+      - grub
 
 - name: STIG RHEL7 V-81007 Check 2
   shell: ls /boot/efi/EFI/redhat/grub.cfg 2>/dev/null
@@ -31,6 +35,10 @@
   register: check2_81007
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81007
+      - redhatrelease
+      - grub
 
 - name: STIG RHEL7 V-81007 Check 3
   shell: grep "^GRUB2_PASSWORD=grub.pbkdf2.sha512" /boot/efi/EFI/redhat/user.cfg 2>/dev/null
@@ -39,6 +47,10 @@
   register: check3_81007
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81007
+      - redhatrelease
+      - grub
 
 - name: STIG RHEL7 V-81007 Check 4
   shell: egrep  -i "set superusers=\"root\"|export superusers" /boot/grub2/grub.cfg 2>/dev/null |wc -l
@@ -47,9 +59,17 @@
   register: check4_81007
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81007
+      - redhatrelease
+      - grub
 
 
 - name: STIG RHEL7 V-81007 Report
   set_fact: 
     status_81007: "{{ 'NA' if (check2_81007.stdout == '' ) else 'fail' if (check3_81007.stdout == '' or check4_81007.stdout != '2' ) else 'pass'}}"
+  tags:
+      - V-81007
+      - redhatrelease
+      - grub
 

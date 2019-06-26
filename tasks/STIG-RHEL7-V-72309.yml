@@ -20,6 +20,9 @@
   register: check1_72309
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72309
+      - sysctl
 
 - name: STIG RHEL7 V-72309 Check 2
   shell: cat /etc/sysctl.conf /etc/sysctl.d/*  2>/dev/null |grep -ix "net.ipv4.ip_forward = 0"
@@ -28,6 +31,9 @@
   register: check2_72309
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72309
+      - sysctl
 
 - name: STIG RHEL7 V-72309 Check 3
   shell: /sbin/sysctl -a 2>/dev/null |grep -ix "net.ipv4.ip_forward = 0"
@@ -36,9 +42,15 @@
   register: check3_72309
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72309
+      - sysctl
 
 - name: STIG RHEL7 V-72309 Report
   set_fact: 
     status_72309: "{{ 'fail' if (( check2_72309.stdout == '' or check3_72309.stdout == '' )) else 'pass'}}"
+  tags:
+      - V-72309
+      - sysctl
 
 #

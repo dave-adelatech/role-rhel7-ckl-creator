@@ -21,6 +21,9 @@
   register: check1_81005
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81005
+      - grub
 
 - name: STIG RHEL7 V-81005 Check 2
   #shell: grep -iw grub2_password /boot/grub2/user.cfg 2>/dev/null | awk '/set superusers="root"/ && /export superusers/'
@@ -30,6 +33,9 @@
   register: check2_81005
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81005
+      - grub
 
 - name: STIG RHEL7 V-81005 Check 3
   #shell: grep -iw "superusers" /boot/grub2/grub.cfg | awk '/GRUB2_PASSWORD=grub.pbkdf2.sha512/'
@@ -39,9 +45,15 @@
   register: check3_81005
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81005
+      - grub
 
 
 - name: STIG RHEL7 V-81005 Report
   set_fact: 
     status_81005: "{{ 'fail' if (check2_81005.stdout == '' or  check3_81005.stdout != '2') else 'pass'}}"
+  tags:
+      - V-81005
+      - grub
 

@@ -18,6 +18,9 @@
   register: check1_71919
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71919
+      - pam
 
 - name: STIG RHEL7 V-71919 Check 2
   shell:  grep password /etc/pam.d/system-auth-ac | awk '/512/'
@@ -26,8 +29,14 @@
   register: check2_71919
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71919
+      - pam
 
 - name: STIG RHEL7 V-71919 Report
   set_fact: 
     status_71919: "{{ 'fail' if (check2_71919.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71919
+      - pam
 

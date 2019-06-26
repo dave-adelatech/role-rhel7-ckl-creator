@@ -21,6 +21,9 @@
   register: check1_72073
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72073
+      - yum
 
 - name: STIG RHEL7 V-72073 Check 2
   shell: yum list installed -q aide 2>&1 |egrep "aide|^Error"
@@ -29,6 +32,9 @@
   register: check2_72073
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72073
+      - yum
 
 - name: STIG RHEL7 V-72073 Check 3
   shell: grep "^ALL " /etc/aide.conf |grep "+sha512+"
@@ -37,7 +43,13 @@
   register: check3_72073
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72073
+      - yum
 
 - name: STIG RHEL7 V-72073 Report
   set_fact: 
     status_72073: "{{ 'fail' if (check2_72073.stdout == 'Error: No matching Packages to list') else 'fail' if (check2_72073.stdout == '') else 'pass'}}"
+  tags:
+      - V-72073
+      - yum

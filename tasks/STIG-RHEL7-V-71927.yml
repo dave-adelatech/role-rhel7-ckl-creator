@@ -20,6 +20,9 @@
 
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71927
+      - other
 
 - name: STIG RHEL7 V-71927 Check 2
   shell:  awk "-F:" '$4 < 1 && $1 !~ /root|bin|daemon|adm|lp|sync|shutdown|halt|mail|operator|games|ftp|nobody|scanuser|rpc|nagios|systemd-bus-proxy|systemd-network|dbus|polkit|tss|postfix|sshd|chrony|tcpdump|setroubleshoot|sssd|ntp/ {print "chage -m 1 "$1}' /etc/shadow
@@ -29,8 +32,14 @@
 
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71927
+      - other
 
 - name: STIG RHEL7 V-71927 Report
   set_fact: 
     status_71927: "{{ 'fail' if (check2_71927.stdout != '') else 'pass'}}"
+  tags:
+      - V-71927
+      - other
 

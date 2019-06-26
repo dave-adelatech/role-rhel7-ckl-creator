@@ -19,6 +19,9 @@
   register: check1_72013
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72013
+      - logindefs
 
 - name: STIG RHEL7 V-72013 Check 2
   # tab between HOME and yes
@@ -29,8 +32,14 @@
   register: check2_72013
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72013
+      - logindefs
 
 - name: STIG RHEL7 V-72013 Report
   set_fact: 
     status_72013: "{{ 'fail' if (check2_72013.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72013
+      - logindefs
 

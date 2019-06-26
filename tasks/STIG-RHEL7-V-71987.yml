@@ -18,6 +18,9 @@
   register: check1_71987
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71987
+      - yum
 
 - name: STIG RHEL7 V-71987 Check 2
   shell: grep -i "^clean_requirements_on_remove=1$" /etc/yum.conf  2>/dev/null
@@ -26,9 +29,15 @@
   register: check2_71987
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71987
+      - yum
 
 
 - name: STIG RHEL7 V-71987 Report
   set_fact: 
     status_71987: "{{ 'fail' if (check2_71987.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71987
+      - yum
 

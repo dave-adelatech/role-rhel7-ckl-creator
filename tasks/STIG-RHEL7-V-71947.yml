@@ -19,6 +19,9 @@
   register: check1_71947
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71947
+      - other
 
 - name: STIG RHEL7 V-71947 Check 2
   shell: cat /etc/sudoers /etc/sudoers.d/* 2>/dev/null |grep -i nopasswd |grep -v "^#"
@@ -27,9 +30,15 @@
   register: check2_71947
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71947
+      - other
 
 - name: STIG RHEL7 V-71947 Report
   set_fact: 
     status_71947: "{{ 'fail' if (check2_71947.stdout != '') else 'pass'}}"
+  tags:
+      - V-71947
+      - other
 
 #

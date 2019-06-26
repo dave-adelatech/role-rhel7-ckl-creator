@@ -18,6 +18,9 @@
   register: check1_72259
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72259
+      - ssh
 
 - name: STIG RHEL7 V-72259 Check 2
   shell: grep -i gssapiauth /etc/ssh/sshd_config 2>/dev/null | awk '!/^#/ && /no/'
@@ -26,9 +29,15 @@
   register: check2_72259
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72259
+      - ssh
 
 
 - name: STIG RHEL7 V-72259 Report
   set_fact: 
     status_72259: "{{ 'fail' if (check2_72259.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72259
+      - ssh
 

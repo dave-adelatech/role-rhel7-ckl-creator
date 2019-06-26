@@ -22,6 +22,10 @@
   register: check1_72037
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72037
+      - find
+      - etcpasswd
 
 - name: STIG RHEL7 V-72037 Check 2
   shell:  for i in `cat /tmp/V-72037`;do grep -ir $i `cat /tmp/V-72037-2|grep -v .bash_history`;done
@@ -30,8 +34,16 @@
   register: check2_72037
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72037
+      - find
+      - etcpasswd
 
 - name: STIG RHEL7 V-72037 Report
   set_fact: 
     status_72037: "{{ 'fail' if (check2_72037.stdout != '') else 'pass'}}"
+  tags:
+      - V-72037
+      - find
+      - etcpasswd
 

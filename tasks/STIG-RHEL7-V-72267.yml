@@ -19,6 +19,9 @@
   register: check1_72267
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72267
+      - ssh
 
 - name: STIG RHEL7 V-72267 Check 2
   shell: grep -i compression /etc/ssh/sshd_config 2>/dev/null |awk '!/^#/ && /delayed|no/'
@@ -27,9 +30,15 @@
   register: check2_72267
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72267
+      - ssh
 
 
 - name: STIG RHEL7 V-72267 Report
   set_fact: 
     status_72267: "{{ 'fail' if (check2_72267.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72267
+      - ssh
 

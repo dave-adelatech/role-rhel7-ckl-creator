@@ -18,6 +18,9 @@
   register: check1_72253
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72253
+      - ssh
 
 - name: STIG RHEL7 V-72253 Check 2
   shell: grep -i macs /etc/ssh/sshd_config 3>/dev/null | awk '!/^#/ && /hmac-sha2-256|hmac-sha2-512/'
@@ -26,8 +29,14 @@
   register: check2_72253
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72253
+      - ssh
 
 - name: STIG RHEL7 V-72253 Report
   set_fact: 
     status_72253: "{{ 'fail' if (check2_72253.stdout == '') else 'pass'}}"
+  tags:
+      - V-72253
+      - ssh
 

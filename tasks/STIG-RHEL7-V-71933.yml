@@ -19,6 +19,9 @@
   register: check1_71933
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71933
+      - pam
 
 - name: STIG RHEL7 V-71933 Check 2
   shell: grep -i remember /etc/pam.d/system-auth-ac 2>/dev/null | awk '/remember=5/'
@@ -27,8 +30,14 @@
   register: check2_71933
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71933
+      - pam
 
 - name: STIG RHEL7 V-71933 Report
   set_fact: 
     status_71933: "{{ 'fail' if (check2_71933.stdout == '') else 'pass'}}"
+  tags:
+      - V-71933
+      - pam
 

@@ -18,6 +18,9 @@
   register: check1_71985
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71985
+      - systemctl
 
 - name: STIG RHEL7 V-71985 Check 2
   shell: systemctl status autofs 2>&1 | awk '/inactive|could not be found/'
@@ -26,8 +29,14 @@
   register: check2_71985
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71985
+      - systemctl
 
 - name: STIG RHEL7 V-71985 Report
   set_fact: 
     status_71985: "{{ 'fail' if (check2_71985.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71985
+      - systemctl
 

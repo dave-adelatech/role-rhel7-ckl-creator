@@ -18,6 +18,9 @@
   register: check1_72003
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72003
+      - other
 
 - name: STIG RHEL7 V-72003 Check 2
   shell: pwck -r 2>/dev/null | awk '/no group/'
@@ -26,8 +29,14 @@
   register: check2_72003
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72003
+      - other
 
 - name: STIG RHEL7 V-72003 Report
   set_fact: 
     status_72003: "{{ 'fail' if (check2_72003.stdout != '' ) else 'pass'}}"
+  tags:
+      - V-72003
+      - other
 

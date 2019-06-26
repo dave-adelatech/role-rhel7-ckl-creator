@@ -19,6 +19,9 @@
   register: check1_72319
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72319
+      - sysctl
 
 - name: STIG RHEL7 V-72319 Check 2
   shell: cat /etc/sysctl.conf /etc/sysctl.d/* |grep -ix "net.ipv6.conf.all.accept_source_route = 0" 2>&1
@@ -27,6 +30,9 @@
   register: check2_72319
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72319
+      - sysctl
 
 - name: STIG RHEL7 V-72319 Check 3
   shell: /sbin/sysctl -a 2>/dev/null | grep -ix "net.ipv6.conf.all.accept_source_route = 0"
@@ -35,10 +41,16 @@
   register: check3_72319
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72319
+      - sysctl
 
 
 - name: STIG RHEL7 V-72319 Report
   set_fact: 
     status_72319: "{{ 'fail' if (check2_72319.stdout == '' or check3_72319.stdout == '') else 'pass'}}"
+  tags:
+      - V-72319
+      - sysctl
 
 #

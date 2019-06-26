@@ -18,6 +18,9 @@
   register: check1_71989
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71989
+      - selinux
 
 - name: STIG RHEL7 V-71989 Check 2
   shell: /sbin/getenforce 2>/dev/null | awk '/Enforcing/'
@@ -26,9 +29,15 @@
   register: check2_71989
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71989
+      - selinux
 
 
 - name: STIG RHEL7 V-71989 Report
   set_fact: 
     status_71989: "{{ 'fail' if (check2_71989.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71989
+      - selinux
 

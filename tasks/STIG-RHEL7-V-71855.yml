@@ -20,6 +20,9 @@
   register: check1_71855
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71855
+      - yum
 
 - name: STIG RHEL7 V-71855 Check 2
   shell: rpm -Va | grep '^..5'  | awk '($2 != "c") {print $0}' |egrep "^/usr/|^/usr/local/|^/bin/|^/sbin/|^/lib/|^/lib64/|^/libexec"
@@ -28,8 +31,14 @@
   register: check2_71855
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71855
+      - yum
 
 - name: STIG RHEL7 V-71855 Report
   set_fact: 
     status_71855: "{{ 'fail' if (check2_71855.stdout != '') else 'pass'}}"
+  tags:
+      - V-71855
+      - yum
 
