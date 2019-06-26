@@ -8,6 +8,7 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2. 2019-06-18: Removed 'wc' usage. JHMF
 #
 #----------
 
@@ -20,22 +21,14 @@
   changed_when: False
 
 - name: STIG RHEL7 V-71979 Check 2
-  shell: grep ^localpkg_gpgcheck /etc/yum.conf |wc -l
+  shell: grep "^localpkg_gpgcheck=1$" /etc/yum.conf
   args:
     executable: /bin/bash
   register: check2_71979
   ignore_errors: True
   changed_when: False
 
-- name: STIG RHEL7 V-71979 Check 3
-  shell: grep "^localpkg_gpgcheck=1$" /etc/yum.conf |wc -l
-  args:
-    executable: /bin/bash
-  register: check3_71979
-  ignore_errors: True
-  changed_when: False
-
 - name: STIG RHEL7 V-71979 Report
   set_fact: 
-    status_71979: "{{ 'fail' if (check2_71979.stdout != '1') else 'fail' if (check3_71979.stdout != '1') else 'pass'}}"
+    status_71979: "{{ 'fail' if (check2_71979.stdout == '') else 'pass'}}"
 

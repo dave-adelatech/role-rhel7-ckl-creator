@@ -23,7 +23,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-72273 Check 2
-  shell: yum list installed firewalld 2>/dev/null|grep firewalld
+  shell: yum list installed -q firewalld 2>&1 |egrep "firewalld|^Error"
   args:
     executable: /bin/bash
   register: check2_72273
@@ -31,7 +31,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-72273 Check 3
-  shell: systemctl status firewalld|egrep "Loaded. loaded| Active. active"|wc -l
+  shell: systemctl status firewalld 2>/dev/null |egrep "Loaded. loaded| Active. active"
   args:
     executable: /bin/bash
   register: check3_72273
@@ -48,4 +48,4 @@
 
 - name: STIG RHEL7 V-72273 Report
   set_fact: 
-    status_72273: "{{ 'fail' if ((check2_72273.stdout == '' or check3_72273.stdout != '2' or  check4_72273.stdout != '')) else 'pass'}}"
+    status_72273: "{{ 'fail' if ((check2_72273.stdout == 'Error: No matching Packages to list' or check3_72273.stdout == '' or  check4_72273.stdout != '')) else 'pass'}}"

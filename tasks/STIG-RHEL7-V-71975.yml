@@ -8,11 +8,15 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 3, 2019-06-18: Re-wrote yum checks to output text if package not found, per. IA.  JHMF
 #
 #----------
 
 - name: STIG RHEL7 V-71975 Check
-  shell: yum -q list installed aide 2>&1; grep -ri "aide --check" /etc/cron* /var/spool/cron/root
+  shell: |
+     yum -q list installed aide 2>&1
+     echo "------"
+     grep -ri "aide --check" /etc/cron* /var/spool/cron/root
   args:
     executable: /bin/bash
   register: check1_71975
@@ -20,7 +24,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-71975 Check 2
-  shell:  yum -q list installed aide 2>/dev/null
+  shell: yum list installed -q aide 2>&1 |egrep "aide|^Error"
   args:
     executable: /bin/bash
   register: check2_71975
@@ -28,7 +32,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-71975 Check 3
-  shell:  grep -ri "aide --check" /etc/cron* /var/spool/cron/root
+  shell:  grep -ri "aide --check" /etc/cron* /var/spool/cron/root 2>/dev/null
   args:
     executable: /bin/bash
   register: check3_71975
@@ -37,4 +41,4 @@
 
 - name: STIG RHEL7 V-71975 Report
   set_fact: 
-    status_71975: "{{ 'fail' if (check2_71975.stdout == '' ) or (check3_71975.stdout == '' ) else 'pass'}}"
+    status_71975: "{{ 'fail' if (check2_71975.stdout == 'Error: No matching Packages to list' ) or (check3_71975.stdout == '' ) else 'pass'}}"

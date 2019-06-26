@@ -8,11 +8,12 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 3, 2019-06-18: Re-wrote yum checks to output text if package not found, per. IA.  JHMF
 #
 #----------
 
 - name: STIG RHEL7 V-72233 Check
-  shell:  yum list installed | grep ssh 2>&1
+  shell:  yum list installed -q | grep ssh 2>&1
   args:
     executable: /bin/bash
   register: check1_72233
@@ -21,9 +22,8 @@
   async: 1000
   poll: 30
 
-
 - name: STIG RHEL7 V-72233 Check 2
-  shell: yum list installed | grep ssh | awk '/openssh-clients/'
+  shell: yum list installed -q openssh-server* 2>&1 |egrep "openssh-server|^Error"
   args:
     executable: /bin/bash
   register: check2_72233
@@ -32,17 +32,7 @@
   async: 1000
   poll: 30
 
-- name: STIG RHEL7 V-72233 Check 3
-  shell: yum list installed | grep ssh | awk '/openssh-server/'
-  args:
-    executable: /bin/bash
-  register: check3_72233
-  ignore_errors: True
-  changed_when: False
-  async: 1000
-  poll: 30
-
 - name: STIG RHEL7 V-72233 Report
   set_fact: 
-    status_72233: "{{ 'fail' if ((check2_72233.stdout == '' and check2_72233.stdout == '')) else 'pass'}}"
+    status_72233: "{{ 'fail' if (check2_72233.stdout == 'Error: No matching Packages to list') else 'pass'}}"
 

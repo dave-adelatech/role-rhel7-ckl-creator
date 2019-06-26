@@ -8,14 +8,15 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
-#
 # Ver 2, 2019-05-06: Changed shell command to account for STIG preference
 # Ver 3, 2019-05-14: Added V2R3 changes. JHMF
 # Ver 3.1, 2019-05-20: Wording in check is incorrect.  Should be "If neither the screen package or the tmux package is installed, this is a finding."
+# Ver 3.2, 2019-06-18: Re-wrote yum checks to output text if package not found, per. IA.  JHMF
+#
 #----------
 
 - name: STIG RHEL7 V-71897 Check
-  shell: yum list installed screen tmux 2>&1
+  shell: yum list installed -q tmux screen 2>&1 |egrep "tmux|screen|^Error"
   args:
     executable: /bin/bash
   register: check1_71897
@@ -23,7 +24,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-71897 Check 2
-  shell: yum list -q installed screen 2>/dev/null
+  shell: yum list installed -q screen 2>&1 |egrep "screen|^Error"
   args:
     executable: /bin/bash
   register: check2_71897
@@ -31,7 +32,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-71897 Check 3
-  shell: yum list -q installed tmux 2>/dev/null
+  shell: yum list installed -q tmux 2>&1 |egrep "tmux|^Error"
   args:
     executable: /bin/bash
   register: check3_71897
@@ -41,5 +42,4 @@
 
 - name: STIG RHEL7 V-71897 Report
   set_fact: 
-    status_71897: "{{ 'fail' if ((check2_71897.stdout == '' ) and (check3_71897.stdout == '' )) else 'pass'}}"
-
+    status_71897: "{{ 'fail' if ((check2_71897.stdout == 'Error: No matching Packages to list') and (check3_71897.stdout == 'Error: No matching Packages to list')) else 'pass'}}"

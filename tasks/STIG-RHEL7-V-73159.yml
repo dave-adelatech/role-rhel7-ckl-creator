@@ -21,7 +21,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-73159 Check 2
-  shell:  cat /etc/pam.d/system-auth 2>/dev/null |egrep "^password +required +pam_pwquality.so.+ retry=3 "
+  shell:  cat /etc/pam.d/system-auth 2>/dev/null |egrep "^password +required +pam_pwquality.so +retry=3"
   args:
     executable: /bin/bash
   register: check2_73159

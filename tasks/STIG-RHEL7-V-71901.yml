@@ -8,11 +8,14 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
-#
 # Ver 2, 2019-05-09: Included an NA check for RHEL Systems that do not have GNOME 
+# Ver 3, 2019-06-18: Re-wrote yum checks to output text if package not found, per. IA.  JHMF
+#
 #----------
 - name: STIG RHEL7 V-71901 Check 1
-  shell: yum list installed -q gnome* 2>/dev/null |grep -i gnome
+  shell: |
+     yum list installed -q gnome* 2>&1
+     grep ^lock-delay /etc/dconf/db/local.d/* 2>&1
   args:
     executable: /bin/bash
   ignore_errors: True
@@ -21,7 +24,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-71901 Check 2
-  shell: grep ^lock-delay /etc/dconf/db/local.d/* |wc -l
+  shell: yum list installed -q gnome* 2>&1 |egrep "gnome|^Error"
   args:
     executable: /bin/bash
   register: check2_71901
@@ -29,7 +32,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-71901 Check 3
-  shell: grep ^lock-delay=5 /etc/dconf/db/local.d/* |wc -l
+  shell: grep "^lock-delay=uint32 5" /etc/dconf/db/local.d/* 2>/dev/null
   args:
     executable: /bin/bash
   register: check3_71901
@@ -38,4 +41,4 @@
 
 - name: STIG RHEL7 V-71901 Report
   set_fact:
-   status_71901: "{{ 'NA' if (check1_71901.stdout == '') else 'fail' if (check2_71901.stdout != '1') else 'fail' if (check3_71901.stdout != '1') else 'pass'}}"
+   status_71901: "{{ 'NA' if (check2_71901.stdout == 'Error: No matching Packages to list') else 'fail' if (check3_71901.stdout == '') else 'pass'}}"

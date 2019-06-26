@@ -8,6 +8,7 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 3, 2019-06-18: Re-wrote yum checks to output text if package not found, per. IA.  JHMF
 #
 #----------
 
@@ -20,7 +21,7 @@
   changed_when: False
 
 - name: STIG RHEL7 V-72305 Check 2
-  shell: yum list installed -q tftp-server 2>/dev/null
+  shell: yum list installed -q "tftp-server" 2>&1 |egrep "tftp-server|^Error"
   args:
     executable: /bin/bash
   #yum:
@@ -42,5 +43,5 @@
 
 - name: STIG RHEL7 V-72305 Report
   set_fact: 
-    status_72305: "{{ 'fail' if (check2_72305.stdout != '') else 'pass'}}"
+    status_72305: "{{ 'fail' if (check2_72305.stdout != 'Error: No matching Packages to list') else 'pass'}}"
 
