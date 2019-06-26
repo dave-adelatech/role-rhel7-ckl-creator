@@ -19,6 +19,10 @@
   register: check1_72033
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72033
+      - find
+      - etcpasswd
 
 - name: STIG RHEL7 V-72033 Check 2
   shell: find `awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/ {print $6}' /etc/passwd` -name "\.*" -type f -ls |grep -v " .....----- "
@@ -27,8 +31,16 @@
   register: check2_72033
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72033
+      - find
+      - etcpasswd
 
 - name: STIG RHEL7 V-72033 Report
   set_fact: 
     status_72033: "{{ 'fail' if (check2_72033.stdout != '') else 'pass'}}"
+  tags:
+      - V-72033
+      - find
+      - etcpasswd
 

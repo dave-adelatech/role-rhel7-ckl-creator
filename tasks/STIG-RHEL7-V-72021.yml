@@ -19,6 +19,10 @@
   register: check1_72021
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72021
+      - find
+      - etcpasswd
 
 - name: STIG RHEL7 V-72021 Check 2
   shell: egrep ':[0-9]{4}' /etc/passwd |egrep -v "/sbin/nologin|/bin/false"|awk "-F:" '{print $4, $6}'| while read GRP DIR; do find $DIR -maxdepth 0 ! -group $GRP -ls ; done
@@ -27,8 +31,16 @@
   register: check2_72021
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72021
+      - find
+      - etcpasswd
  
 - name: STIG RHEL7 V-72021 Report
   set_fact: 
     status_72021: "{{ 'fail' if (check2_72021.stdout != '') else 'pass'}}"
+  tags:
+      - V-72021
+      - find
+      - etcpasswd
 

@@ -19,6 +19,9 @@
   register: check1_71979
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71979
+      - yum
 
 - name: STIG RHEL7 V-71979 Check 2
   shell: grep "^localpkg_gpgcheck=1$" /etc/yum.conf
@@ -27,8 +30,14 @@
   register: check2_71979
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71979
+      - yum
 
 - name: STIG RHEL7 V-71979 Report
   set_fact: 
     status_71979: "{{ 'fail' if (check2_71979.stdout == '') else 'pass'}}"
+  tags:
+      - V-71979
+      - yum
 

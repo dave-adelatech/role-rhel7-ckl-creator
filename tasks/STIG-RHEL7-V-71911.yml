@@ -18,6 +18,9 @@
   register: check1_71911
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71911
+      - pwquality
 
 - name: STIG RHEL7 V-71911 Check 2
   shell: grep difok /etc/security/pwquality.conf 2>/dev/null | awk '!/^#/ && $3 >= /8/'
@@ -26,8 +29,14 @@
   register: check2_71911
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71911
+      - pwquality
 
 - name: STIG RHEL7 V-71911 Report
   set_fact: 
     status_71911: "{{ 'fail' if (check2_71911.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71911
+      - pwquality
 

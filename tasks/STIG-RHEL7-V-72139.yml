@@ -18,6 +18,9 @@
   register: check1_72139
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72139
+      - auditrules
 
 - name: STIG RHEL7 V-72139 Check 2
   shell: grep -i /usr/bin/chcon /etc/audit/audit.rules | awk '/chcon -F auid>=1000 -F auid!=4294967295 -k privileged-priv_change/' 2>/dev/null
@@ -26,8 +29,14 @@
   register: check2_72139
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72139
+      - auditrules
 
 
 - name: STIG RHEL7 V-72139 Report
   set_fact:
     status_72139: "{{ 'fail' if (check2_72139.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72139
+      - auditrules

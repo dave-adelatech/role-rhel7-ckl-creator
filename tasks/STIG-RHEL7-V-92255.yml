@@ -12,23 +12,48 @@
 #----------
 
 - name: STIG RHEL7 V-92255 Check
-  shell: echo -e "Checking if SELINUX is in use\n"; /sbin/getenforce 2>&1
+  shell: |
+     /sbin/getenforce 2>&1
+     rpm -qa | grep MFEhiplsm 2>&1
+     ps -ef | grep -i "hipclient"
+
   args:
     executable: /bin/bash
   register: check1_92255
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-92255
+      - hips
 
 - name: STIG RHEL7 V-92255 Check 2
-  shell: /sbin/getenforce 2>/dev/null | awk '/Enforcing/'
+  shell: rpm -qa 2>/dev/null | grep MFEhiplsm |grep -v grep
   args:
     executable: /bin/bash
   register: check2_92255
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-92255
+      - hips
+
+- name: STIG RHEL7 V-92255 Check 3
+  shell: ps -ef 2>/dev/null | grep -i "hipclient" |grep -v grep 
+  args:
+    executable: /bin/bash
+  register: check3_92255
+  ignore_errors: True
+  changed_when: False
+  tags:
+      - V-92255
+      - hips
+
 
 
 - name: STIG RHEL7 V-92255 Report
   set_fact: 
-    status_92255: "{{ 'fail' if (check2_92255.stdout == '' ) else 'pass'}}"
+    status_92255: "{{ 'fail' if ((check2_92255.stdout == '' ) or (check3_92255.stdout == '' )) else 'pass'}}"
+  tags:
+      - V-92255
+      - hips
 

@@ -18,6 +18,9 @@
   register: check1_72255
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72255
+      - find
 
 - name: STIG RHEL7 V-72255 Check 2
   # tabs below      
@@ -27,8 +30,14 @@
   register: check2_72255
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72255
+      - find
 
 - name: STIG RHEL7 V-72255 Report
   set_fact: 
     status_72255: "{{ 'fail' if (check2_72255.stdout != '') else 'pass'}}"
+  tags:
+      - V-72255
+      - find
 

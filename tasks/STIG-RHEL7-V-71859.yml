@@ -21,6 +21,10 @@
   register: check1_71859
   #ignore_errors: True
   changed_when: False
+  tags:
+      - V-71859
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-71859 Check 2
   shell: grep ^banner-message-enable /etc/dconf/db/local.d/*
@@ -29,6 +33,10 @@
   register: check2_71859
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71859
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-71859 Check 3
   shell: grep ^banner-message-enable=true$ /etc/dconf/db/local.d/*
@@ -37,9 +45,15 @@
   register: check3_71859
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71859
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-71859 Report
   set_fact: 
-    #status_71859: "{{ 'fail' if (check2_71859.stdout != '') else 'pass'}}"
     status_71859: "{{ 'NA' if (check1_71859.stdout == 'Error: No matching Packages to list') else 'fail' if (check2_71859.stdout == '') else 'fail' if (check3_71859.stdout == '') else 'pass'}}"
-
+  tags:
+      - V-71859
+      - yum
+      - gnome

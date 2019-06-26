@@ -21,6 +21,9 @@
   register: check1_72297
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72297
+      - yum
 
 - name: STIG RHEL7 V-72297 Check 2
   shell: yum list installed -q postfix 2>&1 |egrep "postfix|^Error"
@@ -29,6 +32,9 @@
   register: check2_72297
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72297
+      - yum
 
 - name: STIG RHEL7 V-72297 Check 3
   shell: postconf -n smtpd_client_restrictions | egrep "^smtpd_client_restrictions = permit_mynetworks, reject$|^smtpd_client_restrictions = permit_mynetworks,reject$"
@@ -37,8 +43,14 @@
   register: check3_72297
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72297
+      - yum
 
 - name: STIG RHEL7 V-72297 Report
   set_fact: 
     status_72297: "{{ 'NA' if (check2_72297.stdout == 'Error: No matching Packages to list' ) else 'fail' if (check3_72297.stdout == '') else 'pass'}}"
+  tags:
+      - V-72297
+      - yum
 

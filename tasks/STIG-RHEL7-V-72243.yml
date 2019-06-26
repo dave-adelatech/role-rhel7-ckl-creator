@@ -18,6 +18,9 @@
   register: check1_72243
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72243
+      - ssh
 
 - name: STIG RHEL7 V-72243 Check 2
   shell: grep -i IgnoreRhosts /etc/ssh/sshd_config 2>/dev/null | awk !'/^#/ && /yes/'
@@ -26,9 +29,15 @@
   register: check2_72243
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72243
+      - ssh
 
 
 - name: STIG RHEL7 V-72243 Report
   set_fact: 
     status_72243: "{{ 'fail' if (check2_72243.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72243
+      - ssh
 

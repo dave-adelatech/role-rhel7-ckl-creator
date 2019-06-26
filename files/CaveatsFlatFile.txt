@@ -1,6 +1,6 @@
 # 18Jun2019 Added additonal STIGS, mostly concerning auditing "perm=x" false negative issue. JHMF
 
-~V-71849 Contents of script /installs/andrew/Ansible/redhat-7/roles/STIG-RHEL7-V-71849/V-71849.sh available upon request
+~V-71849 Contents of script /installs/Ansible/role-rhel7-ckl-creator/files/V-71849.sh available upon request
 Scripts checks for elevated permission as well as user/group changes from original file/direcotry found in package
 
 ~V-71855 This check will typically be OPEN as files are commonly modified from their original state (ie: McAfee).
@@ -21,7 +21,7 @@ DISA check will be False Positive, as DISA does not check for N/A
 DISA check will be False Positive, as DISA does not check for N/A
 
 ~V-71897 Wording in check is incorrect.
-Under "Check Text", and check itself, it should be "If NEITHER the screen package or the tmux package is installed, this is a finding."
+Under "Check Text", and check itself, it should read "If NEITHER the screen package or the tmux package is installed, this is a finding."
 
 ~V-71899 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
@@ -30,6 +30,7 @@ DISA check will be False Positive, as DISA does not check for N/A
 DISA check will be False Positive, as DISA does not check for N/A
 
 ~V-71931 DISA check can, and does, report a FALSE POSITIVE
+The Scanuser account is a PRDC service account, which is utilized to scan UNIX/Linux systems for vulnerabilities with ACAS. This open finding will be discussed and appropriately mitigated during a collaboration meeting.
 
 ~V-71963 For systems that are running RHEL 7.2 or newer, this is Not Applicable.
 
@@ -153,4 +154,4 @@ DISA check will be False Positive, as DISA does not check for N/A
 ~V-81007 For systems that use BIOS, this is Not Applicable.
 
 ~V-92255 If another host-based intrusion detection application is in use, such as SELinux, this must be documented and approved by the local Authorizing Official.
-
+Having SELinux in use only DOES NOT satisfy this find.

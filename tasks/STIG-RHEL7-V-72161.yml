@@ -18,6 +18,9 @@
   register: check1_72161
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72161
+      - auditrules
 
 - name: STIG RHEL7 V-72161 Check 2
   shell: grep -iw /usr/bin/sudo /etc/audit/audit.rules |awk '/sudo -F auid>=1000 -F auid!=4294967295 -k privileged-priv_change/' 2>/dev/null
@@ -26,7 +29,13 @@
   register: check2_72161
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72161
+      - auditrules
 
 - name: STIG RHEL7 V-72161 Report
   set_fact:
     status_72161: "{{ 'fail' if (check2_72161.stdout == '') else 'pass'}}"
+  tags:
+      - V-72161
+      - auditrules

@@ -18,6 +18,9 @@
   register: check1_72145
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72145
+      - auditrules
 
 - name: STIG RHEL7 V-72145 Check 2
   shell: grep -i /var/run/faillock /etc/audit/audit.rules | awk '/faillock -p wa -k logins/' 2>/dev/null
@@ -26,8 +29,14 @@
   register: check2_72145
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72145
+      - auditrules
 
 
 - name: STIG RHEL7 V-72145 Report
   set_fact:
     status_72145: "{{ 'fail' if (check2_72145.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72145
+      - auditrules

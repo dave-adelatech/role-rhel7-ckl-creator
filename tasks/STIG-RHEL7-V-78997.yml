@@ -24,6 +24,10 @@
   register: check1_78997
   #ignore_errors: True
   changed_when: False
+  tags:
+      - V-78997
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-78997 Check 2
   shell: yum list installed -q gnome* 2>&1 |egrep "gnome|^Error"
@@ -32,6 +36,10 @@
   register: check2_78997
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-78997
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-78997 Check 3
   shell: grep system-db /etc/dconf/profile/user 2>/dev/null
@@ -40,6 +48,10 @@
   register: check3_78997
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-78997
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-78997 Check 4
   shell: grep -x "/org/gnome/desktop/screensaver/idle-activation-enabled" /etc/dconf/db/local.d/locks/* 2>/dev/null
@@ -48,8 +60,16 @@
   register: check4_78997
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-78997
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-78997 Report
   set_fact: 
     status_78997: "{{ 'NA' if (check2_78997.stdout == 'Error: No matching Packages to list') else 'fail' if ((check3_78997.stdout == '') or (check4_78997.stdout == '')) else 'pass'}}"
+  tags:
+      - V-78997
+      - yum
+      - gnome
 

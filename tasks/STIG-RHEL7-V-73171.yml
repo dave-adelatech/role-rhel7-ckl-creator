@@ -17,6 +17,9 @@
   register: check1_73171
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73171
+      - auditrules
 
 - name: STIG RHEL7 V-73171 Check 2
   shell: grep -x "\-w /etc/shadow \-p wa \-k identity" /etc/audit/audit.rules 2>/dev/null
@@ -25,7 +28,13 @@
   register: check2_73171
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73171
+      - auditrules
 
 - name: STIG RHEL7 V-73171 Report
   set_fact:
     status_73171: "{{ 'fail' if (check2_73171.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-73171
+      - auditrules

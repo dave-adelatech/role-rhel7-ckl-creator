@@ -18,6 +18,9 @@
   register: check1_71967
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71967
+      - yum
 
 - name: STIG RHEL7 V-71967 Check 2
   shell: rpm -qa | grep rsh-server
@@ -26,8 +29,14 @@
   register: check2_71967
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71967
+      - yum
 
 - name: STIG RHEL7 V-71967 Report
   set_fact: 
     status_71967: "{{ 'fail' if (check2_71967.stdout != '' ) else 'pass'}}"
+  tags:
+      - V-71967
+      - yum
 

@@ -18,6 +18,9 @@
   register: check1_77821
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-77821
+      - modprobe
 
 - name: STIG RHEL7 V-77821 Check 2
   shell: grep -r dccp /etc/modprobe.d/* | grep -i "/bin/true" | grep -v "^#" 2>/dev/null
@@ -26,8 +29,14 @@
   register: check2_77821
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-77821
+      - modprobe
 
 - name: STIG RHEL7 V-77821 Report
   set_fact: 
     status_77821: "{{ 'fail' if (check2_77821.stdout == '') else 'pass'}}"
+  tags:
+      - V-77821
+      - modprobe
 

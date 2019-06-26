@@ -18,6 +18,9 @@
   register: check1_73167
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73167
+      - auditrules
 
 - name: STIG RHEL7 V-73167 Check 2
   shell: grep /etc/gshadow /etc/audit/audit.rules 2>/dev/null | grep -x "\-w /etc/gshadow \-p wa \-k identity"
@@ -26,9 +29,15 @@
   register: check2_73167
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-73167
+      - auditrules
 
 
 - name: STIG RHEL7 V-73167 Report
   set_fact: 
     status_73167: "{{ 'fail' if (check2_73167.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-73167
+      - auditrules
 

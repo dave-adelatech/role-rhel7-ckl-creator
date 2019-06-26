@@ -18,6 +18,9 @@
   register: check1_72049
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72049
+      - other
  
 - name: STIG RHEL7 V-72049 Check 2
   shell: grep -i umask /home/*/.* 2>/dev/null
@@ -26,9 +29,15 @@
   register: check2_72049
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72049
+      - other
  
 - name: STIG RHEL7 V-72049 Report
   set_fact: 
     status_72049: "{{ 'pass' if (check2_72049.stdout == '') else 'fail'}}"
+  tags:
+      - V-72049
+      - other
  
 #

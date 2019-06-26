@@ -19,6 +19,9 @@
   register: check1_72085
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72085
+      - auditrules
 
 - name: V-72085 Check 2
   shell: grep -ix "enable_krb5 = yes" /etc/audisp/audisp-remote.conf 2>/dev/null
@@ -27,8 +30,14 @@
   register: check2_72085
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72085
+      - auditrules
 
 - name: V-72085 Reporting
   set_fact: 
     status_72085: "{{ 'NR' if (check2_72085.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72085
+      - auditrules
 

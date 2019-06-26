@@ -19,6 +19,9 @@
   register: check1_72257
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72257
+      - find
 
 
 - name: STIG RHEL7 V-72257 Check 2
@@ -28,7 +31,13 @@
   register: check2_72257
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72257
+      - find
 
 - name: STIG RHEL7 V-72257 Report
   set_fact: 
     status_72257: "{{ 'fail' if (check2_72257.stdout != '') else 'pass'}}"
+  tags:
+      - V-72257
+      - find

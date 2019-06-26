@@ -20,6 +20,9 @@
   register: check1_72223
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72223
+      - other
 
 - name: STIG RHEL7 V-72223 Check 2
   shell: egrep -i "tmout=600|readonly TMOUT|export TMOUT" /etc/profile.d/* 2>/dev/null
@@ -28,8 +31,14 @@
   register: check2_72223
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72223
+      - other
 
 - name: STIG RHEL7 V-72223 Report
   set_fact: 
     status_72223: "{{ 'fail' if (check2_72223.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72223
+      - other
 

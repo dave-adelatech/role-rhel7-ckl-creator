@@ -18,6 +18,9 @@
   register: check1_72113
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72113
+      - auditrules
 
 - name: STIG RHEL7 V-72113 Check 2
   shell: grep -iw fsetxattr /etc/audit/audit.rules | awk '/-a always,exit -F arch=b64 -S fsetxattr -F auid>=1000 -F auid!=4294967295 -k perm_mod/' 2>/dev/null
@@ -26,7 +29,13 @@
   register: check2_72113
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72113
+      - auditrules
 
 - name: STIG RHEL7 V-72113 Report
   set_fact:
     status_72113: "{{ 'fail' if (check2_72113.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72113
+      - auditrules

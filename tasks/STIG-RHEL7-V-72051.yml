@@ -19,6 +19,9 @@
   register: check1_72051
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72051
+      - rsyslog
  
 
 - name: STIG RHEL7 V-72051 Check 2
@@ -28,6 +31,9 @@
   register: check2_72051
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72051
+      - rsyslog
  
 - name: STIG RHEL7 V-72051 Check 3
   shell: more /etc/rsyslog.conf | grep "^'*.*' /var/log/messages" 2>/dev/null
@@ -36,10 +42,16 @@
   register: check3_72051
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72051
+      - rsyslog
 
 - name: STIG RHEL7 V-72051 Report
   set_fact: 
     status_72051: "{{ 'fail' if ((check2_72051.stdout == '') and (check3_72051.stdout == '')) else 'pass' }}"
+  tags:
+      - V-72051
+      - rsyslog
 
  
 

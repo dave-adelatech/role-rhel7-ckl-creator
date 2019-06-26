@@ -18,6 +18,9 @@
   register: check1_72307
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72307
+      - yum
 
 - name: STIG RHEL7 V-72307 Check 2
   shell: rpm -qa | grep xorg | grep server 2>/dev/null
@@ -26,8 +29,14 @@
   register: check2_72307
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72307
+      - yum
 
 - name: STIG RHEL7 V-72307 Report
   set_fact: 
     status_72307: "{{ 'fail' if (check2_72307.stdout != '') else 'pass'}}"
+  tags:
+      - V-72307
+      - yum
 

@@ -18,6 +18,9 @@
   register: check1_72121
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72121
+      - auditrules
 
 - name: STIG RHEL7 V-72121 Check 2
   shell: grep -iw lremovexattr /etc/audit/audit.rules | awk '/-a always,exit -F arch=b64 -S lremovexattr -F auid>=1000 -F auid!=4294967295 -k perm_mod/' 2>/dev/null
@@ -26,7 +29,13 @@
   register: check2_72121
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72121
+      - auditrules
 
 - name: STIG RHEL7 V-72121 Report
   set_fact:
     status_72121: "{{ 'fail' if (check2_72121.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72121
+      - auditrules

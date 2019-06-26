@@ -23,6 +23,10 @@
   ignore_errors: True
   register: check1_71893
   changed_when: False
+  tags:
+      - V-71893
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-71893 Check 2
   shell: yum list installed -q gnome* 2>&1 |egrep "gnome|^Error"
@@ -31,6 +35,10 @@
   ignore_errors: True
   register: check2_71893
   changed_when: False
+  tags:
+      - V-71893
+      - yum
+      - gnome
 
 
 - name: STIG RHEL7 V-71893 Check 3
@@ -40,8 +48,16 @@
   register: check3_71893
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71893
+      - yum
+      - gnome
 
 
 - name: STIG RHEL7 V-71893 Report
   set_fact: 
     status_71893: "{{ 'NA' if (check2_71893.stdout == 'Error: No matching Packages to list') else 'fail' if (check3_71893.stdout == '') else 'pass'}}"
+  tags:
+      - V-71893
+      - yum
+      - gnome

@@ -20,6 +20,10 @@
   register: check1_72065
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72065
+      - systemctl
+      - fstab
 
 - name: STIG RHEL7 V-72065 Check 2
   shell: systemctl is-enabled tmp.mount |grep -x "enabled" 2>/dev/null
@@ -28,6 +32,10 @@
   register: check2_72065
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72065
+      - systemctl
+      - fstab
 
 - name: STIG RHEL7 V-72065 Check 3
   shell: grep -i /tmp /etc/fstab 2>/dev/null
@@ -36,8 +44,16 @@
   register: check3_72065
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72065
+      - systemctl
+      - fstab
 
 - name: STIG RHEL7 V-72065 Report
   set_fact: 
     status_72065: "{{ 'fail' if ((check2_72065.stdout == '') and (check3_72065.stdout == '')) else 'pass'}}"
+  tags:
+      - V-72065
+      - systemctl
+      - fstab
 

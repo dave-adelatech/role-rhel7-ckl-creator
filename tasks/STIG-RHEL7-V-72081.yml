@@ -20,6 +20,9 @@
   register: check1_72081
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72081
+      - other
 
 - name: STIG RHEL7 V-72081 Check 2
   shell: auditctl -s | grep -x "failure [1|2]"
@@ -28,8 +31,14 @@
   register: check2_72081
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72081
+      - other
 
 - name: STIG RHEL7 V-72081 Report
   set_fact: 
     status_72081: "{{ 'fail' if (check2_72081.stdout == '') else 'pass'}}"
+  tags:
+      - V-72081
+      - other
  

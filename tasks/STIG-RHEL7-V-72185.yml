@@ -18,6 +18,9 @@
   register: check1_72185
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72185
+      - auditrules
 
 - name: STIG RHEL7 V-72185 Check 2
   shell: grep -iw "/usr/sbin/pam_timestamp_check" /etc/audit/audit.rules 2>/dev/null |grep -ix "\-a always,exit \-F path=/usr/sbin/pam_timestamp_check \-F auid>=1000 \-F auid!=4294967295 \-k privileged\-pam"
@@ -26,7 +29,13 @@
   register: check2_72185
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72185
+      - auditrules
 
 - name: STIG RHEL7 V-72185 Report
   set_fact:
     status_72185: "{{ 'fail' if (check2_72185.stdout == '') else 'pass'}}"
+  tags:
+      - V-72185
+      - auditrules

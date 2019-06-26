@@ -19,6 +19,9 @@
   register: check1_72275
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72275
+      - pam
 
 - name: STIG RHEL7 V-72275 Check 2
   shell: grep pam_lastlog /etc/pam.d/postlogin |egrep "^session +required +pam_lastlog.so +showfailed"
@@ -27,8 +30,14 @@
   register: check2_72275
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72275
+      - pam
 
 - name: STIG RHEL7 V-72275 Report
   set_fact: 
     status_72275: "{{ 'fail' if (check2_72275.stdout == '') else 'pass'}}"
+  tags:
+      - V-72275
+      - pam
 

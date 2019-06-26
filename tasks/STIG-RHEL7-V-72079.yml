@@ -18,6 +18,9 @@
   register: check1_72079
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72079
+      - systemctl
 
 - name: STIG RHEL7 V-72079 Check 2
   shell: systemctl is-active auditd.service 2>/dev/null | awk '!/^active/'
@@ -26,8 +29,14 @@
   register: check2_72079
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72079
+      - systemctl
 
 - name: STIG RHEL7 V-72079 Report
   set_fact: 
     status_72079: "{{ 'fail' if (check2_72079.stdout != '' ) else 'pass'}}"
+  tags:
+      - V-72079
+      - systemctl
 

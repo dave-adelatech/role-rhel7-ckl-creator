@@ -19,6 +19,9 @@
   register: check1_71997
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71997
+      - redhatrelease
 
 - name: STIG RHEL7 V-71997 Check 2
   #shell: cat /etc/redhat-release | awk '/7.2||7.3||7.4||7.5/'
@@ -28,10 +31,16 @@
   register: check2_71997
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71997
+      - redhatrelease
 
 - name: STIG RHEL7 V-71997 Report
   set_fact: 
     status_71997: "{{ 'fail' if (check2_71997.stdout != '') else 'pass'}}"
+  tags:
+      - V-71997
+      - redhatrelease
 
 
 

@@ -18,6 +18,9 @@
   register: check1_71939
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71939
+      - ssh
 
 - name: STIG RHEL7 V-71939 Check 2
   shell: grep -i PermitEmptyPasswords /etc/ssh/sshd_config | awk '!/^#|no/'
@@ -26,8 +29,14 @@
   register: check2_71939
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71939
+      - ssh
 
 - name: STIG RHEL7 V-71939 Report
   set_fact: 
     status_71939: "{{ 'fail' if (check2_71939.stdout != '' ) else 'pass'}}"
+  tags:
+      - V-71939
+      - ssh
 

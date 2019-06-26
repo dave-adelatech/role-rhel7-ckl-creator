@@ -19,6 +19,9 @@
   register: check1_72209
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72209
+      - rsyslog
 
 - name: STIG RHEL7 V-72209 Check 2
   #shell: grep @ /etc/rsyslog.conf 2>/dev/null
@@ -28,7 +31,13 @@
   register: check2_72209
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72209
+      - rsyslog
 
 - name: STIG RHEL7 V-72209 Report
   set_fact: 
     status_72209: "{{ 'fail' if (check2_72209.stdout == '') else 'pass'}}"
+  tags:
+      - V-72209
+      - rsyslog

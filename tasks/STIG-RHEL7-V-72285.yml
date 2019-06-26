@@ -22,6 +22,9 @@
   register: check1_72285
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72285
+      - sysctl
 
 - name: STIG RHEL7 V-72285 Check 2
   shell: cat  /etc/sysctl.conf /etc/sysctl.d/* 2>/dev/null |grep -x "net.ipv4.conf.default.accept_source_route = 0"
@@ -30,6 +33,9 @@
   register: check2_72285
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72285
+      - sysctl
 
 - name: STIG RHEL7 V-72285 Check 3
   shell: /sbin/sysctl -a 2>/dev/null |grep -x "net.ipv4.conf.default.accept_source_route = 0"
@@ -38,9 +44,15 @@
   register: check3_72285
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72285
+      - sysctl
 
 
 - name: STIG RHEL7 V-72285 Report
   set_fact: 
     status_72285: "{{ 'fail' if (check2_72285.stdout == '' or check3_72285.stdout == '') else 'pass'}}"
+  tags:
+      - V-72285
+      - sysctl
 

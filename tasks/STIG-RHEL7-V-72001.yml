@@ -18,6 +18,9 @@
   register: check1_72001
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72001
+      - etcpasswd
  
 
 - name: STIG RHEL7 V-72001 Check 2
@@ -27,11 +30,17 @@
   register: check2_72001
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72001
+      - etcpasswd
 
 
 - name: STIG RHEL7 V-72001 Report
   set_fact: 
     status_72001: "{{ 'pass' if (check2_72001.stdout == '') else 'fail'}}"
+  tags:
+      - V-72001
+      - etcpasswd
 
  
 

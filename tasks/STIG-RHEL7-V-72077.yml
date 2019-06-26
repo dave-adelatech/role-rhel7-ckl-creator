@@ -19,6 +19,9 @@
   register: check1_72077
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72077
+      - yum
 
 - name: STIG RHEL7 V-72077 Check 2
   shell: yum list installed -q "telnet-server"  2>&1 |egrep "telnet-server|^Error"
@@ -27,8 +30,14 @@
   register: check2_72077
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72077
+      - yum
 
 - name: STIG RHEL7 V-72077 Report
   set_fact: 
     status_72077: "{{ 'fail' if (check2_72077.stdout != 'Error: No matching Packages to list' ) else 'pass'}}"
+  tags:
+      - V-72077
+      - yum
 

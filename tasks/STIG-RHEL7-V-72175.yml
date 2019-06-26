@@ -18,6 +18,9 @@
   register: check1_72175
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72175
+      - auditrules
 
 - name: STIG RHEL7 V-72175 Check 2
   shell: grep -iw /usr/sbin/postdrop /etc/audit/audit.rules | awk '/postdrop -F auid>=1000 -F auid!=4294967295 -k privileged-postfix/' 2>/dev/null
@@ -26,7 +29,13 @@
   register: check2_72175
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72175
+      - auditrules
 - name: STIG RHEL7 V-72175 Report
   set_fact:
     status_72175: "{{ 'fail' if (check2_72175.stdout == '') else 'pass'}}"
+  tags:
+      - V-72175
+      - auditrules
 

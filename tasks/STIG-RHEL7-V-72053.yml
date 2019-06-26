@@ -19,6 +19,9 @@
   register: check1_72053
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72053
+      - find
 
 - name: STIG RHEL7 V-72053 Check 2
   shell: find /etc/cron.allow -type f ! -user root -ls 2>/dev/null
@@ -27,10 +30,16 @@
   register: check2_72053
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72053
+      - find
 
 - name: STIG RHEL7 V-72053 Report
   ignore_errors: True
   #when: (check2_72053.stat.exists == "true" )
   set_fact: 
     status_72053: "{{ 'fail' if (check2_72053.stdout != '') else 'pass'}}"
+  tags:
+      - V-72053
+      - find
 

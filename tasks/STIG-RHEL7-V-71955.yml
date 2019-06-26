@@ -18,6 +18,9 @@
   register: check1_71955
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71955
+      - other
 
 - name: STIG RHEL7 V-71955 Check 2
   shell: if [ "$(cat /etc/gdm/custom.conf 2>/dev/null)" ]; then grep -i timedloginenable /etc/gdm/custom.conf; fi
@@ -26,8 +29,14 @@
   register: check2_71955
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71955
+      - other
 
 - name: STIG RHEL7 V-71955 Report
   set_fact: 
     status_71955: "{{ 'fail' if (check2_71955.stdout != '' ) else 'pass'}}"
+  tags:
+      - V-71955
+      - other
 

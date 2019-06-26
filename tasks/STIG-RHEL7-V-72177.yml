@@ -18,6 +18,9 @@
   register: check1_72177
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72177
+      - auditrules
 
 - name: STIG RHEL7 V-72177 Check 2
   shell: grep -iw /usr/sbin/postqueue /etc/audit/audit.rules | awk '/postqueue -F auid>=1000 -F auid!=4294967295 -k privileged-postfix/' 2>/dev/null
@@ -26,6 +29,12 @@
   register: check2_72177
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72177
+      - auditrules
 - name: STIG RHEL7 V-72177 Report
   set_fact:
     status_72177: "{{ 'fail' if (check2_72177.stdout == '') else 'pass'}}"
+  tags:
+      - V-72177
+      - auditrules

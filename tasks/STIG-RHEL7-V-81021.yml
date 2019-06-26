@@ -18,6 +18,9 @@
   register: check1_81021
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81021
+      - auditrules
 
 - name: STIG RHEL7 V-81021 Check 2
   shell: grep "name_format" /etc/audisp/audispd.conf 2>/dev/null | grep -i "name_format = HOSTNAME"
@@ -26,9 +29,15 @@
   register: check2_81021
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-81021
+      - auditrules
 
 - name: STIG RHEL7 V-81021 Report
   set_fact: 
     status_81021: "{{ 'fail' if (check2_81021.stdout == '') else 'pass'}}"
+  tags:
+      - V-81021
+      - auditrules
 
 # 

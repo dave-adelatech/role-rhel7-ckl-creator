@@ -18,6 +18,9 @@
   register: check1_72247
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72247
+      - ssh
 
 - name: STIG RHEL7 V-72247 Check 2
   shell: grep -i permitrootlogin /etc/ssh/sshd_config 2>/dev/null | awk !'/^#/ && /no/'
@@ -26,9 +29,15 @@
   register: check2_72247
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72247
+      - ssh
 
 
 - name: STIG RHEL7 V-72247 Report
   set_fact: 
-    status_72247: "{{ 'fail' if (check2_72247.stdout == '' ) else 'pass'}}" 
+    status_72247: "{{ 'fail' if (check2_72247.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72247
+      - ssh 
 

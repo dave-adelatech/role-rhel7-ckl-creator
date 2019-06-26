@@ -8,36 +8,61 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2. 2019-06-24; Completly wrong check.  Corrected. JHMF
 #
 #----------
 
 - name: STIG RHEL7 V-72231 Check
   shell: |
-      echo -e "\n    grep -i useldapauth /etc/sysconfig/authconfig 2>&1"; grep -i useldapauth /etc/sysconfig/authconfig 2>&1; \
-      echo -e "\n    grep -i cacertfile /etc/pam_ldap.conf"; grep -i cacertfile /etc/pam_ldap.conf; 
+      systemctl status sssd.service 2>&1
+      grep -i tls_cacert /etc/sssd/sssd.conf 2>&1
   args:
     executable: /bin/bash
   register: check1_72231
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72231
+      - systemctl
 
 - name: STIG RHEL7 V-72231 Check 2
-  shell: grep -i useldapauth /etc/sysconfig/authconfig 2>/dev/null | awk '/USELDAPAUTH=yes/'
+  shell: systemctl status sssd.service 2>&1 |egrep -i "   Active. inactive|Unit sssd.service could not be found"
   args:
     executable: /bin/bash
   register: check2_72231
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72231
+      - systemctl
 
 - name: STIG RHEL7 V-72231 Check 3
-  shell: grep -i cacertfile /etc/pam_ldap.conf | awk '/tls_cacertfile/'
+  shell: grep -i tls_reqcert /etc/sssd/sssd.conf |grep "^ldap_tls_cacert = "
   args:
     executable: /bin/bash
   register: check3_72231
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72231
+      - systemctl
+
+- name: STIG RHEL7 V-72231 Check 4
+  shell: grep -i tls_reqcert /etc/sssd/sssd.conf |grep "^ldap_tls_cacert = " |awk '{print $3}'
+  args:
+    executable: /bin/bash
+  register: check4_72231
+  ignore_errors: True
+  changed_when: False
+  tags:
+      - V-72231
+      - systemctl
+
 
 - name: STIG RHEL7 V-72231 Report
   set_fact: 
-    status_72231: "{{ 'fail' if ((check2_72231.stdout != '' and check3_72231.stdout == '' )) else 'pass'}}"
+    status_72231: "{{ 'NA' if check2_72231.stdout != '' else 'fail' if (check2_72231.stdout == '') else 'fail' if (check3_72231.stdout == '') else 'fail' if (check4_72231.stdout == '') else 'pass'}}"
+  tags:
+      - V-72231
+      - systemctl
 

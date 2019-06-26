@@ -18,6 +18,9 @@
   register: check1_71923
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71923
+      - other
 
 - name: STIG RHEL7 V-71923 Check 2
   shell: cat /etc/libuser.conf | grep -i sha512 |  awk '!/^#/'
@@ -26,9 +29,15 @@
   register: check2_71923
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71923
+      - other
 
 
 - name: STIG RHEL7 V-71923 Report
   set_fact: 
     status_71923: "{{ 'fail' if (check2_71923.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-71923
+      - other
 

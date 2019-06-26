@@ -18,6 +18,10 @@
   register: check1_72311
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72311
+      - nfs
+      - fstab
 
 - name: STIG RHEL7 V-72311 Check 2
   shell: cat /etc/fstab | grep nfs|grep -v "sec=sys:krb5:krb5i:krb5p"
@@ -26,7 +30,15 @@
   register: check2_72311
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72311
+      - nfs
+      - fstab
 
 - name: STIG RHEL7 V-72311 Report
   set_fact: 
     status_72311: "{{ 'fail' if (check2_72311.stdout != '') else 'pass'}}"
+  tags:
+      - V-72311
+      - nfs
+      - fstab

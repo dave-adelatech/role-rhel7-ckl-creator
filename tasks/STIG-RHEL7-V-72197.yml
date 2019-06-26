@@ -18,6 +18,10 @@
   register: check1_72197
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72197
+      - etcpasswd
+      - auditrules
 
 - name: STIG RHEL7 V-72197 Check 2
   shell: grep "w /etc/passwd -p wa -k identity" /etc/audit/audit.rules 2>/dev/null
@@ -26,8 +30,16 @@
   register: check2_72197
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72197
+      - etcpasswd
+      - auditrules
 
 
 - name: STIG RHEL7 V-72197 Report
   set_fact:
     status_72197: "{{ 'fail' if (check2_72197.stdout == '' ) else 'pass'}}"
+  tags:
+      - V-72197
+      - etcpasswd
+      - auditrules

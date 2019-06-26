@@ -22,6 +22,10 @@
   register: check1_71901
   #ignore_errors: True
   changed_when: False
+  tags:
+      - V-71901
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-71901 Check 2
   shell: yum list installed -q gnome* 2>&1 |egrep "gnome|^Error"
@@ -30,6 +34,10 @@
   register: check2_71901
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71901
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-71901 Check 3
   shell: grep "^lock-delay=uint32 5" /etc/dconf/db/local.d/* 2>/dev/null
@@ -38,7 +46,15 @@
   register: check3_71901
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-71901
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-71901 Report
   set_fact:
    status_71901: "{{ 'NA' if (check2_71901.stdout == 'Error: No matching Packages to list') else 'fail' if (check3_71901.stdout == '') else 'pass'}}"
+  tags:
+      - V-71901
+      - yum
+      - gnome

@@ -18,6 +18,9 @@
   register: check1_72095
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72095
+      - auditrules
 
 - name: STIG RHEL7 V-72095 Check 2
   shell: grep -iw execve /etc/audit/audit.rules | awk '/execve/' 2>/dev/null
@@ -26,7 +29,13 @@
   register: check2_72095
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72095
+      - auditrules
 
 - name: STIG RHEL7 V-72095 Report
   set_fact:
     status_72095: "{{ 'fail' if (check2_72095.stdout == '') else 'pass'}}"
+  tags:
+      - V-72095
+      - auditrules

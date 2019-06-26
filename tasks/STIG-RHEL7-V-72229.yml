@@ -21,14 +21,20 @@
   register: check1_72229
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72229
+      - systemctl
 
 - name: STIG RHEL7 V-72229 Check 2
-  shell: systemctl status sssd.service|grep "   Active. inactive"
+  shell: systemctl status sssd.service 2>&1 |egrep -i "   Active. inactive|Unit sssd.service could not be found"
   args:
     executable: /bin/bash
   register: check2_72229
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72229
+      - systemctl
 
 - name: STIG RHEL7 V-72229 Check 3
   shell: grep -i tls_reqcert /etc/sssd/sssd.conf |grep -x "ldap_tls_reqcert = demand"
@@ -37,7 +43,13 @@
   register: check3_72229
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72229
+      - systemctl
 
 - name: STIG RHEL7 V-72229 Report
   set_fact: 
-    status_72229: "{{ 'NA' if check2_72229.stdout != '' else 'fail' if (check2_72229.stdout == '') else 'pass'}}"
+    status_72229: "{{ 'NA' if check2_72229.stdout != '' else 'fail' if (check3_72229.stdout == '') else 'pass'}}"
+  tags:
+      - V-72229
+      - systemctl

@@ -18,6 +18,10 @@
   register: check1_72239
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72239
+      - ssh
+      - redhatrelease
 
 - name: STIG RHEL7 V-72239 Check 2
   shell: grep " 7.[0-3] " /etc/redhat-release
@@ -26,6 +30,10 @@
   register: check2_72239
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72239
+      - ssh
+      - redhatrelease
 
 - name: STIG RHEL7 V-72239 Check 3
   shell: grep -i ^RhostsRSAAuthentication /etc/ssh/sshd_config 2>&1 |wc -l
@@ -34,6 +42,10 @@
   register: check3_72239
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72239
+      - ssh
+      - redhatrelease
   
 - name: STIG RHEL7 V-72239 Check 4
   shell: grep "^RhostsRSAAuthentication no$" /etc/ssh/sshd_config 2>&1 |wc -l
@@ -42,7 +54,15 @@
   register: check4_72239
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72239
+      - ssh
+      - redhatrelease
 
 - name: STIG RHEL7 V-72239 Report
   set_fact: 
     status_72239: "{{ 'NA' if (check2_72239.stdout == '') else 'fail' if (check3_72239.stdout != '1') else 'fail' if (check4_72239.stdout != '1') else 'pass'}}"
+  tags:
+      - V-72239
+      - ssh
+      - redhatrelease

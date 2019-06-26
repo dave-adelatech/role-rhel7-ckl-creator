@@ -20,6 +20,10 @@
   register: check1_72089
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72089
+      - find
+      - auditrules
 
 - name: STIG RHEL7 V-72089 Check 2
 # grep the log file name out of auditd.conf so we can do a df on it and check if it is a seperate mount point (not / or /var)
@@ -29,6 +33,10 @@
   register: check2_72089
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72089
+      - find
+      - auditrules
 
 - name: STIG RHEL7 V-72089 Check 3
 # Grab the size of the partition and multiple by .75 to get a number
@@ -38,6 +46,10 @@
   register: check3_72089
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72089
+      - find
+      - auditrules
 
 - name: STIG RHEL7 V-72089 Check 4
 # Grab space_left out of the config file
@@ -47,8 +59,16 @@
   register: check4_72089
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72089
+      - find
+      - auditrules
 
 - name: STIG RHEL7 V-72089 Report
   set_fact: 
   # if auit using a separate mount point (check2), then pass, If space_left is greater than partition size * .75, then fail
     status_72089: "{{ 'pass' if (check2_72089.stdout != '' or (check3_72089.stdout == check4_72089.stdout)) else 'fail'}}"
+  tags:
+      - V-72089
+      - find
+      - auditrules

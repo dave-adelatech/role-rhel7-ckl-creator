@@ -18,6 +18,9 @@
   register: check1_72005
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72005
+      - etcpasswd
 
 - name: STIG RHEL7 V-72005 Check 2
   shell: awk "-F:" '$3 == 0 {print $1}' /etc/passwd 2>/dev/null | awk '!/root/'
@@ -26,8 +29,14 @@
   register: check2_72005
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72005
+      - etcpasswd
 
 
 - name: STIG RHEL7 V-72005 Report
   set_fact: 
     status_72005: "{{ 'fail' if (check2_72005.stdout != '' ) else 'pass'}}"
+  tags:
+      - V-72005
+      - etcpasswd

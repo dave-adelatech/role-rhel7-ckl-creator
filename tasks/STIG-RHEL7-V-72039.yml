@@ -21,6 +21,9 @@
   register: check1_72039
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72039
+      - find
 
 - name: STIG RHEL7 V-72039 Check 2
   shell: |
@@ -31,7 +34,13 @@
   register: check2_72039
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72039
+      - find
 
 - name: STIG RHEL7 V-72039 Report
   set_fact: 
     status_72039: "{{ 'fail' if (check2_72039.stdout != '') else 'pass'}}"
+  tags:
+      - V-72039
+      - find

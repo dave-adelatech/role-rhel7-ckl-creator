@@ -19,6 +19,9 @@
   register: check1_72009
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72009
+      - find
 
 - name: STIG RHEL7 V-72009 Check 2
   shell: find / \( \( -fstype nfs -o -fstype proc \) -prune \) -o -nogroup -ls 2>/dev/null |head -100
@@ -27,8 +30,14 @@
   register: check2_72009
   ignore_errors: True
   changed_when: False
+  tags:
+      - V-72009
+      - find
 
 - name: STIG RHEL7 V-72009 Report
   set_fact: 
     status_72009: "{{ 'fail' if (check2_72009.stdout != '') else 'pass'}}"
+  tags:
+      - V-72009
+      - find
 
