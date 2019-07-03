@@ -30,7 +30,8 @@ DISA check will be False Positive, as DISA does not check for N/A
 DISA check will be False Positive, as DISA does not check for N/A
 
 ~V-71931 DISA check can, and does, report a FALSE POSITIVE
-The Scanuser account is a PRDC service account, which is utilized to scan UNIX/Linux systems for vulnerabilities with ACAS. This open finding will be discussed and appropriately mitigated during a collaboration meeting.
+The "scanuser" account is a PRDC service account, which is utilized to scan UNIX/Linux systems for vulnerabilities with ACAS. 
+This open finding will be discussed and appropriately mitigated during a collaboration meeting.
 
 ~V-71963 For systems that are running RHEL 7.2 or newer, this is Not Applicable.
 
@@ -39,7 +40,8 @@ Output for check is provided.
 
 ~V-71989 If an HBSS or HIPS is active on the system, this is Not Applicable.
 
-~V-71999 Complex check.  Possible that this is a false positive from Ansible script.  May need to verify
+~V-71999 Complex check.  Possible that Ansible script produces a false positive..
+Open findings will need to be verified during collaboration meeting.
 
 ~V-72035 This is a manual check due to complexity.
 Output for check is provided.
@@ -101,7 +103,7 @@ If the value of the "enable_krb5" option is not set to "yes" or the line is comm
 ~V-72187 DISA False Positive in V2R3
 ~V-72189 DISA False Positive in V2R3
 
-~V-72213 If OPEN, this check should be followed up with a manual check to verify/confirm finding.
+~V-72213 If OPEN, this STIG should be followed up with a manual check to verify/confirm finding.
 
 ~V-72219 This is a manual check due to complexity.
 Firewall rules are customized per server/application as requested.
@@ -109,9 +111,7 @@ Firewall rules are customized per server/application as requested.
 ~V-72225 DISA False Positive in V2R3
 
 ~V-72227 If LDAP is not being utilized, this requirement is Not Applicable.
-
 ~V-72229 If LDAP is not being utilized, this requirement is Not Applicable.
-
 ~V-72231 If LDAP is not being utilized, this requirement is Not Applicable.
 
 ~V-72239 If the release is 7.4 or newer this requirement is Not Applicable.
@@ -121,21 +121,24 @@ Firewall rules are customized per server/application as requested.
 
 ~V-72285 DISA False Positive in V2R3
 
-~V-72427 This STIG will always be OPEN, as the sssd service is not in use.
+~V-72427 This STIG will be OPEN, if sssd and LDAP are not in use.
 
 ~V-73155 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
 
 ~V-73159 BASED on Fix Text, DISA may report a FALSE NEGATIVE
+Open findings will need to be verified during collaboration meeting.
 
 ~V-73157 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
 
-~V-73161 This finding will always be OPEN as site requirements dictate that noexec for /installs\* NOT to be in place.
+~V-73161 This finding will always be OPEN as site requirements dictate that noexec for the NFS share /installs\* NOT be in place.
 
-~V-73165 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". Stated check vs. actual check in benchmark do not match
+~V-73165 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". 
+Stated check vs. actual check in benchmark do not match.
 
-~V-73167 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". Stated check vs. actual check in benchmark do not match
+~V-73167 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". 
+Stated check vs. actual check in benchmark do not match
 
 ~V-73177 This is N/A for systems that do not have wireless network adapters.
 
