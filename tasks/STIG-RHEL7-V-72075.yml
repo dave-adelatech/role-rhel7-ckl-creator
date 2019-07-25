@@ -8,12 +8,13 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 3, 2019-07-23: added fstype nfs4 to check. JHMF
 #
 #----------
 
 - name: STIG RHEL7 V-72075 Check
   shell: |
-      echo -e "\n    ls / | while read DIR; do find /$DIR \( -fstype nfs -o -fstype objfs -o -fstype proc \) -prune -o -name grub.cfg -exec ls -la {} \; ; done"; ls / | while read DIR; do find /$DIR \( -fstype nfs -o -fstype objfs -o -fstype proc \) -prune -o -name grub.cfg -exec ls -la {} \; ; done; \
+      echo -e "\n    ls / | while read DIR; do find /$DIR \( -fstype nfs -o -fstype nfs4 -o -fstype objfs -o -fstype proc \) -prune -o -name grub.cfg -exec ls -la {} \; ; done"; ls / | while read DIR; do find /$DIR \( -fstype nfs -o -fstype nfs4 -o -fstype objfs -o -fstype proc \) -prune -o -name grub.cfg -exec ls -la {} \; ; done; \
       echo -e "\n    grep -c 'menuentry ' /boot/grub2/grub.cfg"; grep -c 'menuentry ' /boot/grub2/grub.cfg; \
       echo -e "\n    grep 'set root' /boot/grub2/grub.cfg"; grep 'set root' /boot/grub2/grub.cfg;
   args:
@@ -27,7 +28,7 @@
       - find
 
 - name: STIG RHEL7 V-72075 Check 2
-  shell:  ls / | while read DIR; do find /$DIR \( -fstype nfs -o -fstype objfs -o -fstype proc \) -prune -o -name grub.cfg -exec ls -la {} \; ; done | awk '!/\/boot\/grub2\/grub.cfg/' 2>/dev/null
+  shell:  ls / | while read DIR; do find /$DIR \( -fstype nfs -o -fstype nfs4 -o -fstype objfs -o -fstype proc \) -prune -o -name grub.cfg -exec ls -la {} \; ; done | awk '!/\/boot\/grub2\/grub.cfg/' 2>/dev/null
   args:
     executable: /bin/bash
   register: check2_72075

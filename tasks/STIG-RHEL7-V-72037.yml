@@ -10,13 +10,16 @@
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-09: rewrite so check can be debugged, if needed
 # Ver 3, 2019-05-31: changed check2 for performance. Large number of  o+w files would timeout ssh connection.
+# Ver 4, 2019-07-23: Added nfs4 to fstypes. JHMF
 #
 #----------
 
 - name: STIG RHEL7 V-72037 Check
   shell: |
-     find / \( -fstype nfs -o -fstype proc -o -fstype cgroup \) -prune -o -perm -002 -type f -print |tee /tmp/V-72037
-     find `awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/ {print $6}' /etc/passwd` -name "\.*" -type f -print |tee /tmp/V-72037-2
+     find / \( -fstype nfs -o -fstype nfs4 -o -fstype proc -o -fstype cgroup \) -prune -o -perm -002 -type f -print >/tmp/V-72037
+     echo "`wc -l /tmp/V-72037` world-writable files were found and will be checked."
+     find `awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/ {print $6}' /etc/passwd` -name "\.*" -type f -print >/tmp/V-72037-2
+     echo "`wc -l /tmp/V-72037-2` local initialization files were found and will be checked."
   args:
     executable: /bin/bash
   register: check1_72037

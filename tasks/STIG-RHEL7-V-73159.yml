@@ -9,6 +9,7 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-29: Adjusted checks to match DISA Text
+# Ver 3, 2019-07-23: Better egrep. JHMF
 #
 #----------
 
@@ -25,7 +26,7 @@
       - pam
 
 - name: STIG RHEL7 V-73159 Check 2
-  shell:  cat /etc/pam.d/system-auth 2>/dev/null |egrep "^password +required +pam_pwquality.so +retry=3"
+  shell:  cat /etc/pam.d/system-auth 2>/dev/null |egrep "^password +required +pam_pwquality.so.+retry=3"
   args:
     executable: /bin/bash
   register: check2_73159

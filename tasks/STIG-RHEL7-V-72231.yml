@@ -9,6 +9,7 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2. 2019-06-24; Completly wrong check.  Corrected. JHMF
+# Ver 3, 2019-07-23: Corrected check. JHMF
 #
 #----------
 
@@ -37,7 +38,7 @@
       - systemctl
 
 - name: STIG RHEL7 V-72231 Check 3
-  shell: grep -i tls_reqcert /etc/sssd/sssd.conf |grep "^ldap_tls_cacert = "
+  shell: grep -i tls_cacert /etc/sssd/sssd.conf |grep "^ldap_tls_cacert = "
   args:
     executable: /bin/bash
   register: check3_72231
@@ -48,7 +49,7 @@
       - systemctl
 
 - name: STIG RHEL7 V-72231 Check 4
-  shell: grep -i tls_reqcert /etc/sssd/sssd.conf |grep "^ldap_tls_cacert = " |awk '{print $3}'
+  shell: grep -i tls_cacert /etc/sssd/sssd.conf |grep "^ldap_tls_cacert = " |awk '{print $3}' |while read file; do ls -l $file 2>/dev/null;done
   args:
     executable: /bin/bash
   register: check4_72231

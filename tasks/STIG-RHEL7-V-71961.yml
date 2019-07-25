@@ -10,11 +10,14 @@
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-14: Incorporated V2R3 changes. JHMF
 # Ver 2.1, 2019-05-20: Corrected logic. JHMF
+# Ver 3, 2019-07-23: Added NA check
 #
 #----------
 
 - name: STIG RHEL7 V-71961 Check
-  shell: grep -i password /boot/grub2/grub.cfg 2>&1
+  shell: |
+    cat /etc/redhat-release 2>&1
+    grep -i password /boot/grub2/grub.cfg 2>&1
   args:
     executable: /bin/bash
   register: check1_71961
@@ -22,10 +25,11 @@
   changed_when: False
   tags:
       - V-71961
+      - redhatrelease
       - grub
 
 - name: STIG RHEL7 V-71961 Check 2
-  shell: grep -i "password_pbkdf2" /boot/grub2/grub.cfg 2>/dev/null |grep -v "^#" | wc -l
+  shell: grep " 7.[2-9] " /etc/redhat-release
   args:
     executable: /bin/bash
   register: check2_71961
@@ -33,10 +37,12 @@
   changed_when: False
   tags:
       - V-71961
+      - redhatrelease
       - grub
 
+
 - name: STIG RHEL7 V-71961 Check 3
-  shell: grep -i "password_pbkdf2 root " /boot/grub2/grub.cfg 2>/dev/null |grep -v "^#" | wc -l
+  shell: grep -i "password_pbkdf2" /boot/grub2/grub.cfg 2>/dev/null |grep -v "^#" | wc -l
   args:
     executable: /bin/bash
   register: check3_71961
@@ -44,12 +50,25 @@
   changed_when: False
   tags:
       - V-71961
+      - redhatrelease
+      - grub
+
+- name: STIG RHEL7 V-71961 Check 4
+  shell: grep -i "password_pbkdf2 root " /boot/grub2/grub.cfg 2>/dev/null |grep -v "^#" | wc -l
+  args:
+    executable: /bin/bash
+  register: check4_71961
+  ignore_errors: True
+  changed_when: False
+  tags:
+      - V-71961
+      - redhatrelease
       - grub
 
 - name: STIG RHEL7 V-71961 Report
   set_fact: 
-    status_71961: "{{ 'fail' if (check2_71961.stdout != '1') or (check3_71961.stdout != '1') else 'pass'}}"
+    status_71961: "{{ 'NA' if (check2_71961.stdout != '') else 'fail' if ((check3_71961.stdout != '1') or (check4_71961.stdout != '1')) else 'pass'}}"
   tags:
       - V-71961
+      - redhatrelease
       - grub
-

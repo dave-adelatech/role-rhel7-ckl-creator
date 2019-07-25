@@ -9,11 +9,12 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-21: DISA "-xdev" not completed. changed find to -prune. JHMF
+# Ver 3, 2019-07-23: added fstype nfs4 to check. JHMF
 #
 #----------
 
 - name: STIG RHEL7 V-72257 Check 1
-  shell: find / \( -fstype nfs -prune \) -o -name ssh_host\*key -ls 2>&1
+  shell: find / \( \( -fstype nfs -o -fstype nfs4 \) -prune \) -o -name ssh_host\*key -ls 2>&1
   args:
     executable: /bin/bash
   register: check1_72257
@@ -25,7 +26,7 @@
 
 
 - name: STIG RHEL7 V-72257 Check 2
-  shell: find / \( -fstype nfs -prune \) -o -name ssh_host\*key -ls 2>/dev/null |grep -v " ...-.--... "
+  shell: find / \( \( -fstype nfs -o -fstype nfs4 \) -prune \) -o -name ssh_host\*key -ls 2>/dev/null |grep -v " ...-.--... "
   args:
     executable: /bin/bash
   register: check2_72257

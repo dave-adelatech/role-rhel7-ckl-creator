@@ -9,6 +9,7 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-14: Modified to include correct check. Borrowed code from v-71931. JHMF
+# Ver 3, 2019-07-23: added ceph to service accounts. JHMF
 #
 #----------
 
@@ -25,7 +26,7 @@
       - other
 
 - name: STIG RHEL7 V-71927 Check 2
-  shell:  awk "-F:" '$4 < 1 && $1 !~ /root|bin|daemon|adm|lp|sync|shutdown|halt|mail|operator|games|ftp|nobody|scanuser|rpc|nagios|systemd-bus-proxy|systemd-network|dbus|polkit|tss|postfix|sshd|chrony|tcpdump|setroubleshoot|sssd|ntp/ {print "chage -m 1 "$1}' /etc/shadow
+  shell:  awk "-F:" '$4 < 1 && $1 !~ /root|bin|daemon|adm|lp|sync|shutdown|halt|mail|operator|games|ftp|nobody|scanuser|rpc|nagios|systemd-bus-proxy|systemd-network|dbus|polkit|tss|postfix|sshd|chrony|tcpdump|setroubleshoot|sssd|ntp|ceph/ {print "chage -m 1 "$1}' /etc/shadow
   args:
     executable: /bin/bash
   register: check2_71927

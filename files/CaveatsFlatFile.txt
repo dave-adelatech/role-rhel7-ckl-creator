@@ -1,62 +1,44 @@
-# 18Jun2019 Added additonal STIGS, mostly concerning auditing "perm=x" false negative issue. JHMF
-
 ~V-71849 Contents of script /installs/Ansible/role-rhel7-ckl-creator/files/V-71849.sh available upon request
 Scripts checks for elevated permission as well as user/group changes from original file/direcotry found in package
-
 ~V-71855 This check will typically be OPEN as files are commonly modified from their original state (ie: McAfee).
 Files pushed from a DOD entity (McAfee, et al) are expected.
-
 ~V-71859 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
-
 ~V-71861 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
-
 ~V-71863 False Positive. DISA's check of /etc/issue file is incorrect.
-
 ~V-71891 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
-
 ~V-71893 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
-
 ~V-71897 Wording in check is incorrect.
 Under "Check Text", and check itself, it should read "If NEITHER the screen package or the tmux package is installed, this is a finding."
-
 ~V-71899 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
-
 ~V-71901 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
-
-~V-71931 DISA check can, and does, report a FALSE POSITIVE
+~V-71931 DISA check can report a FALSE POSITIVE
 The "scanuser" account is a PRDC service account, which is utilized to scan UNIX/Linux systems for vulnerabilities with ACAS. 
-This open finding will be discussed and appropriately mitigated during a collaboration meeting.
-
+Discrepencies, if any,  can be discussed during collaboration.
+~V-71955 If the system does not have GNOME installed, this requirement is Not Applicable.
 ~V-71963 For systems that are running RHEL 7.2 or newer, this is Not Applicable.
-
 ~V-71971 This is a manual check due to complexity.
 Output for check is provided.
-
 ~V-71989 If an HBSS or HIPS is active on the system, this is Not Applicable.
-
 ~V-71999 Complex check.  Possible that Ansible script produces a false positive..
 Open findings will need to be verified during collaboration meeting.
-
+~V-72007 On OpenShift servers running containers/gpfs, this behavior is expected and required.
+~V-72009 On OpenShift servers running containers/gpfs, this behavior is expected and required.
 ~V-72035 This is a manual check due to complexity.
+~V-72037 Output of initial file scan has been reduced to display just file counts to aid in reviewing output.
 Output for check is provided.
-
 ~V-72047 DISA check using "-xdev" does not work.  Changed check to use "-prune" instead.
 Playbook is not checking for application groups, which may lead to a false positive.
 DISA check WILL produce a false positive, as they do not check for group ownership, as the check states.
-
 ~V-72081 DISA False Positive in V2R3
-
 ~V-72085 Manual check
 If the value of the "enable_krb5" option is not set to "yes" or the line is commented out, ask the System Administrator to indicate how the audit logs are off-loaded to a different system or media.
-
 ~V-72095 May show up as a FALSE POSITIVE. Only 64bit architect is checked
-
 ~V-72123 DISA check returns a possible false NEGATIVE as of V2R3, if both b64 rules (EPERM and EACCES) are NOT in place.
 ~V-72125 DISA check returns a possible false NEGATIVE as of V2R3, if both b64 rules (EPERM and EACCES) are NOT in place.
 ~V-72127 DISA check returns a possible false NEGATIVE as of V2R3, if both b64 rules (EPERM and EACCES) are NOT in place.
@@ -65,20 +47,20 @@ If the value of the "enable_krb5" option is not set to "yes" or the line is comm
 ~V-72133 DISA check returns a possible false NEGATIVE as of V2R3, if both b64 rules (EPERM and EACCES) are NOT in place.
 ~V-72135 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
 ~V-72137 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72139 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72141 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72145 DISA check returns a possible false NEGATIVE as of V2R3. "/" after faillock not allowed.
-~V-72149 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72151 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72153 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72155 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72157 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72159 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72161 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72163 DISA check returns a possible false NEGATIVE as of V2R3. DISA check is not ending "/" compliant with check.
-~V-72165 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72167 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-~V-72171 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
+~V-72139 DISA check may returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
+~V-72141 DISA check may returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
+~V-72145 DISA check may returns a possible false NEGATIVE as of V2R3. "/" after faillock not allowed.
+~V-72149 DISA check may returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
+~V-72151 DISA check may returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
+~V-72153 DISA check may returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
+~V-72155 DISA check may returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
+~V-72157 DISA check may returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
+~V-72159 DISA check may returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
+~V-72161 DISA check may returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
+~V-72163 DISA check may returns a possible false NEGATIVE as of V2R3. DISA check is not ending "/" compliant with check.
+~V-72165 DISA check may returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
+~V-72167 DISA check may returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
+~V-72171 DISA check may returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
 ~V-72173 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
 ~V-72175 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
 ~V-72177 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
@@ -90,71 +72,45 @@ If the value of the "enable_krb5" option is not set to "yes" or the line is comm
 ~V-72203 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
 ~V-72205 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
 ~V-72207 DISA check returns a possible false NEGATIVE as of V2R3. The "perm=x" is not called for in the fix text, but DISA check allows it.
-
 ~V-72149 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". Stated check vs. actual check in benchmark do not match
-
 ~V-72153 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". Stated check vs. actual check in benchmark do not match
-
 ~V-72155 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". Stated check vs. actual check in benchmark do not match
-
 ~V-72157 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". Stated check vs. actual check in benchmark do not match
-
 ~V-72171 DISA False Positive in V2R3
 ~V-72187 DISA False Positive in V2R3
 ~V-72189 DISA False Positive in V2R3
-
 ~V-72213 If OPEN, this STIG should be followed up with a manual check to verify/confirm finding.
-
 ~V-72219 This is a manual check due to complexity.
 Firewall rules are customized per server/application as requested.
-
 ~V-72225 DISA False Positive in V2R3
-
 ~V-72227 If LDAP is not being utilized, this requirement is Not Applicable.
 ~V-72229 If LDAP is not being utilized, this requirement is Not Applicable.
 ~V-72231 If LDAP is not being utilized, this requirement is Not Applicable.
-
 ~V-72239 If the release is 7.4 or newer this requirement is Not Applicable.
 ~V-72251 If the release is 7.4 or newer this requirement is Not Applicable.
-
 ~V-72283 DISA False Positive in V2R3
-
 ~V-72285 DISA False Positive in V2R3
-
 ~V-72427 This STIG will be OPEN, if sssd and LDAP are not in use.
-
 ~V-73155 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
-
 ~V-73159 BASED on Fix Text, DISA may report a FALSE NEGATIVE
 Open findings will need to be verified during collaboration meeting.
-
 ~V-73157 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
-
 ~V-73161 This finding will always be OPEN as site requirements dictate that noexec for the NFS share /installs\* NOT be in place.
-
 ~V-73165 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". 
 Stated check vs. actual check in benchmark do not match.
-
 ~V-73167 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". 
 Stated check vs. actual check in benchmark do not match
-
 ~V-73177 This is N/A for systems that do not have wireless network adapters.
-
 ~V-77819 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
-
 ~V-78995 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
-
 ~V-78999 DISA False Positive in V2R3
 ~V-79001 DISA False Positive in V2R3
-
 ~V-78997 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
-
 ~V-81007 For systems that use BIOS, this is Not Applicable.
-
 ~V-92255 If another host-based intrusion detection application is in use, such as SELinux, this must be documented and approved by the local Authorizing Official.
 Having SELinux in use only DOES NOT satisfy this find.

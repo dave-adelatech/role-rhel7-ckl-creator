@@ -8,6 +8,7 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 3, 2019-07-23: Added check from comments in Check 2. JHMF
 #
 #----------
 
@@ -26,7 +27,7 @@
       - other
 
 - name: STIG RHEL7 V-72281 Check 2
-  shell: grep nameserver /etc/resolv.conf | wc -l | awk '$1 >= 2' 2>/dev/null
+  shell: grep nameserver /etc/resolv.conf |grep -v "^#" | wc -l | awk '$1 >= 2' 2>/dev/null
   args:
     executable: /bin/bash
   register: check2_72281

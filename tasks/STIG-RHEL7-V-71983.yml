@@ -8,11 +8,15 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-07-24: added HBSS check
 #
 #----------
 
 - name: STIG RHEL7 V-71983 Check
-  shell: grep -ir usb-storage /etc/modprobe.d/* 2>&1
+  shell: |
+    rpm -qa | grep MFEhiplsm
+    ps -ef | grep -i "hipclient"
+    grep -ir usb-storage /etc/modprobe.d/* 2>&1
   args:
     executable: /bin/bash
   register: check1_71983
@@ -23,7 +27,7 @@
       - modprobe
 
 - name: STIG RHEL7 V-71983 Check 2
-  shell: grep -ir "^install usb-storage /bin/true$" /etc/modprobe.d*
+  shell: rpm -qa | grep MFEhiplsmA 2>/dev/null
   args:
     executable: /bin/bash
   register: check2_71983
@@ -33,9 +37,33 @@
       - V-71983
       - modprobe
 
+- name: STIG RHEL7 V-71983 Check 3
+  shell: ps -ef | grep -i "hipclient" 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check3_71983
+  ignore_errors: True
+  changed_when: False
+  tags:
+      - V-71983
+      - modprobe
+
+
+- name: STIG RHEL7 V-71983 Check 4
+  #shell: grep -ir "^install usb-storage /bin/true$" /etc/modprobe.d*
+  shell: grep usb-storage /etc/modprobe.d/blacklist.conf 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check4_71983
+  ignore_errors: True
+  changed_when: False
+  tags:
+      - V-71983
+      - modprobe
+
 - name: STIG RHEL7 V-71983 Report
   set_fact: 
-    status_71983: "{{ 'fail' if (check2_71983.stdout == '') else 'pass'}}"
+    status_71983: "{{ 'NA' if ((check2_71983.stdout != '') and (check3_71983.stdout != '')) else 'fail' if (check4_71983.stdout == '') else 'pass'}}"
   tags:
       - V-71983
       - modprobe
