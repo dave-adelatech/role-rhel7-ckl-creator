@@ -27,7 +27,7 @@
       - modprobe
 
 - name: STIG RHEL7 V-71983 Check 2
-  shell: rpm -qa | grep MFEhiplsmA 2>/dev/null
+  shell: rpm -qa | grep MFEhiplsm 2>/dev/null
   args:
     executable: /bin/bash
   register: check2_71983
@@ -38,7 +38,7 @@
       - modprobe
 
 - name: STIG RHEL7 V-71983 Check 3
-  shell: ps -ef | grep -i "hipclient" 2>/dev/null
+  shell: ps -ef | grep -i "hipclient" 2>/dev/null |grep -v grep
   args:
     executable: /bin/bash
   register: check3_71983

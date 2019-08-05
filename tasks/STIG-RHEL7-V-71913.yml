@@ -23,7 +23,7 @@
       - pwquality
 
 - name: STIG RHEL7 V-71913 Check 2
-  shell: grep minclass /etc/security/pwquality.conf 2>/dev/null | awk '!/^#/ && $3 > /4/'
+  shell: grep minclass /etc/security/pwquality.conf 2>/dev/null | fgrep -x "minclass = 4"
   args:
     executable: /bin/bash
   register: check2_71913

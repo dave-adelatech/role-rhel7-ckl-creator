@@ -27,7 +27,7 @@
       - systemctl
 
 - name: STIG RHEL7 V-72231 Check 2
-  shell: systemctl status sssd.service 2>&1 |egrep -i "   Active. inactive|Unit sssd.service could not be found"
+  shell: systemctl status sssd.service 2>&1 |egrep -i "   Active. inactive|   Active. failed|Unit sssd.service could not be found"
   args:
     executable: /bin/bash
   register: check2_72231

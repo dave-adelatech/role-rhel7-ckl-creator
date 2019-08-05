@@ -8,6 +8,7 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-07-26: Reviewed and corrected. JHMF
 #
 #----------
 
@@ -23,7 +24,7 @@
       - pwquality
 
 - name: STIG RHEL7 V-71917 Check 2
-  shell: grep maxclassrepeat /etc/security/pwquality.conf 2>/dev/null | awk '!/^#/ && $3 > /4/'
+  shell: grep maxclassrepeat /etc/security/pwquality.conf 2>/dev/null | fgrep -x "maxclassrepeat = 4"
   args:
     executable: /bin/bash
   register: check2_71917

@@ -23,7 +23,7 @@
       - pwquality
 
 - name: STIG RHEL7 V-71911 Check 2
-  shell: grep difok /etc/security/pwquality.conf 2>/dev/null | awk '!/^#/ && $3 >= /8/'
+  shell: grep difok /etc/security/pwquality.conf 2>/dev/null | fgrep -x "difok = 8"
   args:
     executable: /bin/bash
   register: check2_71911
