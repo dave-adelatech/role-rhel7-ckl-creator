@@ -40,7 +40,7 @@
   shell: if [ -s /etc/snmp/snmpd.conf ]; then awk '/public|private/' /etc/snmp/snmpd.conf; fi
   args:
     executable: /bin/bash
-  register: checks3_72313
+  register: check3_72313
   ignore_errors: True
   changed_when: False
   tags:
