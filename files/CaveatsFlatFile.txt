@@ -20,6 +20,7 @@ DISA check will be False Positive, as DISA does not check for N/A
 ~V-71931 DISA check can report a FALSE POSITIVE
 The "scanuser" account is a PRDC service account, which is utilized to scan UNIX/Linux systems for vulnerabilities with ACAS. 
 Discrepencies, if any,  can be discussed during collaboration.
+~V-71953 If the system does not have GNOME installed, this requirement is Not Applicable.
 ~V-71955 If the system does not have GNOME installed, this requirement is Not Applicable.
 ~V-71963 For systems that are running RHEL 7.2 or newer, this is Not Applicable.
 ~V-71971 This is a manual check due to complexity.
