@@ -24,7 +24,7 @@
       - etcpasswd
 
 - name: STIG RHEL7 V-72025 Check 2
-  shell:  /installs/Ansible/redhat-7/roles/STIG-RHEL7-master/files/V-72025.sh
+  shell:  /installs/Ansible/role-rhel7-ckl-creator/files/V-72025.sh
   args:
     executable: /bin/bash
   register: check2_72025
