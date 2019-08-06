@@ -8,11 +8,14 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 3, 2019-07-23: Added NA check. JHMF
 #
 #----------
 
 - name: STIG RHEL7 V-72313 Check
-  shell: if [ "$(ls -al /etc/snmp/snmpd.conf 2>/dev/null)" ]; then awk '/public|private/' /etc/snmp/snmpd.conf; fi
+  shell: |
+    ls -al /etc/snmp/snmpd.conf 2>&1
+    awk '/public|private/' /etc/snmp/snmpd.conf 2>&1
   args:
     executable: /bin/bash
   register: check1_72313
@@ -23,7 +26,7 @@
       - other
 
 - name: STIG RHEL7 V-72313 Check 2
-  shell: if [ "$(ls -al /etc/snmp/snmpd.conf 2>/dev/null)" ]; then awk '/public|private/' /etc/snmp/snmpd.conf; fi
+  shell: if [ ! -s /etc/snmp/snmpd.conf ]; then echo "File /etc/snmp/snmpd.conf does not exists";fi
   args:
     executable: /bin/bash
   register: check2_72313
@@ -33,10 +36,21 @@
       - V-72313
       - other
 
+- name: STIG RHEL7 V-72313 Check 3
+  shell: if [ -s /etc/snmp/snmpd.conf ]; then awk '/public|private/' /etc/snmp/snmpd.conf; fi
+  args:
+    executable: /bin/bash
+  register: checks3_72313
+  ignore_errors: True
+  changed_when: False
+  tags:
+      - V-72313
+      - other
+
 
 - name: STIG RHEL7 V-72313 Report
   set_fact: 
-    status_72313: "{{ 'fail' if (check2_72313.stdout != '' ) else 'pass'}}"
+    status_72313: "{{ 'NA' if (check2_72313.stdout != '' ) else 'fail' if (check3_72313.stdout != '' ) else 'pass'}}"
   tags:
       - V-72313
       - other

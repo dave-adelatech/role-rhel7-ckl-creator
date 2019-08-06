@@ -8,6 +8,7 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-07-26: Reviewed and corrected. JHMF
 #
 #----------
 
@@ -23,7 +24,7 @@
       - other
 
 - name: STIG RHEL7 V-71923 Check 2
-  shell: cat /etc/libuser.conf | grep -i sha512 |  awk '!/^#/'
+  shell: cat /etc/libuser.conf | fgrep -x "crypt_style = sha512"
   args:
     executable: /bin/bash
   register: check2_71923

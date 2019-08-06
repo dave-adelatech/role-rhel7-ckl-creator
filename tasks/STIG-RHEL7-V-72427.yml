@@ -8,6 +8,8 @@
 # Change History:
 #
 # Ver 1, 2019-05-13: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 3, 2019-07-23: Better grep. JHMF
+
 #
 #----------
 
@@ -23,7 +25,7 @@
       - other
 
 - name: STIG RHEL7 V-72427 Check 2
-  shell: grep -x "services = nss, pam" /etc/sssd/sssd.conf /etc/sssd/conf.d/*.conf 2>/dev/null
+  shell: grep "^services = nss, pam" /etc/sssd/sssd.conf /etc/sssd/conf.d/*.conf 2>/dev/null
   args:
     executable: /bin/bash
   register: check2_72427

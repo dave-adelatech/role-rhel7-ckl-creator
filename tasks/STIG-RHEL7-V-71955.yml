@@ -8,22 +8,26 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 1, 2019-07-23: Original check did not have gnome check.  JHMF
+# Ver 3, 2019-07-23: Added NA check. JHMF
 #
 #----------
 
-- name: STIG RHEL7 V-71955 Check
-  shell: if [ "$(cat /etc/gdm/custom.conf 2>/dev/null)" ]; then grep -i timedloginenable /etc/gdm/custom.conf; else echo "GNOME is not installed"; fi
+- name: STIG RHEL7 V-71955 Check 1
+  shell: yum list installed -q gnome* 2>&1 |egrep "gnome|^Error"
   args:
     executable: /bin/bash
-  register: check1_71955
   ignore_errors: True
+  register: check1_71955
+  #ignore_errors: True
   changed_when: False
   tags:
       - V-71955
-      - other
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-71955 Check 2
-  shell: if [ "$(cat /etc/gdm/custom.conf 2>/dev/null)" ]; then grep -i timedloginenable /etc/gdm/custom.conf; fi
+  shell: if [ -s /etc/gdm/custom.conf ]; then grep -i timedloginenable /etc/gdm/custom.conf; else echo "File /etc/gdm/custom.conf does not exists"; fi
   args:
     executable: /bin/bash
   register: check2_71955
@@ -31,12 +35,25 @@
   changed_when: False
   tags:
       - V-71955
-      - other
+      - yum
+      - gnome
+
+- name: STIG RHEL7 V-71955 Check 3
+  shell: if [ -s /etc/gdm/custom.conf ]; then grep -i "TimedLoginEnable=false" /etc/gdm/custom.conf; fi
+  args:
+    executable: /bin/bash
+  register: check3_71955
+  ignore_errors: True
+  changed_when: False
+  tags:
+      - V-71955
+      - yum
+      - gnome
 
 - name: STIG RHEL7 V-71955 Report
   set_fact: 
-    status_71955: "{{ 'fail' if (check2_71955.stdout != '' ) else 'pass'}}"
+    status_71955: "{{ 'NA' if (check1_71955.stdout == 'Error: No matching Packages to list') else 'fail' if (check3_71955.stdout == '') else 'pass'}}"
   tags:
       - V-71955
-      - other
-
+      - yum
+      - gnome

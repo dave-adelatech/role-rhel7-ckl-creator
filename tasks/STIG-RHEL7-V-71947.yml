@@ -9,11 +9,13 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-20: Correct grep so commented lines are not counted
+# Ver 3, 2019-07-23: Added NA check. JHMF
+# Ver 3, 2019-07-24: RemovedNA check lines. JHMF
 #
 #----------
 
 - name: STIG RHEL7 V-71947 Check
-  shell: grep -i nopasswd /etc/sudoers /etc/sudoers.d/* 2>&1
+  shell: grep -irv ^# /etc/sudoers /etc/sudoers.d/ |grep -i nopasswd
   args:
     executable: /bin/bash
   register: check1_71947
@@ -24,7 +26,7 @@
       - other
 
 - name: STIG RHEL7 V-71947 Check 2
-  shell: cat /etc/sudoers /etc/sudoers.d/* 2>/dev/null |grep -i nopasswd |grep -v "^#"
+  shell: grep -irv ^# /etc/sudoers /etc/sudoers.d/ |grep -i nopasswd
   args:
     executable: /bin/bash
   register: check2_71947
@@ -36,9 +38,8 @@
 
 - name: STIG RHEL7 V-71947 Report
   set_fact: 
+    #status_71947: "{{ 'NA' if (check2_71947.stdout == '') else 'fail' if (check3_71947.stdout != '') else 'pass'}}"
     status_71947: "{{ 'fail' if (check2_71947.stdout != '') else 'pass'}}"
   tags:
       - V-71947
       - other
-
-#

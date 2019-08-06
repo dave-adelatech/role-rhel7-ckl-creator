@@ -9,6 +9,7 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-09: Better check
+# Ver 3, 2019-07-23: Correct "tab" check in fstab
 #
 #----------
 
@@ -28,7 +29,7 @@
       - auditrules
 
 - name: STIG RHEL7 V-72063 Check 2
-  shell: grep "/var/log/audit[ |        ]" /etc/fstab 2>/dev/null
+  shell: grep "/var/log/audit[ |	]" /etc/fstab 2>/dev/null
   args:
     executable: /bin/bash
   register: check2_72063

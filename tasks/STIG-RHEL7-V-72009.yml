@@ -9,11 +9,12 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-31. changed "-print" to "-ls" in find.  Excluded proc filesystems. And limit output to 100 lines. JHMF
+# Ver 3, 2019-07-23: added fstype nfs4 to check. JHMF
 #
 #----------
 
 - name: STIG RHEL7 V-72009 Check
-  shell: find / \( \( -fstype nfs -o -fstype proc \) -prune \) -o -nogroup -ls 2>/dev/null |head -100
+  shell: find / \( \( -fstype nfs -o -fstype nfs4 -o -fstype proc \) -prune \) -o -nogroup -ls 2>/dev/null |head -100
   args:
     executable: /bin/bash
   register: check1_72009
@@ -24,7 +25,7 @@
       - find
 
 - name: STIG RHEL7 V-72009 Check 2
-  shell: find / \( \( -fstype nfs -o -fstype proc \) -prune \) -o -nogroup -ls 2>/dev/null |head -100
+  shell: find / \( \( -fstype nfs -o -fstype nfs4 -o -fstype proc \) -prune \) -o -nogroup -ls 2>/dev/null |head -100
   args:
     executable: /bin/bash
   register: check2_72009

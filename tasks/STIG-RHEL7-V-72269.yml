@@ -13,7 +13,7 @@
 
 - name: STIG RHEL7 V-72269 Check
   shell: |
-      echo -e "\n     ps -ef | grep ntp";  ps -ef | grep ntp; \
+      echo -e "\n     ps -ef | grep ntpd";  ps -ef | grep ntpd; \
       echo -e "\n    grep maxpoll /etc/ntp.conf"; grep maxpoll /etc/ntp.conf; # \
   args:
     executable: /bin/bash
