@@ -29,7 +29,7 @@
       - yum
 
 - name: STIG RHEL7 V-71849 Check 2
-  shell:  /installs/Ansible/redhat-7/roles/STIG-RHEL7-master/files/V-71849.sh
+  shell:  /installs/Ansible/role-rhel7-ckl-creator/files/V-71849.sh
   args:
     executable: /bin/bash
   register: check2_71849
