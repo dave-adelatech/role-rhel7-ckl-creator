@@ -83,3 +83,4 @@ fi
 #echo "$FINDING $VULN $STIG $TITLE" #>>$SC_NAM
 
 rm $HN.${VULN}
+

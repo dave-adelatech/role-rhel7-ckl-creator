@@ -24,4 +24,3 @@
     executable: /bin/bash
   ignore_errors: True
   changed_when: False
-
