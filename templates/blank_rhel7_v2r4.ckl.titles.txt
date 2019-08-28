@@ -1,0 +1,988 @@
+ORIG: V-71849 The Red Hat Enterprise Linux operating system must be configured so that the file permissions, ownership, and group membership of system files and commands match the vendor values.
+PASS: V-71849 The Red Hat Enterprise Linux operating system - IS - configured so that the file permissions, ownership, and group membership of system files and commands match the vendor values.
+FAIL: V-71849 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the file permissions, ownership, and group membership of system files and commands match the vendor values.
+
+ORIG: V-71855 The Red Hat Enterprise Linux operating system must be configured so that the cryptographic hash of system files and commands matches vendor values.
+PASS: V-71855 The Red Hat Enterprise Linux operating system - IS - configured so that the cryptographic hash of system files and commands matches vendor values.
+FAIL: V-71855 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the cryptographic hash of system files and commands matches vendor values.
+
+ORIG: V-71859 The Red Hat Enterprise Linux operating system must display the Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system via a graphical user logon.
+PASS: V-71859 The Red Hat Enterprise Linux operating system - DOES - display the Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system via a graphical user logon.
+FAIL: V-71859 The Red Hat Enterprise Linux operating system - DOES NOT - display the Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system via a graphical user logon.
+
+ORIG: V-71861 The Red Hat Enterprise Linux operating system must display the approved Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system via a graphical user logon.
+PASS: V-71861 The Red Hat Enterprise Linux operating system - DOES - display the approved Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system via a graphical user logon.
+FAIL: V-71861 The Red Hat Enterprise Linux operating system - DOES NOT - display the approved Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system via a graphical user logon.
+
+ORIG: V-71863 The Red Hat Enterprise Linux operating system must display the Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system via a command line user logon.
+PASS: V-71863 The Red Hat Enterprise Linux operating system - DOES - display the Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system via a command line user logon.
+FAIL: V-71863 The Red Hat Enterprise Linux operating system - DOES NOT - display the Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system via a command line user logon.
+
+ORIG: V-71891 The Red Hat Enterprise Linux operating system must enable a user session lock until that user re-establishes access using established identification and authentication procedures.
+PASS: V-71891 The Red Hat Enterprise Linux operating system - DOES - enable a user session lock until that user re-establishes access using established identification and authentication procedures.
+FAIL: V-71891 The Red Hat Enterprise Linux operating system - DOES NOT - enable a user session lock until that user re-establishes access using established identification and authentication procedures.
+
+ORIG: V-71893 The Red Hat Enterprise Linux operating system must initiate a screensaver after a 15-minute period of inactivity for graphical user interfaces.
+PASS: V-71893 The Red Hat Enterprise Linux operating system - DOES - initiate a screensaver after a 15-minute period of inactivity for graphical user interfaces.
+FAIL: V-71893 The Red Hat Enterprise Linux operating system - DOES NOT - initiate a screensaver after a 15-minute period of inactivity for graphical user interfaces.
+
+ORIG: V-71897 The Red Hat Enterprise Linux operating system must have the screen package installed.
+PASS: V-71897 The Red Hat Enterprise Linux operating system - DOES - have the screen package installed.
+FAIL: V-71897 The Red Hat Enterprise Linux operating system - DOES NOT - have the screen package installed.
+
+ORIG: V-71899 The Red Hat Enterprise Linux operating system must initiate a session lock for the screensaver after a period of inactivity for graphical user interfaces.
+PASS: V-71899 The Red Hat Enterprise Linux operating system - DOES - initiate a session lock for the screensaver after a period of inactivity for graphical user interfaces.
+FAIL: V-71899 The Red Hat Enterprise Linux operating system - DOES NOT - initiate a session lock for the screensaver after a period of inactivity for graphical user interfaces.
+
+ORIG: V-71901 The Red Hat Enterprise Linux operating system must initiate a session lock for graphical user interfaces when the screensaver is activated.
+PASS: V-71901 The Red Hat Enterprise Linux operating system - DOES - initiate a session lock for graphical user interfaces when the screensaver is activated.
+FAIL: V-71901 The Red Hat Enterprise Linux operating system - DOES NOT - initiate a session lock for graphical user interfaces when the screensaver is activated.
+
+ORIG: V-71903 The Red Hat Enterprise Linux operating system must be configured so that when passwords are changed or new passwords are established, the new password must contain at least one upper-case character.
+PASS: V-71903 The Red Hat Enterprise Linux operating system - IS - configured so that when passwords are changed or new passwords are established, the new password must contain at least one upper-case character.
+FAIL: V-71903 The Red Hat Enterprise Linux operating system - IS NOT - configured so that when passwords are changed or new passwords are established, the new password must contain at least one upper-case character.
+
+ORIG: V-71905 The Red Hat Enterprise Linux operating system must be configured so that when passwords are changed or new passwords are established, the new password must contain at least one lower-case character.
+PASS: V-71905 The Red Hat Enterprise Linux operating system - IS - configured so that when passwords are changed or new passwords are established, the new password must contain at least one lower-case character.
+FAIL: V-71905 The Red Hat Enterprise Linux operating system - IS NOT - configured so that when passwords are changed or new passwords are established, the new password must contain at least one lower-case character.
+
+ORIG: V-71907 The Red Hat Enterprise Linux operating system must be configured so that when passwords are changed or new passwords are assigned, the new password must contain at least one numeric character.
+PASS: V-71907 The Red Hat Enterprise Linux operating system - IS - configured so that when passwords are changed or new passwords are assigned, the new password must contain at least one numeric character.
+FAIL: V-71907 The Red Hat Enterprise Linux operating system - IS NOT - configured so that when passwords are changed or new passwords are assigned, the new password must contain at least one numeric character.
+
+ORIG: V-71909 The Red Hat Enterprise Linux operating system must be configured so that when passwords are changed or new passwords are established, the new password must contain at least one special character.
+PASS: V-71909 The Red Hat Enterprise Linux operating system - IS - configured so that when passwords are changed or new passwords are established, the new password must contain at least one special character.
+FAIL: V-71909 The Red Hat Enterprise Linux operating system - IS NOT - configured so that when passwords are changed or new passwords are established, the new password must contain at least one special character.
+
+ORIG: V-71911 The Red Hat Enterprise Linux operating system must be configured so that when passwords are changed a minimum of eight of the total number of characters must be changed.
+PASS: V-71911 The Red Hat Enterprise Linux operating system - IS - configured so that when passwords are changed a minimum of eight of the total number of characters must be changed.
+FAIL: V-71911 The Red Hat Enterprise Linux operating system - IS NOT - configured so that when passwords are changed a minimum of eight of the total number of characters must be changed.
+
+ORIG: V-71913 The Red Hat Enterprise Linux operating system must be configured so that when passwords are changed a minimum of four character classes must be changed.
+PASS: V-71913 The Red Hat Enterprise Linux operating system - IS - configured so that when passwords are changed a minimum of four character classes must be changed.
+FAIL: V-71913 The Red Hat Enterprise Linux operating system - IS NOT - configured so that when passwords are changed a minimum of four character classes must be changed.
+
+ORIG: V-71915 The Red Hat Enterprise Linux operating system must be configured so that when passwords are changed the number of repeating consecutive characters must not be more than three characters.
+PASS: V-71915 The Red Hat Enterprise Linux operating system - IS - configured so that when passwords are changed the number of repeating consecutive characters must not be more than three characters.
+FAIL: V-71915 The Red Hat Enterprise Linux operating system - IS NOT - configured so that when passwords are changed the number of repeating consecutive characters must not be more than three characters.
+
+ORIG: V-71917 The Red Hat Enterprise Linux operating system must be configured so that when passwords are changed the number of repeating characters of the same character class must not be more than four characters.
+PASS: V-71917 The Red Hat Enterprise Linux operating system - IS - configured so that when passwords are changed the number of repeating characters of the same character class must not be more than four characters.
+FAIL: V-71917 The Red Hat Enterprise Linux operating system - IS NOT - configured so that when passwords are changed the number of repeating characters of the same character class must not be more than four characters.
+
+ORIG: V-71919 The Red Hat Enterprise Linux operating system must be configured so that the PAM system service is configured to store only encrypted representations of passwords.
+PASS: V-71919 The Red Hat Enterprise Linux operating system - IS - configured so that the PAM system service is configured to store only encrypted representations of passwords.
+FAIL: V-71919 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the PAM system service is configured to store only encrypted representations of passwords.
+
+ORIG: V-71921 The Red Hat Enterprise Linux operating system must be configured to use the shadow file to store only encrypted representations of passwords.
+PASS: V-71921 The Red Hat Enterprise Linux operating system - IS - configured to use the shadow file to store only encrypted representations of passwords.
+FAIL: V-71921 The Red Hat Enterprise Linux operating system - IS NOT - configured to use the shadow file to store only encrypted representations of passwords.
+
+ORIG: V-71923 The Red Hat Enterprise Linux operating system must be configured so that user and group account administration utilities are configured to store only encrypted representations of passwords.
+PASS: V-71923 The Red Hat Enterprise Linux operating system - IS - configured so that user and group account administration utilities are configured to store only encrypted representations of passwords.
+FAIL: V-71923 The Red Hat Enterprise Linux operating system - IS NOT - configured so that user and group account administration utilities are configured to store only encrypted representations of passwords.
+
+ORIG: V-71925 The Red Hat Enterprise Linux operating system must be configured so that passwords for new users are restricted to a 24 hours/1 day minimum lifetime.
+PASS: V-71925 The Red Hat Enterprise Linux operating system - IS - configured so that passwords for new users are restricted to a 24 hours/1 day minimum lifetime.
+FAIL: V-71925 The Red Hat Enterprise Linux operating system - IS NOT - configured so that passwords for new users are restricted to a 24 hours/1 day minimum lifetime.
+
+ORIG: V-71927 The Red Hat Enterprise Linux operating system must be configured so that passwords are restricted to a 24 hours/1 day minimum lifetime.
+PASS: V-71927 The Red Hat Enterprise Linux operating system - IS - configured so that passwords are restricted to a 24 hours/1 day minimum lifetime.
+FAIL: V-71927 The Red Hat Enterprise Linux operating system - IS NOT - configured so that passwords are restricted to a 24 hours/1 day minimum lifetime.
+
+ORIG: V-71929 The Red Hat Enterprise Linux operating system must be configured so that passwords for new users are restricted to a 60-day maximum lifetime.
+PASS: V-71929 The Red Hat Enterprise Linux operating system - IS - configured so that passwords for new users are restricted to a 60-day maximum lifetime.
+FAIL: V-71929 The Red Hat Enterprise Linux operating system - IS NOT - configured so that passwords for new users are restricted to a 60-day maximum lifetime.
+
+ORIG: V-71931 The Red Hat Enterprise Linux operating system must be configured so that existing passwords are restricted to a 60-day maximum lifetime.
+PASS: V-71931 The Red Hat Enterprise Linux operating system - IS - configured so that existing passwords are restricted to a 60-day maximum lifetime.
+FAIL: V-71931 The Red Hat Enterprise Linux operating system - IS NOT - configured so that existing passwords are restricted to a 60-day maximum lifetime.
+
+ORIG: V-71933 The Red Hat Enterprise Linux operating system must be configured so that passwords are prohibited from reuse for a minimum of five generations.
+PASS: V-71933 The Red Hat Enterprise Linux operating system - IS - configured so that passwords are prohibited from reuse for a minimum of five generations.
+FAIL: V-71933 The Red Hat Enterprise Linux operating system - IS NOT - configured so that passwords are prohibited from reuse for a minimum of five generations.
+
+ORIG: V-71935 The Red Hat Enterprise Linux operating system must be configured so that passwords are a minimum of 15 characters in length.
+PASS: V-71935 The Red Hat Enterprise Linux operating system - IS - configured so that passwords are a minimum of 15 characters in length.
+FAIL: V-71935 The Red Hat Enterprise Linux operating system - IS NOT - configured so that passwords are a minimum of 15 characters in length.
+
+ORIG: V-71937 The Red Hat Enterprise Linux operating system must not have accounts configured with blank or null passwords.
+PASS: V-71937 The Red Hat Enterprise Linux operating system - DOES NOT - have accounts configured with blank or null passwords.
+FAIL: V-71937 The Red Hat Enterprise Linux operating system - DOES - have accounts configured with blank or null passwords.
+
+ORIG: V-71939 The Red Hat Enterprise Linux operating system must be configured so that the SSH daemon does not allow authentication using an empty password.
+PASS: V-71939 The Red Hat Enterprise Linux operating system - IS - configured so that the SSH daemon does not allow authentication using an empty password.
+FAIL: V-71939 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the SSH daemon does not allow authentication using an empty password.
+
+ORIG: V-71941 The Red Hat Enterprise Linux operating system must disable account identifiers (individuals, groups, roles, and devices) if the password expires.
+PASS: V-71941 The Red Hat Enterprise Linux operating system - DOES - disable account identifiers (individuals, groups, roles, and devices) if the password expires.
+FAIL: V-71941 The Red Hat Enterprise Linux operating system - DOES NOT - disable account identifiers (individuals, groups, roles, and devices) if the password expires.
+
+ORIG: V-71943 The Red Hat Enterprise Linux operating system must be configured to lock accounts for a minimum of 15 minutes after three unsuccessful logon attempts within a 15-minute timeframe.
+PASS: V-71943 The Red Hat Enterprise Linux operating system - IS - configured to lock accounts for a minimum of 15 minutes after three unsuccessful logon attempts within a 15-minute timeframe.
+FAIL: V-71943 The Red Hat Enterprise Linux operating system - IS NOT - configured to lock accounts for a minimum of 15 minutes after three unsuccessful logon attempts within a 15-minute timeframe.
+
+ORIG: V-71945 The Red Hat Enterprise Linux operating system must lock the associated account after three unsuccessful root logon attempts are made within a 15-minute period.
+PASS: V-71945 The Red Hat Enterprise Linux operating system - DOES - lock the associated account after three unsuccessful root logon attempts are made within a 15-minute period.
+FAIL: V-71945 The Red Hat Enterprise Linux operating system - DOES NOT - lock the associated account after three unsuccessful root logon attempts are made within a 15-minute period.
+
+ORIG: V-71947 The Red Hat Enterprise Linux operating system must be configured so that users must provide a password for privilege escalation.
+PASS: V-71947 The Red Hat Enterprise Linux operating system - IS - configured so that users must provide a password for privilege escalation.
+FAIL: V-71947 The Red Hat Enterprise Linux operating system - IS NOT - configured so that users must provide a password for privilege escalation.
+
+ORIG: V-71949 The Red Hat Enterprise Linux operating system must be configured so that users must re-authenticate for privilege escalation.
+PASS: V-71949 The Red Hat Enterprise Linux operating system - IS - configured so that users must re-authenticate for privilege escalation.
+FAIL: V-71949 The Red Hat Enterprise Linux operating system - IS NOT - configured so that users must re-authenticate for privilege escalation.
+
+ORIG: V-71951 The Red Hat Enterprise Linux operating system must be configured so that the delay between logon prompts following a failed console logon attempt is at least four seconds.
+PASS: V-71951 The Red Hat Enterprise Linux operating system - IS - configured so that the delay between logon prompts following a failed console logon attempt is at least four seconds.
+FAIL: V-71951 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the delay between logon prompts following a failed console logon attempt is at least four seconds.
+
+ORIG: V-71953 The Red Hat Enterprise Linux operating system must not allow an unattended or automatic logon to the system via a graphical user interface.
+PASS: V-71953 The Red Hat Enterprise Linux operating system - DOES NOT - allow an unattended or automatic logon to the system via a graphical user interface.
+FAIL: V-71953 The Red Hat Enterprise Linux operating system - DOES - allow an unattended or automatic logon to the system via a graphical user interface.
+
+ORIG: V-71955 The Red Hat Enterprise Linux operating system must not allow an unrestricted logon to the system.
+PASS: V-71955 The Red Hat Enterprise Linux operating system - DOES NOT - allow an unrestricted logon to the system.
+FAIL: V-71955 The Red Hat Enterprise Linux operating system - DOES - allow an unrestricted logon to the system.
+
+ORIG: V-71957 The Red Hat Enterprise Linux operating system must not allow users to override SSH environment variables.
+PASS: V-71957 The Red Hat Enterprise Linux operating system - DOES NOT - allow users to override SSH environment variables.
+FAIL: V-71957 The Red Hat Enterprise Linux operating system - DOES - allow users to override SSH environment variables.
+
+ORIG: V-71959 The Red Hat Enterprise Linux operating system must not allow a non-certificate trusted host SSH logon to the system.
+PASS: V-71959 The Red Hat Enterprise Linux operating system - DOES NOT - allow a non-certificate trusted host SSH logon to the system.
+FAIL: V-71959 The Red Hat Enterprise Linux operating system - DOES - allow a non-certificate trusted host SSH logon to the system.
+
+ORIG: V-71961 Red Hat Enterprise Linux operating systems prior to version 7.2 with a Basic Input/Output System (BIOS) must require authentication upon booting into single-user and maintenance modes.
+PASS: V-71961 Red Hat Enterprise Linux operating systems prior to version 7.2 with a Basic Input/Output System (BIOS) - DO - require authentication upon booting into single-user and maintenance modes.
+FAIL: V-71961 Red Hat Enterprise Linux operating systems prior to version 7.2 with a Basic Input/Output System (BIOS) - DO NOT - require authentication upon booting into single-user and maintenance modes.
+
+ORIG: V-71963 Red Hat Enterprise Linux operating systems prior to version 7.2 using Unified Extensible Firmware Interface (UEFI) must require authentication upon booting into single-user and maintenance modes.
+PASS: V-71963 Red Hat Enterprise Linux operating systems prior to version 7.2 using Unified Extensible Firmware Interface (UEFI) - DO - require authentication upon booting into single-user and maintenance modes.
+FAIL: V-71963 Red Hat Enterprise Linux operating systems prior to version 7.2 using Unified Extensible Firmware Interface (UEFI) - DO NOT - require authentication upon booting into single-user and maintenance modes.
+
+ORIG: V-71965 The Red Hat Enterprise Linux operating system must uniquely identify and must authenticate organizational users (or processes acting on behalf of organizational users) using multifactor authentication.
+PASS: V-71965 The Red Hat Enterprise Linux operating system - DOES - uniquely identify and must authenticate organizational users (or processes acting on behalf of organizational users) using multifactor authentication.
+FAIL: V-71965 The Red Hat Enterprise Linux operating system - DOES NOT - uniquely identify and must authenticate organizational users (or processes acting on behalf of organizational users) using multifactor authentication.
+
+ORIG: V-71967 The Red Hat Enterprise Linux operating system must not have the rsh-server package installed.
+PASS: V-71967 The Red Hat Enterprise Linux operating system - DOES NOT - have the rsh-server package installed.
+FAIL: V-71967 The Red Hat Enterprise Linux operating system - DOES - have the rsh-server package installed.
+
+ORIG: V-71969 The Red Hat Enterprise Linux operating system must not have the ypserv package installed.
+PASS: V-71969 The Red Hat Enterprise Linux operating system - DOES NOT - have the ypserv package installed.
+FAIL: V-71969 The Red Hat Enterprise Linux operating system - DOES - have the ypserv package installed.
+
+ORIG: V-71971 The Red Hat Enterprise Linux operating system must prevent non-privileged users from executing privileged functions to include disabling, circumventing, or altering implemented security safeguards/countermeasures.
+PASS: V-71971 The Red Hat Enterprise Linux operating system - DOES - prevent non-privileged users from executing privileged functions to include disabling, circumventing, or altering implemented security safeguards/countermeasures.
+FAIL: V-71971 The Red Hat Enterprise Linux operating system - DOES NOT - prevent non-privileged users from executing privileged functions to include disabling, circumventing, or altering implemented security safeguards/countermeasures.
+
+ORIG: V-71973 The Red Hat Enterprise Linux operating system must be configured so that a file integrity tool verifies the baseline operating system configuration at least weekly.
+PASS: V-71973 The Red Hat Enterprise Linux operating system - IS - configured so that a file integrity tool verifies the baseline operating system configuration at least weekly.
+FAIL: V-71973 The Red Hat Enterprise Linux operating system - IS NOT - configured so that a file integrity tool verifies the baseline operating system configuration at least weekly.
+
+ORIG: V-71975 The Red Hat Enterprise Linux operating system must be configured so that designated personnel are notified if baseline configurations are changed in an unauthorized manner.
+PASS: V-71975 The Red Hat Enterprise Linux operating system - IS - configured so that designated personnel are notified if baseline configurations are changed in an unauthorized manner.
+FAIL: V-71975 The Red Hat Enterprise Linux operating system - IS NOT - configured so that designated personnel are notified if baseline configurations are changed in an unauthorized manner.
+
+ORIG: V-71977 The Red Hat Enterprise Linux operating system must prevent the installation of software, patches, service packs, device drivers, or operating system components from a repository without verification they have been digitally signed using a certificate that is issued by a Certificate Authority (CA) that is recognized and approved by the organization.
+PASS: V-71977 The Red Hat Enterprise Linux operating system - DOES - prevent the installation of software, patches, service packs, device drivers, or operating system components from a repository without verification they have been digitally signed using a certificate that is issued by a Certificate Authority (CA) that is recognized and approved by the organization.
+FAIL: V-71977 The Red Hat Enterprise Linux operating system - DOES NOT - prevent the installation of software, patches, service packs, device drivers, or operating system components from a repository without verification they have been digitally signed using a certificate that is issued by a Certificate Authority (CA) that is recognized and approved by the organization.
+
+ORIG: V-71979 The Red Hat Enterprise Linux operating system must prevent the installation of software, patches, service packs, device drivers, or operating system components of local packages without verification they have been digitally signed using a certificate that is issued by a Certificate Authority (CA) that is recognized and approved by the organization.
+PASS: V-71979 The Red Hat Enterprise Linux operating system - DOES - prevent the installation of software, patches, service packs, device drivers, or operating system components of local packages without verification they have been digitally signed using a certificate that is issued by a Certificate Authority (CA) that is recognized and approved by the organization.
+FAIL: V-71979 The Red Hat Enterprise Linux operating system - DOES NOT - prevent the installation of software, patches, service packs, device drivers, or operating system components of local packages without verification they have been digitally signed using a certificate that is issued by a Certificate Authority (CA) that is recognized and approved by the organization.
+
+ORIG: V-71983 The Red Hat Enterprise Linux operating system must be configured to disable USB mass storage.
+PASS: V-71983 The Red Hat Enterprise Linux operating system - IS - configured to disable USB mass storage.
+FAIL: V-71983 The Red Hat Enterprise Linux operating system - IS NOT - configured to disable USB mass storage.
+
+ORIG: V-71985 The Red Hat Enterprise Linux operating system must disable the file system automounter unless required.
+PASS: V-71985 The Red Hat Enterprise Linux operating system - DOES - disable the file system automounter unless required.
+FAIL: V-71985 The Red Hat Enterprise Linux operating system - DOES NOT - disable the file system automounter unless required.
+
+ORIG: V-71987 The Red Hat Enterprise Linux operating system must remove all software components after updated versions have been installed.
+PASS: V-71987 The Red Hat Enterprise Linux operating system - DOES - remove all software components after updated versions have been installed.
+FAIL: V-71987 The Red Hat Enterprise Linux operating system - DOES NOT - remove all software components after updated versions have been installed.
+
+ORIG: V-71989 The Red Hat Enterprise Linux operating system must enable SELinux.
+PASS: V-71989 The Red Hat Enterprise Linux operating system - DOES - enable SELinux.
+FAIL: V-71989 The Red Hat Enterprise Linux operating system - DOES NOT - enable SELinux.
+
+ORIG: V-71991 The Red Hat Enterprise Linux operating system must enable the SELinux targeted policy.
+PASS: V-71991 The Red Hat Enterprise Linux operating system - DOES - enable the SELinux targeted policy.
+FAIL: V-71991 The Red Hat Enterprise Linux operating system - DOES NOT - enable the SELinux targeted policy.
+
+ORIG: V-71993 The Red Hat Enterprise Linux operating system must be configured so that the x86 Ctrl-Alt-Delete key sequence is disabled on the command line.
+PASS: V-71993 The Red Hat Enterprise Linux operating system - IS - configured so that the x86 Ctrl-Alt-Delete key sequence is disabled on the command line.
+FAIL: V-71993 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the x86 Ctrl-Alt-Delete key sequence is disabled on the command line.
+
+ORIG: V-71995 The Red Hat Enterprise Linux operating system must define default permissions for all authenticated users in such a way that the user can only read and modify their own files.
+PASS: V-71995 The Red Hat Enterprise Linux operating system - DOES - define default permissions for all authenticated users in such a way that the user can only read and modify their own files.
+FAIL: V-71995 The Red Hat Enterprise Linux operating system - DOES NOT - define default permissions for all authenticated users in such a way that the user can only read and modify their own files.
+
+ORIG: V-71997 The Red Hat Enterprise Linux operating system must be a vendor supported release.
+PASS: V-71997 The Red Hat Enterprise Linux operating system - IS - a vendor supported release.
+FAIL: V-71997 The Red Hat Enterprise Linux operating system - IS NOT - a vendor supported release.
+
+ORIG: V-71999 The Red Hat Enterprise Linux operating system security patches and updates must be installed and up to date.
+PASS: V-71999 The Red Hat Enterprise Linux operating system security patches and updates - ARE - installed and up to date.
+FAIL: V-71999 The Red Hat Enterprise Linux operating system security patches and updates - ARE NOT - installed and up to date.
+
+ORIG: V-72001 The Red Hat Enterprise Linux operating system must not have unnecessary accounts.
+PASS: V-72001 The Red Hat Enterprise Linux operating system - DOES NOT - have unnecessary accounts.
+FAIL: V-72001 The Red Hat Enterprise Linux operating system - DOES - have unnecessary accounts.
+
+ORIG: V-72003 The Red Hat Enterprise Linux operating system must be configured so that all Group Identifiers (GIDs) referenced in the /etc/passwd file are defined in the /etc/group file.
+PASS: V-72003 The Red Hat Enterprise Linux operating system - IS - configured so that all Group Identifiers (GIDs) referenced in the /etc/passwd file are defined in the /etc/group file.
+FAIL: V-72003 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all Group Identifiers (GIDs) referenced in the /etc/passwd file are defined in the /etc/group file.
+
+ORIG: V-72005 The Red Hat Enterprise Linux operating system must be configured so that the root account must be the only account having unrestricted access to the system.
+PASS: V-72005 The Red Hat Enterprise Linux operating system - IS - configured so that the root account must be the only account having unrestricted access to the system.
+FAIL: V-72005 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the root account must be the only account having unrestricted access to the system.
+
+ORIG: V-72007 The Red Hat Enterprise Linux operating system must be configured so that all files and directories have a valid owner.
+PASS: V-72007 The Red Hat Enterprise Linux operating system - IS - configured so that all files and directories have a valid owner.
+FAIL: V-72007 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all files and directories have a valid owner.
+
+ORIG: V-72009 The Red Hat Enterprise Linux operating system must be configured so that all files and directories have a valid group owner.
+PASS: V-72009 The Red Hat Enterprise Linux operating system - IS - configured so that all files and directories have a valid group owner.
+FAIL: V-72009 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all files and directories have a valid group owner.
+
+ORIG: V-72011 The Red Hat Enterprise Linux operating system must be configured so that all local interactive users have a home directory assigned in the /etc/passwd file.
+PASS: V-72011 The Red Hat Enterprise Linux operating system - IS - configured so that all local interactive users have a home directory assigned in the /etc/passwd file.
+FAIL: V-72011 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all local interactive users have a home directory assigned in the /etc/passwd file.
+
+ORIG: V-72013 The Red Hat Enterprise Linux operating system must be configured so that all local interactive user accounts, upon creation, are assigned a home directory.
+PASS: V-72013 The Red Hat Enterprise Linux operating system - IS - configured so that all local interactive user accounts, upon creation, are assigned a home directory.
+FAIL: V-72013 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all local interactive user accounts, upon creation, are assigned a home directory.
+
+ORIG: V-72015 The Red Hat Enterprise Linux operating system must be configured so that all local interactive user home directories are defined in the /etc/passwd file.
+PASS: V-72015 The Red Hat Enterprise Linux operating system - IS - configured so that all local interactive user home directories are defined in the /etc/passwd file.
+FAIL: V-72015 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all local interactive user home directories are defined in the /etc/passwd file.
+
+ORIG: V-72017 The Red Hat Enterprise Linux operating system must be configured so that all local interactive user home directories have mode 0750 or less permissive.
+PASS: V-72017 The Red Hat Enterprise Linux operating system - IS - configured so that all local interactive user home directories have mode 0750 or less permissive.
+FAIL: V-72017 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all local interactive user home directories have mode 0750 or less permissive.
+
+ORIG: V-72019 The Red Hat Enterprise Linux operating system must be configured so that all local interactive user home directories are owned by their respective users.
+PASS: V-72019 The Red Hat Enterprise Linux operating system - IS - configured so that all local interactive user home directories are owned by their respective users.
+FAIL: V-72019 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all local interactive user home directories are owned by their respective users.
+
+ORIG: V-72021 The Red Hat Enterprise Linux operating system must be configured so that all local interactive user home directories are group-owned by the home directory owners primary group.
+PASS: V-72021 The Red Hat Enterprise Linux operating system - IS - configured so that all local interactive user home directories are group-owned by the home directory owners primary group.
+FAIL: V-72021 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all local interactive user home directories are group-owned by the home directory owners primary group.
+
+ORIG: V-72023 The Red Hat Enterprise Linux operating system must be configured so that all files and directories contained in local interactive user home directories are owned by the owner of the home directory.
+PASS: V-72023 The Red Hat Enterprise Linux operating system - IS - configured so that all files and directories contained in local interactive user home directories are owned by the owner of the home directory.
+FAIL: V-72023 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all files and directories contained in local interactive user home directories are owned by the owner of the home directory.
+
+ORIG: V-72025 The Red Hat Enterprise Linux operating system must be configured so that all files and directories contained in local interactive user home directories are group-owned by a group of which the home directory owner is a member.
+PASS: V-72025 The Red Hat Enterprise Linux operating system - IS - configured so that all files and directories contained in local interactive user home directories are group-owned by a group of which the home directory owner is a member.
+FAIL: V-72025 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all files and directories contained in local interactive user home directories are group-owned by a group of which the home directory owner is a member.
+
+ORIG: V-72027 The Red Hat Enterprise Linux operating system must be configured so that all files and directories contained in local interactive user home directories have a mode of 0750 or less permissive.
+PASS: V-72027 The Red Hat Enterprise Linux operating system - IS - configured so that all files and directories contained in local interactive user home directories have a mode of 0750 or less permissive.
+FAIL: V-72027 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all files and directories contained in local interactive user home directories have a mode of 0750 or less permissive.
+
+ORIG: V-72029 The Red Hat Enterprise Linux operating system must be configured so that all local initialization files for interactive users are owned by the home directory user or root.
+PASS: V-72029 The Red Hat Enterprise Linux operating system - IS - configured so that all local initialization files for interactive users are owned by the home directory user or root.
+FAIL: V-72029 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all local initialization files for interactive users are owned by the home directory user or root.
+
+ORIG: V-72031 The Red Hat Enterprise Linux operating system must be configured so that all local initialization files for local interactive users are be group-owned by the users primary group or root.
+PASS: V-72031 The Red Hat Enterprise Linux operating system - IS - configured so that all local initialization files for local interactive users are be group-owned by the users primary group or root.
+FAIL: V-72031 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all local initialization files for local interactive users are be group-owned by the users primary group or root.
+
+ORIG: V-72033 The Red Hat Enterprise Linux operating system must be configured so that all local initialization files have mode 0740 or less permissive.
+PASS: V-72033 The Red Hat Enterprise Linux operating system - IS - configured so that all local initialization files have mode 0740 or less permissive.
+FAIL: V-72033 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all local initialization files have mode 0740 or less permissive.
+
+ORIG: V-72035 The Red Hat Enterprise Linux operating system must be configured so that all local interactive user initialization files executable search paths contain only paths that resolve to the users home directory.
+PASS: V-72035 The Red Hat Enterprise Linux operating system - IS - configured so that all local interactive user initialization files executable search paths contain only paths that resolve to the users home directory.
+FAIL: V-72035 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all local interactive user initialization files executable search paths contain only paths that resolve to the users home directory.
+
+ORIG: V-72037 The Red Hat Enterprise Linux operating system must be configured so that local initialization files do not execute world-writable programs.
+PASS: V-72037 The Red Hat Enterprise Linux operating system - IS - configured so that local initialization files do not execute world-writable programs.
+FAIL: V-72037 The Red Hat Enterprise Linux operating system - IS NOT - configured so that local initialization files do not execute world-writable programs.
+
+ORIG: V-72039 The Red Hat Enterprise Linux operating system must be configured so that all system device files are correctly labeled to prevent unauthorized modification.
+PASS: V-72039 The Red Hat Enterprise Linux operating system - IS - configured so that all system device files are correctly labeled to prevent unauthorized modification.
+FAIL: V-72039 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all system device files are correctly labeled to prevent unauthorized modification.
+
+ORIG: V-72041 The Red Hat Enterprise Linux operating system must be configured so that file systems containing user home directories are mounted to prevent files with the setuid and setgid bit set from being executed.
+PASS: V-72041 The Red Hat Enterprise Linux operating system - IS - configured so that file systems containing user home directories are mounted to prevent files with the setuid and setgid bit set from being executed.
+FAIL: V-72041 The Red Hat Enterprise Linux operating system - IS NOT - configured so that file systems containing user home directories are mounted to prevent files with the setuid and setgid bit set from being executed.
+
+ORIG: V-72043 The Red Hat Enterprise Linux operating system must prevent files with the setuid and setgid bit set from being executed on file systems that are used with removable media.
+PASS: V-72043 The Red Hat Enterprise Linux operating system - DOES - prevent files with the setuid and setgid bit set from being executed on file systems that are used with removable media.
+FAIL: V-72043 The Red Hat Enterprise Linux operating system - DOES NOT - prevent files with the setuid and setgid bit set from being executed on file systems that are used with removable media.
+
+ORIG: V-72045 The Red Hat Enterprise Linux operating system must prevent files with the setuid and setgid bit set from being executed on file systems that are being imported via Network File System (NFS).
+PASS: V-72045 The Red Hat Enterprise Linux operating system - DOES - prevent files with the setuid and setgid bit set from being executed on file systems that are being imported via Network File System (NFS).
+FAIL: V-72045 The Red Hat Enterprise Linux operating system - DOES NOT - prevent files with the setuid and setgid bit set from being executed on file systems that are being imported via Network File System (NFS).
+
+ORIG: V-72047 The Red Hat Enterprise Linux operating system must be configured so that all world-writable directories are group-owned by root, sys, bin, or an application group.
+PASS: V-72047 The Red Hat Enterprise Linux operating system - IS - configured so that all world-writable directories are group-owned by root, sys, bin, or an application group.
+FAIL: V-72047 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all world-writable directories are group-owned by root, sys, bin, or an application group.
+
+ORIG: V-72049 The Red Hat Enterprise Linux operating system must set the umask value to 077 for all local interactive user accounts.
+PASS: V-72049 The Red Hat Enterprise Linux operating system - DOES - set the umask value to 077 for all local interactive user accounts.
+FAIL: V-72049 The Red Hat Enterprise Linux operating system - DOES NOT - set the umask value to 077 for all local interactive user accounts.
+
+ORIG: V-72051 The Red Hat Enterprise Linux operating system must have cron logging implemented.
+PASS: V-72051 The Red Hat Enterprise Linux operating system - DOES - have cron logging implemented.
+FAIL: V-72051 The Red Hat Enterprise Linux operating system - DOES NOT - have cron logging implemented.
+
+ORIG: V-72053 The Red Hat Enterprise Linux operating system must be configured so that the cron.allow file, if it exists, is owned by root.
+PASS: V-72053 The Red Hat Enterprise Linux operating system - IS - configured so that the cron.allow file, if it exists, is owned by root.
+FAIL: V-72053 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the cron.allow file, if it exists, is owned by root.
+
+ORIG: V-72055 The Red Hat Enterprise Linux operating system must be configured so that the cron.allow file, if it exists, is group-owned by root.
+PASS: V-72055 The Red Hat Enterprise Linux operating system - IS - configured so that the cron.allow file, if it exists, is group-owned by root.
+FAIL: V-72055 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the cron.allow file, if it exists, is group-owned by root.
+
+ORIG: V-72057 The Red Hat Enterprise Linux operating system must disable Kernel core dumps unless needed.
+PASS: V-72057 The Red Hat Enterprise Linux operating system - DOES - disable Kernel core dumps unless needed.
+FAIL: V-72057 The Red Hat Enterprise Linux operating system - DOES NOT - disable Kernel core dumps unless needed.
+
+ORIG: V-72059 The Red Hat Enterprise Linux operating system must be configured so that a separate file system is used for user home directories (such as /home or an equivalent).
+PASS: V-72059 The Red Hat Enterprise Linux operating system - IS - configured so that a separate file system is used for user home directories (such as /home or an equivalent).
+FAIL: V-72059 The Red Hat Enterprise Linux operating system - IS NOT - configured so that a separate file system is used for user home directories (such as /home or an equivalent).
+
+ORIG: V-72061 The Red Hat Enterprise Linux operating system must use a separate file system for /var.
+PASS: V-72061 The Red Hat Enterprise Linux operating system - DOES - use a separate file system for /var.
+FAIL: V-72061 The Red Hat Enterprise Linux operating system - DOES NOT - use a separate file system for /var.
+
+ORIG: V-72063 The Red Hat Enterprise Linux operating system must use a separate file system for the system audit data path.
+PASS: V-72063 The Red Hat Enterprise Linux operating system - DOES - use a separate file system for the system audit data path.
+FAIL: V-72063 The Red Hat Enterprise Linux operating system - DOES NOT - use a separate file system for the system audit data path.
+
+ORIG: V-72065 The Red Hat Enterprise Linux operating system must use a separate file system for /tmp (or equivalent).
+PASS: V-72065 The Red Hat Enterprise Linux operating system - DOES - use a separate file system for /tmp (or equivalent).
+FAIL: V-72065 The Red Hat Enterprise Linux operating system - DOES NOT - use a separate file system for /tmp (or equivalent).
+
+ORIG: V-72067 The Red Hat Enterprise Linux operating system must implement NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect data requiring data-at-rest protections in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.
+PASS: V-72067 The Red Hat Enterprise Linux operating system - DOES - implement NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect data requiring data-at-rest protections in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.
+FAIL: V-72067 The Red Hat Enterprise Linux operating system - DOES NOT - implement NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect data requiring data-at-rest protections in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.
+
+ORIG: V-72069 The Red Hat Enterprise Linux operating system must be configured so that the file integrity tool is configured to verify Access Control Lists (ACLs).
+PASS: V-72069 The Red Hat Enterprise Linux operating system - IS - configured so that the file integrity tool is configured to verify Access Control Lists (ACLs).
+FAIL: V-72069 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the file integrity tool is configured to verify Access Control Lists (ACLs).
+
+ORIG: V-72071 The Red Hat Enterprise Linux operating system must be configured so that the file integrity tool is configured to verify extended attributes.
+PASS: V-72071 The Red Hat Enterprise Linux operating system - IS - configured so that the file integrity tool is configured to verify extended attributes.
+FAIL: V-72071 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the file integrity tool is configured to verify extended attributes.
+
+ORIG: V-72073 The Red Hat Enterprise Linux operating system must use a file integrity tool that is configured to use FIPS 140-2 approved cryptographic hashes for validating file contents and directories.
+PASS: V-72073 The Red Hat Enterprise Linux operating system - DOES - use a file integrity tool that is configured to use FIPS 140-2 approved cryptographic hashes for validating file contents and directories.
+FAIL: V-72073 The Red Hat Enterprise Linux operating system - DOES NOT - use a file integrity tool that is configured to use FIPS 140-2 approved cryptographic hashes for validating file contents and directories.
+
+ORIG: V-72075 The Red Hat Enterprise Linux operating system must not allow removable media to be used as the boot loader unless approved.
+PASS: V-72075 The Red Hat Enterprise Linux operating system - DOES NOT - allow removable media to be used as the boot loader unless approved.
+FAIL: V-72075 The Red Hat Enterprise Linux operating system - DOES - allow removable media to be used as the boot loader unless approved.
+
+ORIG: V-72077 The Red Hat Enterprise Linux operating system must not have the telnet-server package installed.
+PASS: V-72077 The Red Hat Enterprise Linux operating system - DOES NOT - have the telnet-server package installed.
+FAIL: V-72077 The Red Hat Enterprise Linux operating system - DOES - have the telnet-server package installed.
+
+ORIG: V-72079 The Red Hat Enterprise Linux operating system must be configured so that auditing is configured to produce records containing information to establish what type of events occurred, where the events occurred, the source of the events, and the outcome of the events. These audit records must also identify individual identities of group account users.
+PASS: V-72079 The Red Hat Enterprise Linux operating system - IS - configured so that auditing is configured to produce records containing information to establish what type of events occurred, where the events occurred, the source of the events, and the outcome of the events. These audit records must also identify individual identities of group account users.
+FAIL: V-72079 The Red Hat Enterprise Linux operating system - IS NOT - configured so that auditing is configured to produce records containing information to establish what type of events occurred, where the events occurred, the source of the events, and the outcome of the events. These audit records must also identify individual identities of group account users.
+
+ORIG: V-72081 The Red Hat Enterprise Linux operating system must shut down upon audit processing failure, unless availability is an overriding concern. If availability is a concern, the system must alert the designated staff (System Administrator [SA] and Information System Security Officer [ISSO] at a minimum) in the event of an audit processing failure.
+PASS: V-72081 The Red Hat Enterprise Linux operating system - DOES - shut down upon audit processing failure, unless availability is an overriding concern. If availability is a concern, the system must alert the designated staff (System Administrator [SA] and Information System Security Officer [ISSO] at a minimum) in the event of an audit processing failure.
+FAIL: V-72081 The Red Hat Enterprise Linux operating system - DOES NOT - shut down upon audit processing failure, unless availability is an overriding concern. If availability is a concern, the system must alert the designated staff (System Administrator [SA] and Information System Security Officer [ISSO] at a minimum) in the event of an audit processing failure.
+
+ORIG: V-72083 The Red Hat Enterprise Linux operating system must off-load audit records onto a different system or media from the system being audited.
+PASS: V-72083 The Red Hat Enterprise Linux operating system - DOES - off-load audit records onto a different system or media from the system being audited.
+FAIL: V-72083 The Red Hat Enterprise Linux operating system - DOES NOT - off-load audit records onto a different system or media from the system being audited.
+
+ORIG: V-72085 The Red Hat Enterprise Linux operating system must encrypt the transfer of audit records off-loaded onto a different system or media from the system being audited.
+PASS: V-72085 The Red Hat Enterprise Linux operating system - DOES - encrypt the transfer of audit records off-loaded onto a different system or media from the system being audited.
+FAIL: V-72085 The Red Hat Enterprise Linux operating system - DOES NOT - encrypt the transfer of audit records off-loaded onto a different system or media from the system being audited.
+
+ORIG: V-72087 The Red Hat Enterprise Linux operating system must be configured so that the audit system takes appropriate action when the audit storage volume is full.
+PASS: V-72087 The Red Hat Enterprise Linux operating system - IS - configured so that the audit system takes appropriate action when the audit storage volume is full.
+FAIL: V-72087 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the audit system takes appropriate action when the audit storage volume is full.
+
+ORIG: V-72089 The Red Hat Enterprise Linux operating system must initiate an action to notify the System Administrator (SA) and Information System Security Officer ISSO, at a minimum, when allocated audit record storage volume reaches 75% of the repository maximum audit record storage capacity.
+PASS: V-72089 The Red Hat Enterprise Linux operating system - DOES - initiate an action to notify the System Administrator (SA) and Information System Security Officer ISSO, at a minimum, when allocated audit record storage volume reaches 75% of the repository maximum audit record storage capacity.
+FAIL: V-72089 The Red Hat Enterprise Linux operating system - DOES NOT - initiate an action to notify the System Administrator (SA) and Information System Security Officer ISSO, at a minimum, when allocated audit record storage volume reaches 75% of the repository maximum audit record storage capacity.
+
+ORIG: V-72091 The Red Hat Enterprise Linux operating system must immediately notify the System Administrator (SA) and Information System Security Officer (ISSO) (at a minimum) via email when the threshold for the repository maximum audit record storage capacity is reached.
+PASS: V-72091 The Red Hat Enterprise Linux operating system - DOES - immediately notify the System Administrator (SA) and Information System Security Officer (ISSO) (at a minimum) via email when the threshold for the repository maximum audit record storage capacity is reached.
+FAIL: V-72091 The Red Hat Enterprise Linux operating system - DOES NOT - immediately notify the System Administrator (SA) and Information System Security Officer (ISSO) (at a minimum) via email when the threshold for the repository maximum audit record storage capacity is reached.
+
+ORIG: V-72093 The Red Hat Enterprise Linux operating system must immediately notify the System Administrator (SA) and Information System Security Officer (ISSO) (at a minimum) when the threshold for the repository maximum audit record storage capacity is reached.
+PASS: V-72093 The Red Hat Enterprise Linux operating system - DOES - immediately notify the System Administrator (SA) and Information System Security Officer (ISSO) (at a minimum) when the threshold for the repository maximum audit record storage capacity is reached.
+FAIL: V-72093 The Red Hat Enterprise Linux operating system - DOES NOT - immediately notify the System Administrator (SA) and Information System Security Officer (ISSO) (at a minimum) when the threshold for the repository maximum audit record storage capacity is reached.
+
+ORIG: V-72095 The Red Hat Enterprise Linux operating system must audit all executions of privileged functions.
+PASS: V-72095 The Red Hat Enterprise Linux operating system - DOES - audit all executions of privileged functions.
+FAIL: V-72095 The Red Hat Enterprise Linux operating system - DOES NOT - audit all executions of privileged functions.
+
+ORIG: V-72097 The Red Hat Enterprise Linux operating system must audit all uses of the chown syscall.
+PASS: V-72097 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the chown syscall.
+FAIL: V-72097 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the chown syscall.
+
+ORIG: V-72099 The Red Hat Enterprise Linux operating system must audit all uses of the fchown syscall.
+PASS: V-72099 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the fchown syscall.
+FAIL: V-72099 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the fchown syscall.
+
+ORIG: V-72101 The Red Hat Enterprise Linux operating system must audit all uses of the lchown syscall.
+PASS: V-72101 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the lchown syscall.
+FAIL: V-72101 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the lchown syscall.
+
+ORIG: V-72103 The Red Hat Enterprise Linux operating system must audit all uses of the fchownat syscall.
+PASS: V-72103 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the fchownat syscall.
+FAIL: V-72103 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the fchownat syscall.
+
+ORIG: V-72105 The Red Hat Enterprise Linux operating system must audit all uses of the chmod syscall.
+PASS: V-72105 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the chmod syscall.
+FAIL: V-72105 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the chmod syscall.
+
+ORIG: V-72107 The Red Hat Enterprise Linux operating system must audit all uses of the fchmod syscall.
+PASS: V-72107 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the fchmod syscall.
+FAIL: V-72107 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the fchmod syscall.
+
+ORIG: V-72109 The Red Hat Enterprise Linux operating system must audit all uses of the fchmodat syscall.
+PASS: V-72109 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the fchmodat syscall.
+FAIL: V-72109 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the fchmodat syscall.
+
+ORIG: V-72111 The Red Hat Enterprise Linux operating system must audit all uses of the setxattr syscall.
+PASS: V-72111 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the setxattr syscall.
+FAIL: V-72111 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the setxattr syscall.
+
+ORIG: V-72113 The Red Hat Enterprise Linux operating system must audit all uses of the fsetxattr syscall.
+PASS: V-72113 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the fsetxattr syscall.
+FAIL: V-72113 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the fsetxattr syscall.
+
+ORIG: V-72115 The Red Hat Enterprise Linux operating system must audit all uses of the lsetxattr syscall.
+PASS: V-72115 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the lsetxattr syscall.
+FAIL: V-72115 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the lsetxattr syscall.
+
+ORIG: V-72117 The Red Hat Enterprise Linux operating system must audit all uses of the removexattr syscall.
+PASS: V-72117 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the removexattr syscall.
+FAIL: V-72117 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the removexattr syscall.
+
+ORIG: V-72119 The Red Hat Enterprise Linux operating system must audit all uses of the fremovexattr syscall.
+PASS: V-72119 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the fremovexattr syscall.
+FAIL: V-72119 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the fremovexattr syscall.
+
+ORIG: V-72121 The Red Hat Enterprise Linux operating system must audit all uses of the lremovexattr syscall.
+PASS: V-72121 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the lremovexattr syscall.
+FAIL: V-72121 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the lremovexattr syscall.
+
+ORIG: V-72123 The Red Hat Enterprise Linux operating system must audit all uses of the creat syscall.
+PASS: V-72123 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the creat syscall.
+FAIL: V-72123 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the creat syscall.
+
+ORIG: V-72125 The Red Hat Enterprise Linux operating system must audit all uses of the open syscall.
+PASS: V-72125 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the open syscall.
+FAIL: V-72125 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the open syscall.
+
+ORIG: V-72127 The Red Hat Enterprise Linux operating system must audit all uses of the openat syscall.
+PASS: V-72127 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the openat syscall.
+FAIL: V-72127 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the openat syscall.
+
+ORIG: V-72129 The Red Hat Enterprise Linux operating system must audit all uses of the open_by_handle_at syscall.
+PASS: V-72129 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the open_by_handle_at syscall.
+FAIL: V-72129 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the open_by_handle_at syscall.
+
+ORIG: V-72131 The Red Hat Enterprise Linux operating system must audit all uses of the truncate syscall.
+PASS: V-72131 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the truncate syscall.
+FAIL: V-72131 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the truncate syscall.
+
+ORIG: V-72133 The Red Hat Enterprise Linux operating system must audit all uses of the ftruncate syscall.
+PASS: V-72133 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the ftruncate syscall.
+FAIL: V-72133 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the ftruncate syscall.
+
+ORIG: V-72135 The Red Hat Enterprise Linux operating system must audit all uses of the semanage command.
+PASS: V-72135 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the semanage command.
+FAIL: V-72135 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the semanage command.
+
+ORIG: V-72137 The Red Hat Enterprise Linux operating system must audit all uses of the setsebool command.
+PASS: V-72137 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the setsebool command.
+FAIL: V-72137 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the setsebool command.
+
+ORIG: V-72139 The Red Hat Enterprise Linux operating system must audit all uses of the chcon command.
+PASS: V-72139 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the chcon command.
+FAIL: V-72139 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the chcon command.
+
+ORIG: V-72141 The Red Hat Enterprise Linux operating system must audit all uses of the setfiles command.
+PASS: V-72141 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the setfiles command.
+FAIL: V-72141 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the setfiles command.
+
+ORIG: V-72145 The Red Hat Enterprise Linux operating system must generate audit records for all unsuccessful account access events.
+PASS: V-72145 The Red Hat Enterprise Linux operating system - DOES - generate audit records for all unsuccessful account access events.
+FAIL: V-72145 The Red Hat Enterprise Linux operating system - DOES NOT - generate audit records for all unsuccessful account access events.
+
+ORIG: V-72147 The Red Hat Enterprise Linux operating system must generate audit records for all successful account access events.
+PASS: V-72147 The Red Hat Enterprise Linux operating system - DOES - generate audit records for all successful account access events.
+FAIL: V-72147 The Red Hat Enterprise Linux operating system - DOES NOT - generate audit records for all successful account access events.
+
+ORIG: V-72149 The Red Hat Enterprise Linux operating system must audit all uses of the passwd command.
+PASS: V-72149 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the passwd command.
+FAIL: V-72149 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the passwd command.
+
+ORIG: V-72151 The Red Hat Enterprise Linux operating system must audit all uses of the unix_chkpwd command.
+PASS: V-72151 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the unix_chkpwd command.
+FAIL: V-72151 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the unix_chkpwd command.
+
+ORIG: V-72153 The Red Hat Enterprise Linux operating system must audit all uses of the gpasswd command.
+PASS: V-72153 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the gpasswd command.
+FAIL: V-72153 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the gpasswd command.
+
+ORIG: V-72155 The Red Hat Enterprise Linux operating system must audit all uses of the chage command.
+PASS: V-72155 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the chage command.
+FAIL: V-72155 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the chage command.
+
+ORIG: V-72157 The Red Hat Enterprise Linux operating system must audit all uses of the userhelper command.
+PASS: V-72157 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the userhelper command.
+FAIL: V-72157 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the userhelper command.
+
+ORIG: V-72159 The Red Hat Enterprise Linux operating system must audit all uses of the su command.
+PASS: V-72159 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the su command.
+FAIL: V-72159 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the su command.
+
+ORIG: V-72161 The Red Hat Enterprise Linux operating system must audit all uses of the sudo command.
+PASS: V-72161 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the sudo command.
+FAIL: V-72161 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the sudo command.
+
+ORIG: V-72163 The Red Hat Enterprise Linux operating system must audit all uses of the sudoers file and all files in the /etc/sudoers.d/ directory.
+PASS: V-72163 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the sudoers file and all files in the /etc/sudoers.d/ directory.
+FAIL: V-72163 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the sudoers file and all files in the /etc/sudoers.d/ directory.
+
+ORIG: V-72165 The Red Hat Enterprise Linux operating system must audit all uses of the newgrp command.
+PASS: V-72165 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the newgrp command.
+FAIL: V-72165 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the newgrp command.
+
+ORIG: V-72167 The Red Hat Enterprise Linux operating system must audit all uses of the chsh command.
+PASS: V-72167 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the chsh command.
+FAIL: V-72167 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the chsh command.
+
+ORIG: V-72171 The Red Hat Enterprise Linux operating system must audit all uses of the mount command and syscall.
+PASS: V-72171 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the mount command and syscall.
+FAIL: V-72171 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the mount command and syscall.
+
+ORIG: V-72173 The Red Hat Enterprise Linux operating system must audit all uses of the umount command.
+PASS: V-72173 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the umount command.
+FAIL: V-72173 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the umount command.
+
+ORIG: V-72175 The Red Hat Enterprise Linux operating system must audit all uses of the postdrop command.
+PASS: V-72175 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the postdrop command.
+FAIL: V-72175 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the postdrop command.
+
+ORIG: V-72177 The Red Hat Enterprise Linux operating system must audit all uses of the postqueue command.
+PASS: V-72177 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the postqueue command.
+FAIL: V-72177 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the postqueue command.
+
+ORIG: V-72179 The Red Hat Enterprise Linux operating system must audit all uses of the ssh-keysign command.
+PASS: V-72179 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the ssh-keysign command.
+FAIL: V-72179 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the ssh-keysign command.
+
+ORIG: V-72183 The Red Hat Enterprise Linux operating system must audit all uses of the crontab command.
+PASS: V-72183 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the crontab command.
+FAIL: V-72183 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the crontab command.
+
+ORIG: V-72185 The Red Hat Enterprise Linux operating system must audit all uses of the pam_timestamp_check command.
+PASS: V-72185 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the pam_timestamp_check command.
+FAIL: V-72185 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the pam_timestamp_check command.
+
+ORIG: V-72187 The Red Hat Enterprise Linux operating system must audit all uses of the init_module syscall.
+PASS: V-72187 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the init_module syscall.
+FAIL: V-72187 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the init_module syscall.
+
+ORIG: V-72189 The Red Hat Enterprise Linux operating system must audit all uses of the delete_module syscall.
+PASS: V-72189 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the delete_module syscall.
+FAIL: V-72189 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the delete_module syscall.
+
+ORIG: V-72191 The Red Hat Enterprise Linux operating system must audit all uses of the kmod command.
+PASS: V-72191 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the kmod command.
+FAIL: V-72191 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the kmod command.
+
+ORIG: V-72197 The Red Hat Enterprise Linux operating system must generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/passwd.
+PASS: V-72197 The Red Hat Enterprise Linux operating system - DOES - generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/passwd.
+FAIL: V-72197 The Red Hat Enterprise Linux operating system - DOES NOT - generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/passwd.
+
+ORIG: V-72199 The Red Hat Enterprise Linux operating system must audit all uses of the rename syscall.
+PASS: V-72199 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the rename syscall.
+FAIL: V-72199 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the rename syscall.
+
+ORIG: V-72201 The Red Hat Enterprise Linux operating system must audit all uses of the renameat syscall.
+PASS: V-72201 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the renameat syscall.
+FAIL: V-72201 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the renameat syscall.
+
+ORIG: V-72203 The Red Hat Enterprise Linux operating system must audit all uses of the rmdir syscall.
+PASS: V-72203 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the rmdir syscall.
+FAIL: V-72203 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the rmdir syscall.
+
+ORIG: V-72205 The Red Hat Enterprise Linux operating system must audit all uses of the unlink syscall.
+PASS: V-72205 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the unlink syscall.
+FAIL: V-72205 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the unlink syscall.
+
+ORIG: V-72207 The Red Hat Enterprise Linux operating system must audit all uses of the unlinkat syscall.
+PASS: V-72207 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the unlinkat syscall.
+FAIL: V-72207 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the unlinkat syscall.
+
+ORIG: V-72209 The Red Hat Enterprise Linux operating system must send rsyslog output to a log aggregation server.
+PASS: V-72209 The Red Hat Enterprise Linux operating system - DOES - send rsyslog output to a log aggregation server.
+FAIL: V-72209 The Red Hat Enterprise Linux operating system - DOES NOT - send rsyslog output to a log aggregation server.
+
+ORIG: V-72211 The Red Hat Enterprise Linux operating system must be configured so that the rsyslog daemon does not accept log messages from other servers unless the server is being used for log aggregation.
+PASS: V-72211 The Red Hat Enterprise Linux operating system - IS - configured so that the rsyslog daemon does not accept log messages from other servers unless the server is being used for log aggregation.
+FAIL: V-72211 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the rsyslog daemon does not accept log messages from other servers unless the server is being used for log aggregation.
+
+ORIG: V-72213 The Red Hat Enterprise Linux operating system must use a virus scan program.
+PASS: V-72213 The Red Hat Enterprise Linux operating system - DOES - use a virus scan program.
+FAIL: V-72213 The Red Hat Enterprise Linux operating system - DOES NOT - use a virus scan program.
+
+ORIG: V-72217 The Red Hat Enterprise Linux operating system must limit the number of concurrent sessions to 10 for all accounts and/or account types.
+PASS: V-72217 The Red Hat Enterprise Linux operating system - DOES - limit the number of concurrent sessions to 10 for all accounts and/or account types.
+FAIL: V-72217 The Red Hat Enterprise Linux operating system - DOES NOT - limit the number of concurrent sessions to 10 for all accounts and/or account types.
+
+ORIG: V-72219 The Red Hat Enterprise Linux operating system must be configured to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the Ports, Protocols, and Services Management Component Local Service Assessment (PPSM CLSA) and vulnerability assessments.
+PASS: V-72219 The Red Hat Enterprise Linux operating system - IS - configured to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the Ports, Protocols, and Services Management Component Local Service Assessment (PPSM CLSA) and vulnerability assessments.
+FAIL: V-72219 The Red Hat Enterprise Linux operating system - IS NOT - configured to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the Ports, Protocols, and Services Management Component Local Service Assessment (PPSM CLSA) and vulnerability assessments.
+
+ORIG: V-72221 The Red Hat Enterprise Linux operating system must use a FIPS 140-2 approved cryptographic algorithm for SSH communications.
+PASS: V-72221 The Red Hat Enterprise Linux operating system - DOES - use a FIPS 140-2 approved cryptographic algorithm for SSH communications.
+FAIL: V-72221 The Red Hat Enterprise Linux operating system - DOES NOT - use a FIPS 140-2 approved cryptographic algorithm for SSH communications.
+
+ORIG: V-72223 The Red Hat Enterprise Linux operating system must be configured so that all network connections associated with a communication session are terminated at the end of the session or after 10 minutes of inactivity from the user at a command prompt, except to fulfill documented and validated mission requirements.
+PASS: V-72223 The Red Hat Enterprise Linux operating system - IS - configured so that all network connections associated with a communication session are terminated at the end of the session or after 10 minutes of inactivity from the user at a command prompt, except to fulfill documented and validated mission requirements.
+FAIL: V-72223 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all network connections associated with a communication session are terminated at the end of the session or after 10 minutes of inactivity from the user at a command prompt, except to fulfill documented and validated mission requirements.
+
+ORIG: V-72225 The Red Hat Enterprise Linux operating system must display the Standard Mandatory DoD Notice and Consent Banner immediately prior to, or as part of, remote access logon prompts.
+PASS: V-72225 The Red Hat Enterprise Linux operating system - DOES - display the Standard Mandatory DoD Notice and Consent Banner immediately prior to, or as part of, remote access logon prompts.
+FAIL: V-72225 The Red Hat Enterprise Linux operating system - DOES NOT - display the Standard Mandatory DoD Notice and Consent Banner immediately prior to, or as part of, remote access logon prompts.
+
+ORIG: V-72227 The Red Hat Enterprise Linux operating system must implement cryptography to protect the integrity of Lightweight Directory Access Protocol (LDAP) authentication communications.
+PASS: V-72227 The Red Hat Enterprise Linux operating system - DOES - implement cryptography to protect the integrity of Lightweight Directory Access Protocol (LDAP) authentication communications.
+FAIL: V-72227 The Red Hat Enterprise Linux operating system - DOES NOT - implement cryptography to protect the integrity of Lightweight Directory Access Protocol (LDAP) authentication communications.
+
+ORIG: V-72229 The Red Hat Enterprise Linux operating system must implement cryptography to protect the integrity of Lightweight Directory Access Protocol (LDAP) communications.
+PASS: V-72229 The Red Hat Enterprise Linux operating system - DOES - implement cryptography to protect the integrity of Lightweight Directory Access Protocol (LDAP) communications.
+FAIL: V-72229 The Red Hat Enterprise Linux operating system - DOES NOT - implement cryptography to protect the integrity of Lightweight Directory Access Protocol (LDAP) communications.
+
+ORIG: V-72231 The Red Hat Enterprise Linux operating system must implement cryptography to protect the integrity of Lightweight Directory Access Protocol (LDAP) communications.
+PASS: V-72231 The Red Hat Enterprise Linux operating system - DOES - implement cryptography to protect the integrity of Lightweight Directory Access Protocol (LDAP) communications.
+FAIL: V-72231 The Red Hat Enterprise Linux operating system - DOES NOT - implement cryptography to protect the integrity of Lightweight Directory Access Protocol (LDAP) communications.
+
+ORIG: V-72233 The Red Hat Enterprise Linux operating system must be configured so that all networked systems have SSH installed.
+PASS: V-72233 The Red Hat Enterprise Linux operating system - IS - configured so that all networked systems have SSH installed.
+FAIL: V-72233 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all networked systems have SSH installed.
+
+ORIG: V-72235 The Red Hat Enterprise Linux operating system must be configured so that all networked systems use SSH for confidentiality and integrity of transmitted and received information as well as information during preparation for transmission.
+PASS: V-72235 The Red Hat Enterprise Linux operating system - IS - configured so that all networked systems use SSH for confidentiality and integrity of transmitted and received information as well as information during preparation for transmission.
+FAIL: V-72235 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all networked systems use SSH for confidentiality and integrity of transmitted and received information as well as information during preparation for transmission.
+
+ORIG: V-72237 The Red Hat Enterprise Linux operating system must be configured so that all network connections associated with SSH traffic are terminated at the end of the session or after 10 minutes of inactivity, except to fulfill documented and validated mission requirements.
+PASS: V-72237 The Red Hat Enterprise Linux operating system - IS - configured so that all network connections associated with SSH traffic are terminated at the end of the session or after 10 minutes of inactivity, except to fulfill documented and validated mission requirements.
+FAIL: V-72237 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all network connections associated with SSH traffic are terminated at the end of the session or after 10 minutes of inactivity, except to fulfill documented and validated mission requirements.
+
+ORIG: V-72239 The Red Hat Enterprise Linux operating system must be configured so that the SSH daemon does not allow authentication using RSA rhosts authentication.
+PASS: V-72239 The Red Hat Enterprise Linux operating system - IS - configured so that the SSH daemon does not allow authentication using RSA rhosts authentication.
+FAIL: V-72239 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the SSH daemon does not allow authentication using RSA rhosts authentication.
+
+ORIG: V-72241 The Red Hat Enterprise Linux operating system must be configured so that all network connections associated with SSH traffic terminate after a period of inactivity.
+PASS: V-72241 The Red Hat Enterprise Linux operating system - IS - configured so that all network connections associated with SSH traffic terminate after a period of inactivity.
+FAIL: V-72241 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all network connections associated with SSH traffic terminate after a period of inactivity.
+
+ORIG: V-72243 The Red Hat Enterprise Linux operating system must be configured so that the SSH daemon does not allow authentication using rhosts authentication.
+PASS: V-72243 The Red Hat Enterprise Linux operating system - IS - configured so that the SSH daemon does not allow authentication using rhosts authentication.
+FAIL: V-72243 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the SSH daemon does not allow authentication using rhosts authentication.
+
+ORIG: V-72245 The Red Hat Enterprise Linux operating system must display the date and time of the last successful account logon upon an SSH logon.
+PASS: V-72245 The Red Hat Enterprise Linux operating system - DOES - display the date and time of the last successful account logon upon an SSH logon.
+FAIL: V-72245 The Red Hat Enterprise Linux operating system - DOES NOT - display the date and time of the last successful account logon upon an SSH logon.
+
+ORIG: V-72247 The Red Hat Enterprise Linux operating system must not permit direct logons to the root account using remote access via SSH.
+PASS: V-72247 The Red Hat Enterprise Linux operating system - DOES NOT - permit direct logons to the root account using remote access via SSH.
+FAIL: V-72247 The Red Hat Enterprise Linux operating system - DOES - permit direct logons to the root account using remote access via SSH.
+
+ORIG: V-72249 The Red Hat Enterprise Linux operating system must be configured so that the SSH daemon does not allow authentication using known hosts authentication.
+PASS: V-72249 The Red Hat Enterprise Linux operating system - IS - configured so that the SSH daemon does not allow authentication using known hosts authentication.
+FAIL: V-72249 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the SSH daemon does not allow authentication using known hosts authentication.
+
+ORIG: V-72251 The Red Hat Enterprise Linux operating system must be configured so that the SSH daemon is configured to only use the SSHv2 protocol.
+PASS: V-72251 The Red Hat Enterprise Linux operating system - IS - configured so that the SSH daemon is configured to only use the SSHv2 protocol.
+FAIL: V-72251 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the SSH daemon is configured to only use the SSHv2 protocol.
+
+ORIG: V-72253 The Red Hat Enterprise Linux operating system must be configured so that the SSH daemon is configured to only use Message Authentication Codes (MACs) employing FIPS 140-2 approved cryptographic hash algorithms.
+PASS: V-72253 The Red Hat Enterprise Linux operating system - IS - configured so that the SSH daemon is configured to only use Message Authentication Codes (MACs) employing FIPS 140-2 approved cryptographic hash algorithms.
+FAIL: V-72253 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the SSH daemon is configured to only use Message Authentication Codes (MACs) employing FIPS 140-2 approved cryptographic hash algorithms.
+
+ORIG: V-72255 The Red Hat Enterprise Linux operating system must be configured so that the SSH public host key files have mode 0644 or less permissive.
+PASS: V-72255 The Red Hat Enterprise Linux operating system - IS - configured so that the SSH public host key files have mode 0644 or less permissive.
+FAIL: V-72255 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the SSH public host key files have mode 0644 or less permissive.
+
+ORIG: V-72257 The Red Hat Enterprise Linux operating system must be configured so that the SSH private host key files have mode 0640 or less permissive.
+PASS: V-72257 The Red Hat Enterprise Linux operating system - IS - configured so that the SSH private host key files have mode 0640 or less permissive.
+FAIL: V-72257 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the SSH private host key files have mode 0640 or less permissive.
+
+ORIG: V-72259 The Red Hat Enterprise Linux operating system must be configured so that the SSH daemon does not permit Generic Security Service Application Program Interface (GSSAPI) authentication unless needed.
+PASS: V-72259 The Red Hat Enterprise Linux operating system - IS - configured so that the SSH daemon does not permit Generic Security Service Application Program Interface (GSSAPI) authentication unless needed.
+FAIL: V-72259 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the SSH daemon does not permit Generic Security Service Application Program Interface (GSSAPI) authentication unless needed.
+
+ORIG: V-72261 The Red Hat Enterprise Linux operating system must be configured so that the SSH daemon does not permit Kerberos authentication unless needed.
+PASS: V-72261 The Red Hat Enterprise Linux operating system - IS - configured so that the SSH daemon does not permit Kerberos authentication unless needed.
+FAIL: V-72261 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the SSH daemon does not permit Kerberos authentication unless needed.
+
+ORIG: V-72263 The Red Hat Enterprise Linux operating system must be configured so that the SSH daemon performs strict mode checking of home directory configuration files.
+PASS: V-72263 The Red Hat Enterprise Linux operating system - IS - configured so that the SSH daemon performs strict mode checking of home directory configuration files.
+FAIL: V-72263 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the SSH daemon performs strict mode checking of home directory configuration files.
+
+ORIG: V-72265 The Red Hat Enterprise Linux operating system must be configured so that the SSH daemon uses privilege separation.
+PASS: V-72265 The Red Hat Enterprise Linux operating system - IS - configured so that the SSH daemon uses privilege separation.
+FAIL: V-72265 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the SSH daemon uses privilege separation.
+
+ORIG: V-72267 The Red Hat Enterprise Linux operating system must be configured so that the SSH daemon does not allow compression or only allows compression after successful authentication.
+PASS: V-72267 The Red Hat Enterprise Linux operating system - IS - configured so that the SSH daemon does not allow compression or only allows compression after successful authentication.
+FAIL: V-72267 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the SSH daemon does not allow compression or only allows compression after successful authentication.
+
+ORIG: V-72269 The Red Hat Enterprise Linux operating system must, for networked systems, synchronize clocks with a server that is synchronized to one of the redundant United States Naval Observatory (USNO) time servers, a time server designated for the appropriate DoD network (NIPRNet/SIPRNet), and/or the Global Positioning System (GPS).
+PASS: V-72269 The Red Hat Enterprise Linux operating system - DOES -, for networked systems, synchronize clocks with a server that is synchronized to one of the redundant United States Naval Observatory (USNO) time servers, a time server designated for the appropriate DoD network (NIPRNet/SIPRNet), and/or the Global Positioning System (GPS).
+FAIL: V-72269 The Red Hat Enterprise Linux operating system - DOES NOT -, for networked systems, synchronize clocks with a server that is synchronized to one of the redundant United States Naval Observatory (USNO) time servers, a time server designated for the appropriate DoD network (NIPRNet/SIPRNet), and/or the Global Positioning System (GPS).
+
+ORIG: V-72273 The Red Hat Enterprise Linux operating system must enable an application firewall, if available.
+PASS: V-72273 The Red Hat Enterprise Linux operating system - DOES - enable an application firewall, if available.
+FAIL: V-72273 The Red Hat Enterprise Linux operating system - DOES NOT - enable an application firewall, if available.
+
+ORIG: V-72275 The Red Hat Enterprise Linux operating system must display the date and time of the last successful account logon upon logon.
+PASS: V-72275 The Red Hat Enterprise Linux operating system - DOES - display the date and time of the last successful account logon upon logon.
+FAIL: V-72275 The Red Hat Enterprise Linux operating system - DOES NOT - display the date and time of the last successful account logon upon logon.
+
+ORIG: V-72277 The Red Hat Enterprise Linux operating system must not contain .shosts files.
+PASS: V-72277 The Red Hat Enterprise Linux operating system - DOES NOT - contain .shosts files.
+FAIL: V-72277 The Red Hat Enterprise Linux operating system - DOES - contain .shosts files.
+
+ORIG: V-72279 The Red Hat Enterprise Linux operating system must not contain shosts.equiv files.
+PASS: V-72279 The Red Hat Enterprise Linux operating system - DOES NOT - contain shosts.equiv files.
+FAIL: V-72279 The Red Hat Enterprise Linux operating system - DOES - contain shosts.equiv files.
+
+ORIG: V-72281 For Red Hat Enterprise Linux operating systems using DNS resolution, at least two name servers must be configured.
+PASS: V-72281 For Red Hat Enterprise Linux operating systems using DNS resolution, at least two name servers - ARE - configured.
+FAIL: V-72281 For Red Hat Enterprise Linux operating systems using DNS resolution, at least two name servers - ARE NOT - configured.
+
+ORIG: V-72283 The Red Hat Enterprise Linux operating system must not forward Internet Protocol version 4 (IPv4) source-routed packets.
+PASS: V-72283 The Red Hat Enterprise Linux operating system - DOES NOT - forward Internet Protocol version 4 (IPv4) source-routed packets.
+FAIL: V-72283 The Red Hat Enterprise Linux operating system - DOES - forward Internet Protocol version 4 (IPv4) source-routed packets.
+
+ORIG: V-72285 The Red Hat Enterprise Linux operating system must not forward Internet Protocol version 4 (IPv4) source-routed packets by default.
+PASS: V-72285 The Red Hat Enterprise Linux operating system - DOES NOT - forward Internet Protocol version 4 (IPv4) source-routed packets by default.
+FAIL: V-72285 The Red Hat Enterprise Linux operating system - DOES - forward Internet Protocol version 4 (IPv4) source-routed packets by default.
+
+ORIG: V-72287 The Red Hat Enterprise Linux operating system must not respond to Internet Protocol version 4 (IPv4) Internet Control Message Protocol (ICMP) echoes sent to a broadcast address.
+PASS: V-72287 The Red Hat Enterprise Linux operating system - DOES NOT - respond to Internet Protocol version 4 (IPv4) Internet Control Message Protocol (ICMP) echoes sent to a broadcast address.
+FAIL: V-72287 The Red Hat Enterprise Linux operating system - DOES - respond to Internet Protocol version 4 (IPv4) Internet Control Message Protocol (ICMP) echoes sent to a broadcast address.
+
+ORIG: V-72289 The Red Hat Enterprise Linux operating system must prevent Internet Protocol version 4 (IPv4) Internet Control Message Protocol (ICMP) redirect messages from being accepted.
+PASS: V-72289 The Red Hat Enterprise Linux operating system - DOES - prevent Internet Protocol version 4 (IPv4) Internet Control Message Protocol (ICMP) redirect messages from being accepted.
+FAIL: V-72289 The Red Hat Enterprise Linux operating system - DOES NOT - prevent Internet Protocol version 4 (IPv4) Internet Control Message Protocol (ICMP) redirect messages from being accepted.
+
+ORIG: V-72291 The Red Hat Enterprise Linux operating system must not allow interfaces to perform Internet Protocol version 4 (IPv4) Internet Control Message Protocol (ICMP) redirects by default.
+PASS: V-72291 The Red Hat Enterprise Linux operating system - DOES NOT - allow interfaces to perform Internet Protocol version 4 (IPv4) Internet Control Message Protocol (ICMP) redirects by default.
+FAIL: V-72291 The Red Hat Enterprise Linux operating system - DOES - allow interfaces to perform Internet Protocol version 4 (IPv4) Internet Control Message Protocol (ICMP) redirects by default.
+
+ORIG: V-72293 The Red Hat Enterprise Linux operating system must not send Internet Protocol version 4 (IPv4) Internet Control Message Protocol (ICMP) redirects.
+PASS: V-72293 The Red Hat Enterprise Linux operating system - DOES NOT - send Internet Protocol version 4 (IPv4) Internet Control Message Protocol (ICMP) redirects.
+FAIL: V-72293 The Red Hat Enterprise Linux operating system - DOES - send Internet Protocol version 4 (IPv4) Internet Control Message Protocol (ICMP) redirects.
+
+ORIG: V-72295 Network interfaces configured on the Red Hat Enterprise Linux operating system must not be in promiscuous mode.
+PASS: V-72295 Network interfaces configured on the Red Hat Enterprise Linux operating system - ARE NOT - in promiscuous mode.
+FAIL: V-72295 Network interfaces configured on the Red Hat Enterprise Linux operating system - ARE - in promiscuous mode.
+
+ORIG: V-72297 The Red Hat Enterprise Linux operating system must be configured to prevent unrestricted mail relaying.
+PASS: V-72297 The Red Hat Enterprise Linux operating system - IS - configured to prevent unrestricted mail relaying.
+FAIL: V-72297 The Red Hat Enterprise Linux operating system - IS NOT - configured to prevent unrestricted mail relaying.
+
+ORIG: V-72299 The Red Hat Enterprise Linux operating system must not have a File Transfer Protocol (FTP) server package installed unless needed.
+PASS: V-72299 The Red Hat Enterprise Linux operating system - DOES NOT - have a File Transfer Protocol (FTP) server package installed unless needed.
+FAIL: V-72299 The Red Hat Enterprise Linux operating system - DOES - have a File Transfer Protocol (FTP) server package installed unless needed.
+
+ORIG: V-72301 The Red Hat Enterprise Linux operating system must not have the Trivial File Transfer Protocol (TFTP) server package installed if not required for operational support.
+PASS: V-72301 The Red Hat Enterprise Linux operating system - DOES NOT - have the Trivial File Transfer Protocol (TFTP) server package installed if not required for operational support.
+FAIL: V-72301 The Red Hat Enterprise Linux operating system - DOES - have the Trivial File Transfer Protocol (TFTP) server package installed if not required for operational support.
+
+ORIG: V-72303 The Red Hat Enterprise Linux operating system must be configured so that remote X connections for interactive users are encrypted.
+PASS: V-72303 The Red Hat Enterprise Linux operating system - IS - configured so that remote X connections for interactive users are encrypted.
+FAIL: V-72303 The Red Hat Enterprise Linux operating system - IS NOT - configured so that remote X connections for interactive users are encrypted.
+
+ORIG: V-72305 The Red Hat Enterprise Linux operating system must be configured so that if the Trivial File Transfer Protocol (TFTP) server is required, the TFTP daemon is configured to operate in secure mode.
+PASS: V-72305 The Red Hat Enterprise Linux operating system - IS - configured so that if the Trivial File Transfer Protocol (TFTP) server is required, the TFTP daemon is configured to operate in secure mode.
+FAIL: V-72305 The Red Hat Enterprise Linux operating system - IS NOT - configured so that if the Trivial File Transfer Protocol (TFTP) server is required, the TFTP daemon is configured to operate in secure mode.
+
+ORIG: V-72307 The Red Hat Enterprise Linux operating system must not have an X Windows display manager installed unless approved.
+PASS: V-72307 The Red Hat Enterprise Linux operating system - DOES NOT - have an X Windows display manager installed unless approved.
+FAIL: V-72307 The Red Hat Enterprise Linux operating system - DOES - have an X Windows display manager installed unless approved.
+
+ORIG: V-72309 The Red Hat Enterprise Linux operating system must not be performing packet forwarding unless the system is a router.
+PASS: V-72309 The Red Hat Enterprise Linux operating system - IS NOT - performing packet forwarding unless the system is a router.
+FAIL: V-72309 The Red Hat Enterprise Linux operating system - IS - performing packet forwarding unless the system is a router.
+
+ORIG: V-72311 The Red Hat Enterprise Linux operating system must be configured so that the Network File System (NFS) is configured to use RPCSEC_GSS.
+PASS: V-72311 The Red Hat Enterprise Linux operating system - IS - configured so that the Network File System (NFS) is configured to use RPCSEC_GSS.
+FAIL: V-72311 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the Network File System (NFS) is configured to use RPCSEC_GSS.
+
+ORIG: V-72313 SNMP community strings on the Red Hat Enterprise Linux operating system must be changed from the default.
+PASS: V-72313 SNMP community strings on the Red Hat Enterprise Linux operating system - ARE - changed from the default.
+FAIL: V-72313 SNMP community strings on the Red Hat Enterprise Linux operating system - ARE NOT - changed from the default.
+
+ORIG: V-72315 The Red Hat Enterprise Linux operating system access control program must be configured to grant or deny system access to specific hosts and services.
+PASS: V-72315 The Red Hat Enterprise Linux operating system access control program - ARE - configured to grant or deny system access to specific hosts and services.
+FAIL: V-72315 The Red Hat Enterprise Linux operating system access control program - ARE NOT - configured to grant or deny system access to specific hosts and services.
+
+ORIG: V-72317 The Red Hat Enterprise Linux operating system must not have unauthorized IP tunnels configured.
+PASS: V-72317 The Red Hat Enterprise Linux operating system - DOES NOT - have unauthorized IP tunnels configured.
+FAIL: V-72317 The Red Hat Enterprise Linux operating system - DOES - have unauthorized IP tunnels configured.
+
+ORIG: V-72319 The Red Hat Enterprise Linux operating system must not forward IPv6 source-routed packets.
+PASS: V-72319 The Red Hat Enterprise Linux operating system - DOES NOT - forward IPv6 source-routed packets.
+FAIL: V-72319 The Red Hat Enterprise Linux operating system - DOES - forward IPv6 source-routed packets.
+
+ORIG: V-72417 The Red Hat Enterprise Linux operating system must have the required packages for multifactor authentication installed.
+PASS: V-72417 The Red Hat Enterprise Linux operating system - DOES - have the required packages for multifactor authentication installed.
+FAIL: V-72417 The Red Hat Enterprise Linux operating system - DOES NOT - have the required packages for multifactor authentication installed.
+
+ORIG: V-72427 The Red Hat Enterprise Linux operating system must implement multifactor authentication for access to privileged accounts via pluggable authentication modules (PAM).
+PASS: V-72427 The Red Hat Enterprise Linux operating system - DOES - implement multifactor authentication for access to privileged accounts via pluggable authentication modules (PAM).
+FAIL: V-72427 The Red Hat Enterprise Linux operating system - DOES NOT - implement multifactor authentication for access to privileged accounts via pluggable authentication modules (PAM).
+
+ORIG: V-72433 The Red Hat Enterprise Linux operating system must implement certificate status checking for PKI authentication.
+PASS: V-72433 The Red Hat Enterprise Linux operating system - DOES - implement certificate status checking for PKI authentication.
+FAIL: V-72433 The Red Hat Enterprise Linux operating system - DOES NOT - implement certificate status checking for PKI authentication.
+
+ORIG: V-73155 The Red Hat Enterprise Linux operating system must prevent a user from overriding the screensaver lock-delay setting for the graphical user interface.
+PASS: V-73155 The Red Hat Enterprise Linux operating system - DOES - prevent a user from overriding the screensaver lock-delay setting for the graphical user interface.
+FAIL: V-73155 The Red Hat Enterprise Linux operating system - DOES NOT - prevent a user from overriding the screensaver lock-delay setting for the graphical user interface.
+
+ORIG: V-73157 The Red Hat Enterprise Linux operating system must prevent a user from overriding the session idle-delay setting for the graphical user interface.
+PASS: V-73157 The Red Hat Enterprise Linux operating system - DOES - prevent a user from overriding the session idle-delay setting for the graphical user interface.
+FAIL: V-73157 The Red Hat Enterprise Linux operating system - DOES NOT - prevent a user from overriding the session idle-delay setting for the graphical user interface.
+
+ORIG: V-73159 The Red Hat Enterprise Linux operating system must be configured so that when passwords are changed or new passwords are established, pwquality must be used.
+PASS: V-73159 The Red Hat Enterprise Linux operating system - IS - configured so that when passwords are changed or new passwords are established, pwquality must be used.
+FAIL: V-73159 The Red Hat Enterprise Linux operating system - IS NOT - configured so that when passwords are changed or new passwords are established, pwquality must be used.
+
+ORIG: V-73161 The Red Hat Enterprise Linux operating system must prevent binary files from being executed on file systems that are being imported via Network File System (NFS).
+PASS: V-73161 The Red Hat Enterprise Linux operating system - DOES - prevent binary files from being executed on file systems that are being imported via Network File System (NFS).
+FAIL: V-73161 The Red Hat Enterprise Linux operating system - DOES NOT - prevent binary files from being executed on file systems that are being imported via Network File System (NFS).
+
+ORIG: V-73163 The Red Hat Enterprise Linux operating system must be configured so that the audit system takes appropriate action when there is an error sending audit records to a remote system.
+PASS: V-73163 The Red Hat Enterprise Linux operating system - IS - configured so that the audit system takes appropriate action when there is an error sending audit records to a remote system.
+FAIL: V-73163 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the audit system takes appropriate action when there is an error sending audit records to a remote system.
+
+ORIG: V-73165 The Red Hat Enterprise Linux operating system must generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/group.
+PASS: V-73165 The Red Hat Enterprise Linux operating system - DOES - generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/group.
+FAIL: V-73165 The Red Hat Enterprise Linux operating system - DOES NOT - generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/group.
+
+ORIG: V-73167 The Red Hat Enterprise Linux operating system must generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/gshadow.
+PASS: V-73167 The Red Hat Enterprise Linux operating system - DOES - generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/gshadow.
+FAIL: V-73167 The Red Hat Enterprise Linux operating system - DOES NOT - generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/gshadow.
+
+ORIG: V-73171 The Red Hat Enterprise Linux operating system must generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/shadow.
+PASS: V-73171 The Red Hat Enterprise Linux operating system - DOES - generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/shadow.
+FAIL: V-73171 The Red Hat Enterprise Linux operating system - DOES NOT - generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/shadow.
+
+ORIG: V-73173 The Red Hat Enterprise Linux operating system must generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/opasswd.
+PASS: V-73173 The Red Hat Enterprise Linux operating system - DOES - generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/opasswd.
+FAIL: V-73173 The Red Hat Enterprise Linux operating system - DOES NOT - generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/opasswd.
+
+ORIG: V-73175 The Red Hat Enterprise Linux operating system must ignore Internet Protocol version 4 (IPv4) Internet Control Message Protocol (ICMP) redirect messages.
+PASS: V-73175 The Red Hat Enterprise Linux operating system - DOES - ignore Internet Protocol version 4 (IPv4) Internet Control Message Protocol (ICMP) redirect messages.
+FAIL: V-73175 The Red Hat Enterprise Linux operating system - DOES NOT - ignore Internet Protocol version 4 (IPv4) Internet Control Message Protocol (ICMP) redirect messages.
+
+ORIG: V-73177 The Red Hat Enterprise Linux operating system must be configured so that all wireless network adapters are disabled.
+PASS: V-73177 The Red Hat Enterprise Linux operating system - IS - configured so that all wireless network adapters are disabled.
+FAIL: V-73177 The Red Hat Enterprise Linux operating system - IS NOT - configured so that all wireless network adapters are disabled.
+
+ORIG: V-77819 The Red Hat Enterprise Linux operating system must uniquely identify and must authenticate users using multifactor authentication via a graphical user logon.
+PASS: V-77819 The Red Hat Enterprise Linux operating system - DOES - uniquely identify and must authenticate users using multifactor authentication via a graphical user logon.
+FAIL: V-77819 The Red Hat Enterprise Linux operating system - DOES NOT - uniquely identify and must authenticate users using multifactor authentication via a graphical user logon.
+
+ORIG: V-77821 The Red Hat Enterprise Linux operating system must be configured so that the Datagram Congestion Control Protocol (DCCP) kernel module is disabled unless required.
+PASS: V-77821 The Red Hat Enterprise Linux operating system - IS - configured so that the Datagram Congestion Control Protocol (DCCP) kernel module is disabled unless required.
+FAIL: V-77821 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the Datagram Congestion Control Protocol (DCCP) kernel module is disabled unless required.
+
+ORIG: V-77823 The Red Hat Enterprise Linux operating system must require authentication upon booting into single-user and maintenance modes.
+PASS: V-77823 The Red Hat Enterprise Linux operating system - DOES - require authentication upon booting into single-user and maintenance modes.
+FAIL: V-77823 The Red Hat Enterprise Linux operating system - DOES NOT - require authentication upon booting into single-user and maintenance modes.
+
+ORIG: V-77825 The Red Hat Enterprise Linux operating system must implement virtual address space randomization.
+PASS: V-77825 The Red Hat Enterprise Linux operating system - DOES - implement virtual address space randomization.
+FAIL: V-77825 The Red Hat Enterprise Linux operating system - DOES NOT - implement virtual address space randomization.
+
+ORIG: V-78995 The Red Hat Enterprise Linux operating system must prevent a user from overriding the screensaver lock-enabled setting for the graphical user interface.
+PASS: V-78995 The Red Hat Enterprise Linux operating system - DOES - prevent a user from overriding the screensaver lock-enabled setting for the graphical user interface.
+FAIL: V-78995 The Red Hat Enterprise Linux operating system - DOES NOT - prevent a user from overriding the screensaver lock-enabled setting for the graphical user interface.
+
+ORIG: V-78997 The Red Hat Enterprise Linux operating system must prevent a user from overriding the screensaver idle-activation-enabled setting for the graphical user interface.
+PASS: V-78997 The Red Hat Enterprise Linux operating system - DOES - prevent a user from overriding the screensaver idle-activation-enabled setting for the graphical user interface.
+FAIL: V-78997 The Red Hat Enterprise Linux operating system - DOES NOT - prevent a user from overriding the screensaver idle-activation-enabled setting for the graphical user interface.
+
+ORIG: V-78999 The Red Hat Enterprise Linux operating system must audit all uses of the create_module syscall.
+PASS: V-78999 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the create_module syscall.
+FAIL: V-78999 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the create_module syscall.
+
+ORIG: V-79001 The Red Hat Enterprise Linux operating system must audit all uses of the finit_module syscall.
+PASS: V-79001 The Red Hat Enterprise Linux operating system - DOES - audit all uses of the finit_module syscall.
+FAIL: V-79001 The Red Hat Enterprise Linux operating system - DOES NOT - audit all uses of the finit_module syscall.
+
+ORIG: V-81003 The Red Hat Enterprise Linux operating system must be configured so that /etc/pam.d/passwd implements /etc/pam.d/system-auth when changing passwords.
+PASS: V-81003 The Red Hat Enterprise Linux operating system - IS - configured so that /etc/pam.d/passwd implements /etc/pam.d/system-auth when changing passwords.
+FAIL: V-81003 The Red Hat Enterprise Linux operating system - IS NOT - configured so that /etc/pam.d/passwd implements /etc/pam.d/system-auth when changing passwords.
+
+ORIG: V-81005 Red Hat Enterprise Linux operating systems version 7.2 or newer with a Basic Input/Output System (BIOS) must require authentication upon booting into single-user and maintenance modes.
+PASS: V-81005 Red Hat Enterprise Linux operating systems version 7.2 or newer with a Basic Input/Output System (BIOS) - DO - require authentication upon booting into single-user and maintenance modes.
+FAIL: V-81005 Red Hat Enterprise Linux operating systems version 7.2 or newer with a Basic Input/Output System (BIOS) - DO NOT - require authentication upon booting into single-user and maintenance modes.
+
+ORIG: V-81007 Red Hat Enterprise Linux operating systems version 7.2 or newer using Unified Extensible Firmware Interface (UEFI) must require authentication upon booting into single-user and maintenance modes.
+PASS: V-81007 Red Hat Enterprise Linux operating systems version 7.2 or newer using Unified Extensible Firmware Interface (UEFI) - DO - require authentication upon booting into single-user and maintenance modes.
+FAIL: V-81007 Red Hat Enterprise Linux operating systems version 7.2 or newer using Unified Extensible Firmware Interface (UEFI) - DO NOT - require authentication upon booting into single-user and maintenance modes.
+
+ORIG: V-81009 The Red Hat Enterprise Linux operating system must mount /dev/shm with the nodev option.
+PASS: V-81009 The Red Hat Enterprise Linux operating system - DOES - mount /dev/shm with the nodev option.
+FAIL: V-81009 The Red Hat Enterprise Linux operating system - DOES NOT - mount /dev/shm with the nodev option.
+
+ORIG: V-81011 The Red Hat Enterprise Linux operating system must mount /dev/shm with the nosuid option.
+PASS: V-81011 The Red Hat Enterprise Linux operating system - DOES - mount /dev/shm with the nosuid option.
+FAIL: V-81011 The Red Hat Enterprise Linux operating system - DOES NOT - mount /dev/shm with the nosuid option.
+
+ORIG: V-81013 The Red Hat Enterprise Linux operating system must mount /dev/shm with the noexec option.
+PASS: V-81013 The Red Hat Enterprise Linux operating system - DOES - mount /dev/shm with the noexec option.
+FAIL: V-81013 The Red Hat Enterprise Linux operating system - DOES NOT - mount /dev/shm with the noexec option.
+
+ORIG: V-81015 The Red Hat Enterprise Linux operating system must be configured to use the au-remote plugin.
+PASS: V-81015 The Red Hat Enterprise Linux operating system - IS - configured to use the au-remote plugin.
+FAIL: V-81015 The Red Hat Enterprise Linux operating system - IS NOT - configured to use the au-remote plugin.
+
+ORIG: V-81017 The Red Hat Enterprise Linux operating system must configure the au-remote plugin to off-load audit logs using the audisp-remote daemon.
+PASS: V-81017 The Red Hat Enterprise Linux operating system - DOES - configure the au-remote plugin to off-load audit logs using the audisp-remote daemon.
+FAIL: V-81017 The Red Hat Enterprise Linux operating system - DOES NOT - configure the au-remote plugin to off-load audit logs using the audisp-remote daemon.
+
+ORIG: V-81019 The Red Hat Enterprise Linux operating system must take appropriate action when the audisp-remote buffer is full.
+PASS: V-81019 The Red Hat Enterprise Linux operating system - DOES - take appropriate action when the audisp-remote buffer is full.
+FAIL: V-81019 The Red Hat Enterprise Linux operating system - DOES NOT - take appropriate action when the audisp-remote buffer is full.
+
+ORIG: V-81021 The Red Hat Enterprise Linux operating system must label all off-loaded audit logs before sending them to the central log server.
+PASS: V-81021 The Red Hat Enterprise Linux operating system - DOES - label all off-loaded audit logs before sending them to the central log server.
+FAIL: V-81021 The Red Hat Enterprise Linux operating system - DOES NOT - label all off-loaded audit logs before sending them to the central log server.
+
+ORIG: V-92251 The Red Hat Enterprise Linux operating system must use a reverse-path filter for IPv4 network traffic when possible on all interfaces.
+PASS: V-92251 The Red Hat Enterprise Linux operating system - DOES - use a reverse-path filter for IPv4 network traffic when possible on all interfaces.
+FAIL: V-92251 The Red Hat Enterprise Linux operating system - DOES NOT - use a reverse-path filter for IPv4 network traffic when possible on all interfaces.
+
+ORIG: V-92253 The Red Hat Enterprise Linux operating system must use a reverse-path filter for IPv4 network traffic when possible by default.
+PASS: V-92253 The Red Hat Enterprise Linux operating system - DOES - use a reverse-path filter for IPv4 network traffic when possible by default.
+FAIL: V-92253 The Red Hat Enterprise Linux operating system - DOES NOT - use a reverse-path filter for IPv4 network traffic when possible by default.
+
+ORIG: V-92255 The Red Hat Enterprise Linux operating system must have a host-based intrusion detection tool installed.
+PASS: V-92255 The Red Hat Enterprise Linux operating system - DOES - have a host-based intrusion detection tool installed.
+FAIL: V-92255 The Red Hat Enterprise Linux operating system - DOES NOT - have a host-based intrusion detection tool installed.
+
+ORIG: V-94843 The Red Hat Enterprise Linux operating system must be configured so that the x86 Ctrl-Alt-Delete key sequence is disabled in the GUI.
+PASS: V-94843 The Red Hat Enterprise Linux operating system - IS - configured so that the x86 Ctrl-Alt-Delete key sequence is disabled in the GUI.
+FAIL: V-94843 The Red Hat Enterprise Linux operating system - IS NOT - configured so that the x86 Ctrl-Alt-Delete key sequence is disabled in the GUI.
+

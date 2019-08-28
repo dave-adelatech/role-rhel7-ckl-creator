@@ -9,6 +9,7 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-17: Changed logic to check for entire audit rule string
+# Ver 3, 2019-08-15: DISA v2r4 update. JHMF
 #----------
 
 - name: STIG RHEL7 V-72129 Check
@@ -23,7 +24,13 @@
       - auditrules
 
 - name: STIG RHEL7 V-72129 Check 2
-  shell: grep -iw open_by_handle_at /etc/audit/audit.rules | awk '/-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access/' 2>/dev/null
+  shell: |
+    echo "Count the number of lines, which should be 4"
+    ( grep -ix "\-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access" /etc/audit/audit.rules
+    grep -ix "\-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access" /etc/audit/audit.rules
+    grep -ix "\-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access" /etc/audit/audit.rules
+    grep -ix "\-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access" /etc/audit/audit.rules ) | sort -u |wc -l
+
   args:
     executable: /bin/bash
   register: check2_72129
@@ -33,20 +40,9 @@
       - V-72129
       - auditrules
 
-- name: STIG RHEL7 V-72129 Check 3
-  shell: grep -iw open_by_handle_at /etc/audit/audit.rules | awk '/-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access/' 2>/dev/null
-  args:
-    executable: /bin/bash
-  register: check3_72129
-  ignore_errors: True
-  changed_when: False
-  tags:
-      - V-72129
-      - auditrules
-
 - name: STIG RHEL7 V-72129 Report
   set_fact:
-    status_72129: "{{ 'fail' if ((check2_72129.stdout == '') or (check3_72129.stdout == '')) else 'pass'}}"
+    status_72129: "{{ 'fail' if (check2_72129.stdout != '4') else 'pass'}}"
   tags:
       - V-72129
       - auditrules

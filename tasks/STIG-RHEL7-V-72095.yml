@@ -9,6 +9,7 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-06-06: Content was for a different check, rewrote to Baseline
+# Ver 3, 2019-08-15: DISA v2r4 updates. JHMF
 #----------
 
 - name: STIG RHEL7 V-72095 Check
@@ -23,7 +24,12 @@
       - auditrules
 
 - name: STIG RHEL7 V-72095 Check 2
-  shell: grep -iw execve /etc/audit/audit.rules | awk '/execve/' 2>/dev/null
+  shell: |
+    echo "Count the number of lines, which should be 4"
+    ( egrep -ix "\-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid" /etc/audit/audit.rules
+    egrep -ix "\-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid" /etc/audit/audit.rules
+    egrep -ix "\-a always,exit -F arch=b32 -S execve -C gid!=euid -F euid=0 -k setuid" /etc/audit/audit.rules
+    egrep -ix "\-a always,exit -F arch=b64 -S execve -C gid!=euid -F euid=0 -k setuid" /etc/audit/audit.rules ) |sort -u |wc -l
   args:
     executable: /bin/bash
   register: check2_72095
@@ -35,7 +41,7 @@
 
 - name: STIG RHEL7 V-72095 Report
   set_fact:
-    status_72095: "{{ 'fail' if (check2_72095.stdout == '') else 'pass'}}"
+    status_72095: "{{ 'fail' if (check2_72095.stdout != '4') else 'pass'}}"
   tags:
       - V-72095
       - auditrules

@@ -9,6 +9,7 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-01: Modified to run script due to complexity
+# Ver 3, 2019-08-15: DISA v2r4 Update JHMF
 #
 #----------
 
@@ -25,7 +26,7 @@
       - etcpasswd
 
 - name: STIG RHEL7 V-72029 Check 2
-  shell: /installs/Ansible/role-rhel7-ckl-creator/files/V-72029.sh
+  shell: for user in `awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/  {print $1}' /etc/passwd`;do home=`grep "^$user:" /etc/passwd |awk "-F:" '{print $6}'`;group=`grep "^$user:" /etc/passwd |awk "-F:" '{print $4}'`;find $home -name '\.*' \( \( ! -user $user ! -user root \) -o ! -group $group \) -ls;done 
   args:
     executable: /bin/bash
   register: check2_72029
@@ -43,4 +44,3 @@
       - V-72029
       - find
       - etcpasswd
-

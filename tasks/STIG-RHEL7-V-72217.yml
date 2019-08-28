@@ -9,11 +9,12 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-09: modified checks to better capture results. JHMF
+# Ver 3, 2019-08-15: DISA v2r4 update. JHMF
 #
 #----------
 
 - name: STIG RHEL7 V-72217 Check
-  shell: grep "maxlogins" /etc/security/limits.conf
+  shell: grep "maxlogins" /etc/security/limits.conf /etc/security/limits.d/*.conf
   args:
     executable: /bin/bash
   register: check1_72217
@@ -24,8 +25,7 @@
       - other
 
 - name: STIG RHEL7 V-72217 Check 2
-  # tabs below      
-  shell: grep -x "*	hard	maxlogins	10" /etc/security/limits.conf
+  shell: egrep ":*.+hard.+maxlogins.+10" /etc/security/limits.conf /etc/security/limits.d/*.conf
   args:
     executable: /bin/bash
   register: check2_72217

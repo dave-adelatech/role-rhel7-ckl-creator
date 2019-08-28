@@ -13,12 +13,12 @@
 
 - name: Write file 
   template:
-    src: "{{ role_path }}/templates/red7-template.xml.j2"
+    src: "{{ role_path }}/templates/blank_rhel7_v2r4.ckl.template.ckl"
     dest: '{{out_file}}'
 
 - name: Write cvs
   template:
-    src: "{{ role_path }}/templates/blank_rhel7_v2r3.ckl.status.cvs"
+    src: "{{ role_path }}/templates/blank_rhel7_v2r4.ckl.status.cvs"
     dest: '{{cvs_file}}'
 
 #- name: Send mail

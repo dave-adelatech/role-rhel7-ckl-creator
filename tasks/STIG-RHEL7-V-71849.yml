@@ -8,13 +8,14 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
-# Ver 1, 2019-06-05; Mods to make more readable/manageable.  Get rid of script.
+# Ver 2, 2019-06-05; Mods to make more readable/manageable.  Get rid of script.
+# Ver 3, 2019-08-15: Updated to include V2R4 check changes from DISA
 #
 #----------
 
 - name: STIG RHEL7 V-71849 Check
   shell: |
-      for i in `rpm -Va | grep '^.M' | cut -d " " -f4,5`;do for j in `rpm -qf $i`;do rpm -ql $j --dump | cut -d " " -f1,5,6,7 | grep $i;done;done >/root/V-71849
+      for i in `rpm -Va | egrep -i '^\.[M|U|G|.]{8}' | cut -d " " -f4,5`;do for j in `rpm -qf $i`;do rpm -ql $j --dump | cut -d " " -f1,5,6,7 | grep $i;done;done >/root/V-71849
       echo ------------
       cat /root/V-71849
       echo ------------

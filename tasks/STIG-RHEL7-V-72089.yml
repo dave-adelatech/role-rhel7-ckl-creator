@@ -9,12 +9,18 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-16: Updated to include 1 missed check and re-wrote the comparisions. JHMF
+# Ver 3, 2019-08-27: Update v2r4 JHMF: Wording chenage only in check text.
+#       "If the value of the "space_left" keyword is not set to 25 percent of the total partition size, this is a finding." (75 changed to 25 in check)
 #
 #----------
 
 - name: STIG RHEL7 V-72089 Check 1
   # Print out all the commands used to find the result
-  shell: egrep -iw "^log_file|space_left" /etc/audit/auditd.conf; df -m; df -m `grep -iw ^log_file /etc/audit/auditd.conf|awk '{print $3}'`;echo "Note. If the audit records are not being written to a partition specifically created for audit records, no check needed."
+  shell: |
+    egrep -iw "^log_file|space_left" /etc/audit/auditd.conf
+    df -m
+    df -m `grep -iw ^log_file /etc/audit/auditd.conf|awk '{print $3}'`
+    echo "Note. If the audit records are not being written to a partition specifically created for audit records, no check needed."
   args:
     executable: /bin/bash
   register: check1_72089
@@ -39,8 +45,8 @@
       - auditrules
 
 - name: STIG RHEL7 V-72089 Check 3
-# Grab the size of the partition and multiple by .75 to get a number
-  shell:  awk '/^log_file / {print $3}' /etc/audit/auditd.conf |while read FILE;do df -m $FILE;done |awk '$1!="Filesystem" {printf "%.0f\n", $2*.75}' 
+# Grab the size of the partition and multiple by .25 to get a number
+  shell:  awk '/^log_file / {print $3}' /etc/audit/auditd.conf |while read FILE;do df -m $FILE;done |awk '$1!="Filesystem" {printf "%.0f\n", $2*.25}' 
   args:
     executable: /bin/bash
   register: check3_72089
@@ -66,7 +72,7 @@
 
 - name: STIG RHEL7 V-72089 Report
   set_fact: 
-  # if auit using a separate mount point (check2), then pass, If space_left is greater than partition size * .75, then fail
+  # if audit is using a separate mount point (check2), then pass, If space_left is not equal to partition size * .25, then fail
     status_72089: "{{ 'pass' if (check2_72089.stdout != '' or (check3_72089.stdout == check4_72089.stdout)) else 'fail'}}"
   tags:
       - V-72089

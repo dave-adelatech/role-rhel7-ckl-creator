@@ -23,8 +23,10 @@ Discrepencies, if any,  can be discussed during collaboration.
 ~V-71953 If the system does not have GNOME installed, this requirement is Not Applicable.
 ~V-71955 If the system does not have GNOME installed, this requirement is Not Applicable.
 ~V-71963 For systems that are running RHEL 7.2 or newer, this is Not Applicable.
-~V-71971 This is a manual check due to complexity.
-Output for check is provided.
+~V-71971 If HBSS or HIPS is active on the system, this is Not Applicable.
+If HBSS or HIPS is not active, this is a manual check due to complexity.
+"semanage" output for check is provided.
+~V-71983 If there is an HBSS with a Device Control Module and a Data Loss Prevention mechanism, this requirement is not applicable.
 ~V-71989 If an HBSS or HIPS is active on the system, this is Not Applicable.
 ~V-71999 Complex check.  Possible that Ansible script produces a false positive..
 Open findings will need to be verified during collaboration meeting.
@@ -91,6 +93,8 @@ Firewall rules are customized per server/application as requested.
 ~V-72251 If the release is 7.4 or newer this requirement is Not Applicable.
 ~V-72283 DISA False Positive in V2R3
 ~V-72285 DISA False Positive in V2R3
+~V-72305 If a TFTP server is not installed, this is Not Applicable.
+~V-72313 If the file does not exist, this is Not Applicable.
 ~V-72427 This STIG will be OPEN, if sssd and LDAP are not in use.
 ~V-73155 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
@@ -115,3 +119,4 @@ DISA check will be False Positive, as DISA does not check for N/A
 ~V-81007 For systems that use BIOS, this is Not Applicable.
 ~V-92255 If another host-based intrusion detection application is in use, such as SELinux, this must be documented and approved by the local Authorizing Official.
 Having SELinux in use only DOES NOT satisfy this find.
+~V-94834 If the system does not have GNOME installed, this requirement is Not Applicable.
