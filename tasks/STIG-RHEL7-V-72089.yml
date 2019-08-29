@@ -9,7 +9,7 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-16: Updated to include 1 missed check and re-wrote the comparisions. JHMF
-# Ver 3, 2019-08-27: Update v2r4 JHMF: Wording chenage only in check text.
+# Ver 3, 2019-08-27: Update v2r4 JHMF: Wording change only in check text.
 #       "If the value of the "space_left" keyword is not set to 25 percent of the total partition size, this is a finding." (75 changed to 25 in check)
 #
 #----------
@@ -20,7 +20,7 @@
     egrep -iw "^log_file|space_left" /etc/audit/auditd.conf
     df -m
     df -m `grep -iw ^log_file /etc/audit/auditd.conf|awk '{print $3}'`
-    echo "Note. If the audit records are not being written to a partition specifically created for audit records, no check needed."
+    echo "Note. If the audit records are being written to a partition specifically created for audit records, no check needed."
   args:
     executable: /bin/bash
   register: check1_72089
