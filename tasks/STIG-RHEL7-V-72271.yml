@@ -8,11 +8,14 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 2, 2019-08-27: corrected code, although obsolete w/ v2r4. JHMF
 #
 #----------
 
 - name: STIG RHEL7 V-72271 Check
-  shell: rule ipv4 filter IN_public_allow 0 -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT 2>&1
+  shell: |
+    grep 'net.ipv4.tcp_invalid_ratelimit' /etc/sysctl.conf /etc/sysctl.d/* 2>&1
+    /sbin/sysctl -a 2>&1 | grep 'net.ipv4.tcp_invalid_ratelimit'
   args:
     executable: /bin/bash
   register: check1_72271
@@ -23,7 +26,18 @@
       - other
 
 - name: STIG RHEL7 V-72271 Check 2
-  shell: rule ipv4 filter IN_public_allow 0 -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT | awk '/command not found/'
+  shell: grep 'net.ipv4.tcp_invalid_ratelimit' /etc/sysctl.conf /etc/sysctl.d/* 2>/dev/null |grep "tcp_invalid_ratelimit = 500"
+  args:
+    executable: /bin/bash
+  register: check2_72271
+  ignore_errors: True
+  changed_when: False
+  tags:
+      - V-72271
+      - other
+
+- name: STIG RHEL7 V-72271 Check 3
+  shell: /sbin/sysctl -a 2>/dev/null | grep 'net.ipv4.tcp_invalid_ratelimit' |grep "tcp_invalid_ratelimit = 500"
   args:
     executable: /bin/bash
   register: check2_72271
@@ -35,7 +49,7 @@
 
 - name: STIG RHEL7 V-72271 Report
   set_fact: 
-    status_72271: "{{ 'fail' if (check2_72271.stdout != '') else 'pass'}}"
+    status_72271: "{{ 'fail' if ((check2_72271.stdout == '') or (check3_72271.stdout == '')) else 'pass'}}"
   tags:
       - V-72271
       - other

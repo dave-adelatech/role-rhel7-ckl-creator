@@ -9,10 +9,11 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-08: Fixed check
+# Ver 3, 2019-08-15: DISA v2r4 update. JHMF
 #
 #----------
 - name: STIG RHEL7 V-72031 Check
-  shell: find `awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/ {print $6}' /etc/passwd` -name "\.*" -ls
+  shell: find `awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/ {print $6}' /etc/passwd` -type f -name "\.*" -ls
   args:
     executable: /bin/bash
   register: check1_72031
@@ -24,7 +25,7 @@
       - etcpasswd
 
 - name: STIG RHEL7 V-72031 Check 2
-  shell: awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/  {print $4,$6}' /etc/passwd|while read GRP HOME;do find $HOME -name '.*' ! -group $GRP -ls;done
+  shell: awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/  {print $4,$6}' /etc/passwd|while read GRP HOME;do find $HOME -type f -name '.*' ! -group $GRP -ls;done
   args:
     executable: /bin/bash
   register: check2_72031

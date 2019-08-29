@@ -9,6 +9,7 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-17: Changed logic to check for entire audit rule string
+# Ver 3, 2019-08-15: DISA v2r4 update. JHMF
 #----------
 
 - name: STIG RHEL7 V-72189 Check
@@ -23,7 +24,10 @@
       - auditrules
 
 - name: STIG RHEL7 V-72189 Check 2
-  shell: grep -iw delete_module /etc/audit/audit.rules | awk '/-a always,exit -F arch=b64 -S delete_module -k module-change/' 2>/dev/null
+  shell: |
+    echo "Count the number of lines, which should be 2"
+    ( grep -ix "\-a always,exit -F arch=b32 -S delete_module -k module-change" /etc/audit/audit.rules
+    grep -ix "\-a always,exit -F arch=b64 -S delete_module -k module-change" /etc/audit/audit.rules ) |sort -u |wc -l
   args:
     executable: /bin/bash
   register: check2_72189
@@ -34,7 +38,7 @@
       - auditrules
 - name: STIG RHEL7 V-72189 Report
   set_fact:
-    status_72189: "{{ 'fail' if (check2_72189.stdout == '') else 'pass'}}"
+    status_72189: "{{ 'fail' if (check2_72189.stdout != '2') else 'pass'}}"
   tags:
       - V-72189
       - auditrules

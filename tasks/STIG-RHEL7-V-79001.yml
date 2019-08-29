@@ -8,6 +8,7 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 3, 2019-08-16: DISA v2r4 update. JHMF
 #
 #----------
 
@@ -23,7 +24,10 @@
       - auditrules
 
 - name: STIG RHEL7 V-79001 Check 2
-  shell: grep -iw finit_module /etc/audit/audit.rules 2>/dev/null |grep -ix "\-a always,exit \-F arch=b64 \-S finit_module \-k module\-change"
+  shell: |
+    echo "Count the number of lines, which should be 2"
+    ( grep -ix "\-a always,exit -F arch=b32 -S finit_module -k module-change" /etc/audit/audit.rules
+    grep -ix "\-a always,exit -F arch=b64 -S finit_module -k module-change" /etc/audit/audit.rules ) |sort -u |wc -l
   args:
     executable: /bin/bash
   register: check2_79001
@@ -35,7 +39,7 @@
 
 - name: STIG RHEL7 V-79001 Report
   set_fact: 
-    status_79001: "{{ 'fail' if (check2_79001.stdout == '') else 'pass'}}"
+    status_79001: "{{ 'fail' if (check2_79001.stdout != '2') else 'pass'}}"
   tags:
       - V-79001
       - auditrules

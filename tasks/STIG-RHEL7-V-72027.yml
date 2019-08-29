@@ -25,7 +25,7 @@
       - etcpasswd
 
 - name: STIG RHEL7 V-72027 Check 2
-  shell: find `cut -d":" -f1,3,6 /etc/passwd |egrep ':[0-9]{4}:'|cut -d":" -f3` -ls|grep -v " .....-.--- "
+  shell: find `cut -d":" -f1,3,6 /etc/passwd |egrep ':[0-9]{4}:'|cut -d":" -f3` ! -type l -ls|grep -v " .....-.--- "
   args:
     executable: /bin/bash
   register: check2_72027

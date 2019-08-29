@@ -7,7 +7,10 @@ for user in `awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\
 do
 # Get home dir
 home=`grep "^$user:" /etc/passwd |awk -F: '{print $6}'`
-#get a shrumken list of groups
-	find $home -name '\.*' ! -user $user ! -user root -ls
+# get PGID
+group=`grep "^$user:" /etc/passwd |awk -F: '{print $4}'`
+
+#who has wrong ownerships?
+find $home -name '\.*' ! -user $user ! -user root ! -group $group -ls
 done
 

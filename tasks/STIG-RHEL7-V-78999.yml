@@ -8,6 +8,7 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 3, 2019-08-15: DISA v2r4 update. JHMF
 #
 #----------
 
@@ -23,7 +24,10 @@
       - auditrules
 
 - name: STIG RHEL7 V-78999 Check 2
-  shell: grep -iw create_module /etc/audit/audit.rules 2>/dev/null | awk '/-a always,exit -F arch=b64 -S create_module -k module-change/'
+  shell: |
+    echo "Count the number of lines, which should be 2"
+    ( grep -ix "\-a always,exit -F arch=b32 -S create_module -k module-change" /etc/audit/audit.rules
+    grep -ix "\-a always,exit -F arch=b64 -S create_module -k module-change" /etc/audit/audit.rules ) |sort -u |wc -l
   args:
     executable: /bin/bash
   register: check2_78999
@@ -35,8 +39,7 @@
 
 - name: STIG RHEL7 V-78999 Report
   set_fact: 
-    status_78999: "{{ 'fail' if (check2_78999.stdout == '') else 'pass'}}"
+    status_78999: "{{ 'fail' if (check2_78999.stdout != '2') else 'pass'}}"
   tags:
       - V-78999
       - auditrules
-

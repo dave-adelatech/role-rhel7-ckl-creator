@@ -9,6 +9,7 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-17: Changed logic to check for entire audit rule string
+# Ver 3, 2019-08-15: DISA v2r4 update. JHMF
 #----------
 
 - name: STIG RHEL7 V-72171 Check
@@ -23,7 +24,11 @@
       - auditrules
 
 - name: STIG RHEL7 V-72171 Check 2
-  shell: grep -iw "mount" /etc/audit/audit.rules |grep -ix "\-a always,exit \-F arch=b64 \-S mount \-F auid>=1000 \-F auid!=4294967295 \-k privileged\-mount"
+  shell: |
+    echo "Count the number of lines, which should be 3"
+    ( grep -ix "\-a always,exit -F arch=b32 -S mount -F auid>=1000 -F auid!=4294967295 -k privileged-mount" /etc/audit/audit.rules
+    grep -ix "\-a always,exit -F arch=b64 -S mount -F auid>=1000 -F auid!=4294967295 -k privileged-mount" /etc/audit/audit.rules
+    grep -ix "\-a always,exit -F path=/usr/bin/mount -F auid>=1000 -F auid!=4294967295 -k privileged-mount" /etc/audit/audit.rules ) |sort -u |wc -l
   args:
     executable: /bin/bash
   register: check2_72171
@@ -33,21 +38,9 @@
       - V-72171
       - auditrules
 
-- name: STIG RHEL7 V-72171 Check 3
-  shell: grep -iw "/usr/bin/mount" /etc/audit/audit.rules |grep -ix "\-a always,exit \-F path=/usr/bin/mount \-F auid>=1000 \-F auid!=4294967295 \-k privileged\-mount"
-  args:
-    executable: /bin/bash
-  register: check3_72171
-  ignore_errors: True
-  changed_when: False
-  tags:
-      - V-72171
-      - auditrules
-
-
 - name: STIG RHEL7 V-72171 Report
   set_fact:
-    status_72171: "{{ 'fail' if ((check2_72171.stdout == '') or (check3_72171.stdout == '')) else 'pass'}}"
+    status_72171: "{{ 'fail' if ((check2_72171.stdout != '3') or (check3_72171.stdout == '')) else 'pass'}}"
   tags:
       - V-72171
       - auditrules

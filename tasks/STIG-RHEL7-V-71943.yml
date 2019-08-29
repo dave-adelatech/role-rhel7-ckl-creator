@@ -9,11 +9,12 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-21: changed check2 to not use "grep -v". JHMF
+# Ver 3, 2019-08-15: Modified to reflect DISA v2r4 check changes
 #
 #----------
 
 - name: STIG RHEL7 V-71943 Check
-  shell: awk '/pam_faillock.so/' /etc/pam.d/password-auth-ac 2>&1
+  shell: grep -w pam_faillock.so /etc/pam.d/password-auth 2>&1
   args:
     executable: /bin/bash
   register: check1_71943
@@ -24,7 +25,7 @@
       - pam
 
 - name: STIG RHEL7 V-71943 Check 2
-  shell: awk '/pam_faillock.so/' /etc/pam.d/password-auth-ac 2>/dev/null | grep ^auth |grep 'unlock_time=604800'
+  shell: egrep -x "auth.+required.+pam_faillock.so preauth silent audit deny=3 even_deny_root fail_interval=900 unlock_time=604800" /etc/pam.d/password-auth
   args:
     executable: /bin/bash
   register: check2_71943
@@ -34,9 +35,20 @@
       - V-71943
       - pam
 
+- name: STIG RHEL7 V-71943 Check 3
+  shell: egrep -x "auth.+[default=die].+pam_faillock.so authfail audit deny=3 even_deny_root fail_interval=900 unlock_time=604800" /etc/pam.d/password-auth
+  args:
+    executable: /bin/bash
+  register: check3_71943
+  ignore_errors: True
+  changed_when: False
+  tags:
+      - V-71943
+      - pam
+
 - name: STIG RHEL7 V-71943 Report
   set_fact: 
-    status_71943: "{{ 'fail' if (check2_71943.stdout == '' ) else 'pass'}}"
+    status_71943: "{{ 'fail' if ((check2_71943.stdout == '') or (check3_71943.stdout == '')) else 'pass'}}"
   tags:
       - V-71943
       - pam

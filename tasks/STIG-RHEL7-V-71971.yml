@@ -12,8 +12,10 @@
 #----------
 
 - name: STIG RHEL7 V-71971 Check
-  shell: echo -e "This check will need to be manually completed\n"; \
-        semanage login -l | more 2>&1
+  shell: |
+    rpm -qa | grep MFEhiplsm
+    ps -ef | grep -i "hipclient" |grep -v grep
+    semanage login -l | more 2>&1
   args:
     executable: /bin/bash
   register: check1_71971
@@ -22,10 +24,45 @@
   tags:
       - V-71971
       - other
+
+- name: STIG RHEL7 V-71971 Check 2
+  shell: rpm -qa | grep MFEhiplsm 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check2_71971
+  ignore_errors: True
+  changed_when: False
+  tags:
+      - V-71971
+      - other
+
+- name: STIG RHEL7 V-71971 Check 3
+  shell: ps -ef | grep -i "hipclient" 2>/dev/null |grep -v grep
+  args:
+    executable: /bin/bash
+  register: check3_71971
+  ignore_errors: True
+  changed_when: False
+  tags:
+      - V-71971
+      - other
+
+- name: STIG RHEL7 V-71971 Check 4
+  shell: |
+    semanage login -l | more 2>&1
+    echo "If HBSS or HIPS is not active, this is a manual check for semanage settings"
+  args:
+    executable: /bin/bash
+  register: check4_71971
+  ignore_errors: True
+  changed_when: False
+  tags:
+      - V-71971
+      - other
  
 - name: STIG RHEL7 V-71971 Report
   set_fact: 
-    status_71971: 'NR'
+    status_71971: "{{ 'NA' if ((check2_71971.stdout != '') and (check3_71971.stdout != '')) else 'NR'}}"
   tags:
       - V-71971
       - other

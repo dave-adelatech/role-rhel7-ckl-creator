@@ -9,11 +9,12 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-09: Corrected check to work.
+# Ver 3, 2019-08-15: DISA v2r4 updates. JHMF
 #
 #----------
 
 - name: STIG RHEL7 V-72033 Check
-  shell: find `awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/ {print $6}' /etc/passwd` -name "\.*" -ls
+  shell: find `awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/ {print $6}' /etc/passwd` -type f -name "\.*" -ls
   args:
     executable: /bin/bash
   register: check1_72033
@@ -25,7 +26,7 @@
       - etcpasswd
 
 - name: STIG RHEL7 V-72033 Check 2
-  shell: find `awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/ {print $6}' /etc/passwd` -name "\.*" -type f -ls |grep -v " .....----- "
+  shell: find `awk "-F:" '$3 > 100 && $7 !~ /false/ && $7 !~ /nologin/ && $6 !~ /\/$/ && $1 !~ /ldap/ {print $6}' /etc/passwd` -type f -name "\.*" -ls |grep -v " .....----- "
   args:
     executable: /bin/bash
   register: check2_72033

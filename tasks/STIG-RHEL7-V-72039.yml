@@ -9,6 +9,7 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-09 Correct double quote placements
+# Ver 3, 2019-08-27: Added exemption for /dev/vmci and /dev/hipsec, as allowed for. JHMF
 #
 #----------
 
@@ -27,8 +28,8 @@
 
 - name: STIG RHEL7 V-72039 Check 2
   shell: |
-    find /dev -context *:device_t:* \( -type c -o -type b \) -printf "%p %Z\n"
-    find /dev -context *:unlabeled_t:* \( -type c -o -type b \) -printf "%p %Z\n"
+    find /dev -context *:device_t:* \( -type c -o -type b \) -printf "%p %Z\n" |egrep -v "/dev/vmci|/dev/hipsec"
+    find /dev -context *:unlabeled_t:* \( -type c -o -type b \) -printf "%p %Z\n" |egrep -v "/dev/vmci|/dev/hipsec"
   args:
     executable: /bin/bash
   register: check2_72039

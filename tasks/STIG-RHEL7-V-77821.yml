@@ -8,11 +8,12 @@
 # Change History:
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
+# Ver 3, 2019-08-15: DISA v2r4 update. JHMF
 #
 #----------
 
 - name: STIG RHEL7 V-77821 Check
-  shell: grep -r dccp /etc/modprobe.d/* | grep -i "/bin/true" | grep -v "^#" 2>&1
+  shell: grep -ir dccp /etc/modprobe.d/* 2>&1
   args:
     executable: /bin/bash
   register: check1_77821
@@ -23,7 +24,7 @@
       - modprobe
 
 - name: STIG RHEL7 V-77821 Check 2
-  shell: grep -r dccp /etc/modprobe.d/* | grep -i "/bin/true" | grep -v "^#" 2>/dev/null
+  shell: egrep -irx "install dccp /bin/true" /etc/modprobe.d 2>/dev/null
   args:
     executable: /bin/bash
   register: check2_77821
@@ -33,10 +34,20 @@
       - V-77821
       - modprobe
 
-- name: STIG RHEL7 V-77821 Report
-  set_fact: 
-    status_77821: "{{ 'fail' if (check2_77821.stdout == '') else 'pass'}}"
+- name: STIG RHEL7 V-77821 Check 3
+  shell: egrep -irx "blacklist dccp" /etc/modprobe.d 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check3_77821
+  ignore_errors: True
+  changed_when: False
   tags:
       - V-77821
       - modprobe
 
+- name: STIG RHEL7 V-77821 Report
+  set_fact: 
+    status_77821: "{{ 'fail' if ((check2_77821.stdout == '') or (check3_77821.stdout == '')) else 'pass'}}"
+  tags:
+      - V-77821
+      - modprobe

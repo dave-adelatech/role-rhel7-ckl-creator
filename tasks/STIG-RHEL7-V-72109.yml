@@ -9,6 +9,7 @@
 #
 # Ver 1, 2019-04-18: Baseline, based on DISA RHEL7 STIGS v2r2.
 # Ver 2, 2019-05-17: Changed logic to check for entire audit rule string
+# Ver 3, 2019-08-15: DISA v2r4 update. JHMF
 #----------
 
 - name: STIG RHEL7 V-72109 Check
@@ -23,7 +24,10 @@
       - auditrules
 
 - name: STIG RHEL7 V-72109 Check 2
-  shell: grep -iw fchmodat /etc/audit/audit.rules | awk '/-a always,exit -F arch=b64 -S fchmodat -F auid>=1000 -F auid!=4294967295 -k perm_mod/' 2>/dev/null
+  shell: |
+    echo "Count the number of lines, which should be 2"
+    ( egrep -ix "\-a always,exit -F arch=b32 -S fchmodat -F auid>=1000 -F auid!=4294967295 -k perm_mod" /etc/audit/audit.rules
+    egrep -ix "\-a always,exit -F arch=b64 -S fchmodat -F auid>=1000 -F auid!=4294967295 -k perm_mod" /etc/audit/audit.rules ) |sort -u |wc -l
   args:
     executable: /bin/bash
   register: check2_72109
@@ -35,7 +39,7 @@
 
 - name: STIG RHEL7 V-72109 Report
   set_fact:
-    status_72109: "{{ 'fail' if (check2_72109.stdout == '' ) else 'pass'}}"
+    status_72109: "{{ 'fail' if (check2_72109.stdout != '2' ) else 'pass'}}"
   tags:
       - V-72109
       - auditrules
