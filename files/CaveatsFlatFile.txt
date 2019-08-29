@@ -103,6 +103,14 @@ Open findings will need to be verified during collaboration meeting.
 ~V-73157 If GNOME not installed, this check will be N/A.
 DISA check will be False Positive, as DISA does not check for N/A
 ~V-73161 This finding will always be OPEN as site requirements dictate that noexec for the NFS share /installs\* NOT be in place.
+Mitigation: Servers are currently embedded with myriad protections requisite in inhibiting outside access from admittance into systems.
+Systems are inaccessible via the internet, inbound traffic is blocked by a B1 firewall, DISA whitelist and explicit ACL's.
+Additional control measures include native configuration protections; TCP wrappers lock down systems to specific subnets, and secure shell
+connections are locked down by exclusive allow-groups accessible only by approved ciphers, and physical access is secured by X.509 lock and swipe access.
+Authentication access is secured by DISA compliant password strengths and lengths, and permissions to critical / key configuration files are accessible
+only by the system administration team which is composed of known and verified personnel therefore limiting the vulnerability surface.
+Vulnerability cannot be changed without significant impact to production or operations.  In addition automation clients such as HBSS/HIPS, AIDE,
+NETIQ, and SYSLOG monitor and control purview of anomalies in pre-established baselines.
 ~V-73165 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". 
 Stated check vs. actual check in benchmark do not match.
 ~V-73167 DISA benchmark performs additional tests, which are not documentsed in the "Check Text" of Fix Text". 
