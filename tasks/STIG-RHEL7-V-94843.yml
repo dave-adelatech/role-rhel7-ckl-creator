@@ -1,0 +1,63 @@
+#--------------------
+#
+# Project: NAWCAD Data Center Automation
+# File:    Ansible tasks for RHEL7 STIG check
+# Author:  Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci
+# Date:    2019-04-18
+#
+# Change History:
+#
+# Ver 1, 2019-08-16: New check with DISA v2r4.  Check as listed in STIG is wrong.
+#                    Using "/etc/dconf/db/local.d" for the check instead of the listed "/etc/dconf/local.d"
+#                    Also included a check for GNOME and an NA
+#
+#----------
+
+- name: STIG RHEL7 V-94843 Check 1
+  shell: |
+     yum list installed -q gnome* 2>&1
+     grep system-db /etc/dconf/profile/user 2>&1
+     grep logout /etc/dconf/db/local.d/* 2>&1
+  args:
+    executable: /bin/bash
+  ignore_errors: True
+  register: check1_94843
+  #ignore_errors: True
+  changed_when: False
+  tags:
+      - V-94843
+      - yum
+      - gnome
+
+- name: STIG RHEL7 V-94843 Check 2
+  shell: yum list installed -q gnome* 2>&1 |egrep "gnome|^Error"
+  args:
+    executable: /bin/bash
+  register: check2_94843
+  ignore_errors: True
+  changed_when: False
+  tags:
+      - V-94843
+      - yum
+      - gnome
+
+- name: STIG RHEL7 V-94843 Check 3
+  shell: egrep -rx "logout=''" /etc/dconf/db/local.d/ 2>/dev/null
+  args:
+    executable: /bin/bash
+  register: check3_94843
+  ignore_errors: True
+  changed_when: False
+  tags:
+      - V-94843
+      - yum
+      - gnome
+
+- name: STIG RHEL7 V-94843 Report
+  set_fact: 
+    status_94843: "{{ 'NA' if (check2_94843.stdout == 'Error: No matching Packages to list') else 'fail' if (check3_94843.stdout == '') else 'pass'}}"
+  tags:
+      - V-94843
+      - yum
+      - gnome
+
