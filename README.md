@@ -1,12 +1,12 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Role 'role-rhel7-ckl-creator' is the collection of ansible RHEL 7 STIG checks based on the DISA STIG checklist.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This repository is designed to run on Ansible 2.7.7 on RHEL 7.  Currently, the tool is initiated at the command line, and it is required that the necessary credential configuration is in place to permit Ansible to SSH to the target hosts to execute the STIG checks.
 
 Role Variables
 --------------
@@ -16,23 +16,22 @@ A description of the settable variables for this role should go here, including 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+See repository 'playbook-stig-rhel7'.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+See repository 'playbook-stig-rhel7', which contains the master playbook 'redhat-7-master-playbook.yml' that initiates the RHEL 7 STIG checklist.  This playbook in turn imports the master role 'role-rhel7-ckl-creator' found in this repository by the same name.
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+Within this repository, see 'tasks/main.yml' which is the master task file that imports all the individual STIG tasks, including both the 'prep.yml' and 'post.yml' tasks.
+
 
 License
 -------
 
-BSD
+Proprietary, Smartronix / US Navy NAVAIR NAWCAD.
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+The playbooks were a combined effort by many dedicated Unix admins, most notably: Andrew Darley, Josha Loscar, John Faber, Jordan Tyler, & Nate Vanucci.
