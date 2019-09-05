@@ -13,7 +13,9 @@
 #----------
 
 - name: STIG RHEL7 V-72207 Check
-  shell: grep -iw unlinkat /etc/audit/audit.rules  2>&1
+  shell: |
+    echo "Count the number of lines, which should be 2"
+    grep -iw unlinkat /etc/audit/audit.rules  2>&1
   args:
     executable: /bin/bash
   register: check1_72207
@@ -25,7 +27,6 @@
 
 - name: STIG RHEL7 V-72207 Check 2  
   shell: |
-    echo "Count the number of lines, which should be 2"
     ( grep -ix "\-a always,exit -F arch=b32 -S unlinkat -F auid>=1000 -F auid!=4294967295 -k delete" /etc/audit/audit.rules
     grep -ix "\-a always,exit -F arch=b64 -S unlinkat -F auid>=1000 -F auid!=4294967295 -k delete" /etc/audit/audit.rules ) |sort -u |wc -l
   args:

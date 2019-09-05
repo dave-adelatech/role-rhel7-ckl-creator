@@ -13,7 +13,9 @@
 #----------
 
 - name: STIG RHEL7 V-72117 Check
-  shell: grep -iw removexattr /etc/audit/audit.rules 2>&1
+  shell: |
+    echo "Count the number of lines, which should be 2"
+    grep -iw removexattr /etc/audit/audit.rules 2>&1
   args:
     executable: /bin/bash
   register: check1_72117
@@ -25,7 +27,6 @@
 
 - name: STIG RHEL7 V-72117 Check 2
   shell: |
-    echo "Count the number of lines, which should be 2"
     ( egrep -ix "\-a always,exit -F arch=b32 -S removexattr -F auid>=1000 -F auid!=4294967295 -k perm_mod" /etc/audit/audit.rules
     egrep -ix "\-a always,exit -F arch=b64 -S removexattr -F auid>=1000 -F auid!=4294967295 -k perm_mod" /etc/audit/audit.rules ) |sort -u |wc -l
   args:

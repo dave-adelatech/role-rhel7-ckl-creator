@@ -13,7 +13,9 @@
 #----------
 
 - name: STIG RHEL7 V-72127 Check
-  shell: grep -iw openat /etc/audit/audit.rules 2>&1
+  shell: |
+    echo "Count the number of lines, which should be 4"
+    grep -iw openat /etc/audit/audit.rules 2>&1
   args:
     executable: /bin/bash
   register: check1_72127
@@ -25,7 +27,6 @@
 
 - name: STIG RHEL7 V-72127 Check 2
   shell: |
-    echo "Count the number of lines, which should be 4"
     ( grep -ix "\-a always,exit -F arch=b32 -S openat -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access" /etc/audit/audit.rules
     grep -ix "\-a always,exit -F arch=b32 -S openat -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access" /etc/audit/audit.rules
     grep -ix "\-a always,exit -F arch=b64 -S openat -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access" /etc/audit/audit.rules

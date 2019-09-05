@@ -13,7 +13,9 @@
 #----------
 
 - name: STIG RHEL7 V-72095 Check
-  shell: grep -iw execve /etc/audit/audit.rules 2>&1
+  shell: |
+    grep -iw execve /etc/audit/audit.rules 2>&1
+    echo "Count the number of lines, which should be 4"
   args:
     executable: /bin/bash
   register: check1_72095
@@ -25,11 +27,10 @@
 
 - name: STIG RHEL7 V-72095 Check 2
   shell: |
-    echo "Count the number of lines, which should be 4"
     ( egrep -ix "\-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid" /etc/audit/audit.rules
     egrep -ix "\-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid" /etc/audit/audit.rules
-    egrep -ix "\-a always,exit -F arch=b32 -S execve -C gid!=euid -F euid=0 -k setuid" /etc/audit/audit.rules
-    egrep -ix "\-a always,exit -F arch=b64 -S execve -C gid!=euid -F euid=0 -k setuid" /etc/audit/audit.rules ) |sort -u |wc -l
+    egrep -ix "\-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid" /etc/audit/audit.rules
+    egrep -ix "\-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid" /etc/audit/audit.rules ) |sort -u |wc -l
   args:
     executable: /bin/bash
   register: check2_72095

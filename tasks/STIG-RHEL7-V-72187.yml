@@ -13,7 +13,9 @@
 #----------
 
 - name: STIG RHEL7 V-72187 Check
-  shell: grep -iw init_module /etc/audit/audit.rules
+  shell: |
+    echo "Count the number of lines, which should be 2"
+    grep -iw init_module /etc/audit/audit.rules
   args:
     executable: /bin/bash
   register: check1_72187
@@ -25,7 +27,6 @@
 
 - name: STIG RHEL7 V-72187 Check 2
   shell: |
-    echo "Count the number of lines, which should be 2"
     ( grep -ix "\-a always,exit -F arch=b32 -S init_module -k module-change" /etc/audit/audit.rules
     grep -ix "\-a always,exit -F arch=b64 -S init_module -k module-change" /etc/audit/audit.rules ) |sort -u |wc -l
   args:

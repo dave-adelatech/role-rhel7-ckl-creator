@@ -41,7 +41,6 @@ DISA check WILL produce a false positive, as they do not check for group ownersh
 ~V-72081 DISA False Positive in V2R3
 ~V-72085 Manual check
 If the value of the "enable_krb5" option is not set to "yes" or the line is commented out, ask the System Administrator to indicate how the audit logs are off-loaded to a different system or media.
-~V-72089 If the audit records are being written to a partition specifically created for audit records, this STIG is not a finding. 
 ~V-72095 May show up as a FALSE POSITIVE. Only 64bit architect is checked
 ~V-72123 DISA check returns a possible false NEGATIVE as of V2R3, if both b64 rules (EPERM and EACCES) are NOT in place.
 ~V-72125 DISA check returns a possible false NEGATIVE as of V2R3, if both b64 rules (EPERM and EACCES) are NOT in place.
