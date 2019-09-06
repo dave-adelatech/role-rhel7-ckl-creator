@@ -13,7 +13,9 @@
 #----------
 
 - name: STIG RHEL7 V-72203 Check
-  shell: grep -iw rmdir /etc/audit/audit.rules 2>&1
+  shell: |
+    echo "Count the number of lines, which should be 2"
+    grep -iw rmdir /etc/audit/audit.rules 2>&1
   args:
     executable: /bin/bash
   register: check1_72203
@@ -25,7 +27,6 @@
 
 - name: STIG RHEL7 V-72203 Check 2
   shell: |
-    echo "Count the number of lines, which should be 2"
     ( grep -ix "\-a always,exit -F arch=b32 -S rmdir -F auid>=1000 -F auid!=4294967295 -k delete" /etc/audit/audit.rules
     grep -ix "\-a always,exit -F arch=b64 -S rmdir -F auid>=1000 -F auid!=4294967295 -k delete" /etc/audit/audit.rules ) |sort -u |wc -l
   args:

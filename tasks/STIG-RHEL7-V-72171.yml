@@ -13,7 +13,9 @@
 #----------
 
 - name: STIG RHEL7 V-72171 Check
-  shell: grep -iw "mount" /etc/audit/audit.rules 2>&1
+  shell: |
+    echo "Count the number of lines, which should be 3"
+    egrep -iw "mount" /etc/audit/audit.rules 2>&1
   args:
     executable: /bin/bash
   register: check1_72171
@@ -25,7 +27,6 @@
 
 - name: STIG RHEL7 V-72171 Check 2
   shell: |
-    echo "Count the number of lines, which should be 3"
     ( grep -ix "\-a always,exit -F arch=b32 -S mount -F auid>=1000 -F auid!=4294967295 -k privileged-mount" /etc/audit/audit.rules
     grep -ix "\-a always,exit -F arch=b64 -S mount -F auid>=1000 -F auid!=4294967295 -k privileged-mount" /etc/audit/audit.rules
     grep -ix "\-a always,exit -F path=/usr/bin/mount -F auid>=1000 -F auid!=4294967295 -k privileged-mount" /etc/audit/audit.rules ) |sort -u |wc -l
@@ -40,7 +41,7 @@
 
 - name: STIG RHEL7 V-72171 Report
   set_fact:
-    status_72171: "{{ 'fail' if ((check2_72171.stdout != '3') or (check3_72171.stdout == '')) else 'pass'}}"
+    status_72171: "{{ 'fail' if (check2_72171.stdout != '3') else 'pass'}}"
   tags:
       - V-72171
       - auditrules
