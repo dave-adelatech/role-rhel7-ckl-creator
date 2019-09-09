@@ -16,10 +16,10 @@
     src: "{{ role_path }}/templates/blank_rhel7_v2r4.ckl.template.ckl"
     dest: '{{out_file}}'
 
-- name: Write cvs
+- name: Write csv
   template:
-    src: "{{ role_path }}/templates/blank_rhel7_v2r4.ckl.status.cvs"
-    dest: '{{cvs_file}}'
+    src: "{{ role_path }}/templates/blank_rhel7_v2r4.ckl.status.csv"
+    dest: '{{csv_file}}'
 
 #- name: Send mail
 #  ignore_errors: True
