@@ -15,8 +15,8 @@
 - name: Prep
   file: path={{out_file}} owner={{ ansible_user }} group=users mode=640 state=touch
 
-- name: Prep cvs file
-  file: path={{cvs_file}} owner={{ ansible_user }} group=users mode=640 state=touch
+- name: Prep csv file
+  file: path={{csv_file}} owner={{ ansible_user }} group=users mode=640 state=touch
 
 - name: yum makecache fast
   shell: yum makecache fast >/dev/null 2>&1;echo
