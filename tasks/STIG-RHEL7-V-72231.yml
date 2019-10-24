@@ -62,7 +62,7 @@
 
 - name: STIG RHEL7 V-72231 Report
   set_fact: 
-    status_72231: "{{ 'NA' if check2_72231.stdout != '' else 'fail' if (check2_72231.stdout == '') else 'fail' if (check3_72231.stdout == '') else 'fail' if (check4_72231.stdout == '') else 'pass'}}"
+    status_72231: "{{ 'NA' if check2_72231.stdout != '' else 'fail' if (check3_72231.stdout == '') else 'fail' if (check4_72231.stdout == '') else 'pass'}}"
   tags:
       - V-72231
       - systemctl
