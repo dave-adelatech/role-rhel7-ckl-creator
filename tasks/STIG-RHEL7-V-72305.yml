@@ -40,7 +40,7 @@
   shell: grep server_args /etc/xinetd.d/tftp 2>/dev/null |grep -x "server_args = -s /var/lib/tftpboot"
   args:
     executable: /bin/bash
-  register: checks32_72305
+  register: check3_72305
   ignore_errors: True
   changed_when: False
   tags:
